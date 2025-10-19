@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile - 90 Minut</title>
+    
+</head>
+<body>
+    <div class="profile-container">
+        <div class="profile-card">
+            <div class="profile-header">
+                <h2>Editovanje profila</h2>
+                <button class="logout-btn" id="profile-logout-btn">Odjavi se</button>
+            </div>
+
+            <form id="profileForm">
+                <!-- User ID -->
+                <div class="profile-section">
+                    <label>User ID</label>
+                    <input type="text" id="userId" value="232267" disabled>
+                </div>
+
+                <!-- Username -->
+                <div class="profile-section">
+                    <label>Korisničko ime</label>
+                    <div class="username-wrapper">
+                        <span class="username-prefix">www.90minut.ba/profil/</span>
+                        <input type="text" id="username" value="9muser67fa8163" placeholder="username">
+                        <button type="button" class="username-link-btn" title="Kopiraj link">
+                            <i class="fa fa-external-link"></i>
+                        </button>
+                    </div>
+                    <p class="profile-info">Ovo korisničko ime će biti vidljivo u komentarima i drugim javnim sekcijama portala.</p>
+                </div>
+
+                <!-- Email -->
+                <div class="profile-section">
+                    <label>Email</label>
+                    <div class="email-wrapper">
+                        <input type="email" id="email" value="user@gmail.com" placeholder="your.email@example.com">
+                        <button type="button" class="email-verified-btn" title="Verifikovan email">
+                            <i class="fa fa-google"></i>
+                        </button>
+                    </div>
+                    <p class="profile-info">Vaš email neće biti javno dostupan.</p>
+                </div>
+
+                <!-- Avatar Color -->
+                <div class="profile-section">
+                    <label>Boja avatara</label>
+                    <div class="avatar-selector" id="avatarSelector">
+                        <div class="avatar-option" style="background: #e74c3c;" data-color="#e74c3c"></div>
+                        <div class="avatar-option" style="background: #e67e22;" data-color="#e67e22"></div>
+                        <div class="avatar-option" style="background: #2ecc71;" data-color="#2ecc71"></div>
+                        <div class="avatar-option" style="background: #f39c12;" data-color="#f39c12"></div>
+                        <div class="avatar-option" style="background: #9b59b6;" data-color="#9b59b6"></div>
+                        <div class="avatar-option" style="background: #3498db;" data-color="#3498db"></div>
+                        <div class="avatar-option" style="background: #1abc9c;" data-color="#1abc9c"></div>
+                        <div class="avatar-option" style="background: #95a5a6;" data-color="#95a5a6"></div>
+                        <div class="avatar-option" style="background: #34495e;" data-color="#34495e"></div>
+                        <div class="avatar-option" style="background: #16a085;" data-color="#16a085"></div>
+                        <div class="avatar-option" style="background: #27ae60;" data-color="#27ae60"></div>
+                        <div class="avatar-option" style="background: #2980b9;" data-color="#2980b9"></div>
+                        <div class="avatar-option" style="background: #8e44ad;" data-color="#8e44ad"></div>
+                        <div class="avatar-option" style="background: #c0392b;" data-color="#c0392b"></div>
+                        <div class="avatar-option selected" style="background: #d35400;" data-color="#d35400"></div>
+                    </div>
+                </div>
+
+                <!-- Canton -->
+                <div class="profile-section">
+                    <label>Kanton / Općina</label>
+                    <select id="canton" class="profile-select">
+                        <option value="izaberi">Izaberi</option>
+                        <option value="unsko-sanski">Unsko-sanski kanton</option>
+                        <option value="posavski">Posavski kanton</option>
+                        <option value="tuzlanski">Tuzlanski kanton</option>
+                        <option value="zenicko-dobojski">Zeničko-dobojski kanton</option>
+                        <option value="bosansko-podrinjski">Bosansko-podrinjski kanton</option>
+                        <option value="srednjobosanski">Srednjobosanski kanton</option>
+                        <option value="hercegovacko-neretvanski">Hercegovačko-neretvanski kanton</option>
+                        <option value="zapadnohercegovacki">Zapadnohercegovački kanton</option>
+                        <option value="sarajevski">Sarajevski kanton</option>
+                        <option value="10">Kanton 10</option>
+                    </select>
+                </div>
+
+                <!-- Gender -->
+                <div class="profile-section">
+                    <label>Spol</label>
+                    <div class="gender-options">
+                        <label class="gender-option">
+                            <input type="radio" name="gender" value="male" checked>
+                            <span>Muški</span>
+                        </label>
+                        <label class="gender-option">
+                            <input type="radio" name="gender" value="female">
+                            <span>Ženski</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Verified Email Status -->
+                <div class="profile-section">
+                    <label>Verifikovan email</label>
+                    <div class="verification-status">
+                        <span class="status-text">Da</span>
+                    </div>
+                </div>
+
+                <!-- Subscription Status -->
+                <div class="profile-section">
+                    <label>Pretplatnik</label>
+                    <div class="subscription-status">
+                        <span class="status-text">Ne</span>
+                    </div>
+                </div>
+
+                <!-- Delete Account -->
+                <div class="profile-section">
+                    <label>Obriši nalog</label>
+                    <button type="button" class="delete-account-btn" id="deleteAccountBtn">
+                        Obriši
+                    </button>
+                </div>
+
+                <!-- Note -->
+                <div class="note-box">
+                    <h3>Napomena</h3>
+                    <p>Na komentarima i drugim servisima portala će biti prikazano samo Vaše korisničko ime i spol, dok nijedan drugi podatak neće biti javno dostupan.</p>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="profile-actions">
+                    <button type="submit" class="save-btn">Snimi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    
+</body>
+</html>

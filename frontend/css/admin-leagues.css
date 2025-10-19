@@ -1,0 +1,501 @@
+/* ========================================
+   ADMIN LEAGUES PAGE - 90 MINUT
+   League Cards, Badges, Info
+   ======================================== */
+
+/* ========================================
+   LEAGUES GRID
+   ======================================== */
+
+.leagues-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* ========================================
+   LEAGUE CARD
+   ======================================== */
+
+.league-card {
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.league-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--admin-primary);
+}
+
+/* Featured League */
+.league-card.league-featured {
+    border-color: #f39c12;
+    background: linear-gradient(135deg, var(--admin-card-bg) 0%, rgba(243, 156, 18, 0.05) 100%);
+}
+
+.league-card.league-featured:hover {
+    border-color: #f39c12;
+    box-shadow: 0 8px 30px rgba(243, 156, 18, 0.3);
+}
+
+/* League Header */
+.league-header {
+    padding: 30px;
+    background: var(--admin-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: 180px;
+}
+
+.league-logo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+    transition: var(--transition);
+}
+
+.league-card:hover .league-logo {
+    transform: scale(1.1);
+}
+
+.featured-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+}
+
+.featured-badge i {
+    font-size: 12px;
+}
+
+/* League Body */
+.league-body {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.league-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin: 0;
+    text-align: center;
+}
+
+/* League Meta */
+.league-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.league-country {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: 500;
+}
+
+.league-country i {
+    font-size: 14px;
+    color: var(--admin-primary);
+}
+
+.league-type {
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.type-domestic {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--stat-blue);
+}
+
+.type-international {
+    background: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+}
+
+.type-cup {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--stat-orange);
+}
+
+/* League Stats */
+.league-stats {
+    display: flex;
+    justify-content: space-around;
+    padding: 15px 0;
+    border-top: 1px solid var(--admin-border);
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.league-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.league-stat-item i {
+    font-size: 20px;
+    color: var(--admin-primary);
+}
+
+.league-stat-item span {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--admin-text);
+}
+
+/* League Info */
+.league-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.info-label {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--admin-text);
+}
+
+/* Status Badge in Info */
+.info-item .status-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.status-active {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.status-inactive {
+    background: rgba(149, 165, 166, 0.1);
+    color: #95a5a6;
+}
+
+/* League Footer */
+.league-footer {
+    padding: 15px 25px;
+    background: var(--admin-bg);
+    border-top: 1px solid var(--admin-border);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+/* ========================================
+   LIGHT MODE OVERRIDES
+   ======================================== */
+
+body.admin-light-mode .league-name,
+body.admin-light-mode .league-stat-item span,
+body.admin-light-mode .info-value {
+    color: #333333;
+}
+
+body.admin-light-mode .league-country,
+body.admin-light-mode .info-label {
+    color: #6c757d;
+}
+
+body.admin-light-mode .league-logo {
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.05));
+}
+
+/* ========================================
+   ALTERNATIVE LAYOUT - LIST VIEW (Optional)
+   ======================================== */
+
+.league-list-view .leagues-grid {
+    grid-template-columns: 1fr;
+}
+
+.league-list-view .league-card {
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.league-list-view .league-header {
+    min-height: auto;
+    width: 180px;
+    padding: 20px;
+}
+
+.league-list-view .league-logo {
+    width: 80px;
+    height: 80px;
+}
+
+.league-list-view .league-body {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.league-list-view .league-name {
+    text-align: left;
+}
+
+.league-list-view .league-stats {
+    border: none;
+    padding: 0;
+    gap: 30px;
+}
+
+.league-list-view .league-stat-item {
+    flex-direction: row;
+    gap: 10px;
+}
+
+.league-list-view .league-footer {
+    width: auto;
+    padding: 20px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* ========================================
+   VIEW TOGGLE BUTTONS (Optional)
+   ======================================== */
+
+.view-toggle {
+    display: flex;
+    gap: 8px;
+    background: var(--admin-card-bg);
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--admin-border);
+}
+
+.view-toggle-btn {
+    padding: 8px 16px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--admin-text-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    transition: var(--transition);
+}
+
+.view-toggle-btn:hover {
+    color: var(--admin-text);
+    background: var(--admin-bg);
+}
+
+.view-toggle-btn.active {
+    background: var(--admin-primary);
+    color: #ffffff;
+}
+
+.view-toggle-btn i {
+    font-size: 14px;
+}
+
+/* ========================================
+   EMPTY STATE
+   ======================================== */
+
+.leagues-empty {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    border: 2px dashed var(--admin-border);
+}
+
+.leagues-empty i {
+    font-size: 64px;
+    color: var(--admin-text-muted);
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.leagues-empty h3 {
+    font-size: 20px;
+    color: var(--admin-text);
+    margin-bottom: 10px;
+}
+
+.leagues-empty p {
+    font-size: 14px;
+    color: var(--admin-text-muted);
+    margin-bottom: 25px;
+}
+
+/* ========================================
+   LEAGUE CARD VARIATIONS
+   ======================================== */
+
+/* Premium League Card */
+.league-card.league-premium {
+    background: linear-gradient(135deg, rgba(221, 21, 21, 0.05) 0%, var(--admin-card-bg) 100%);
+}
+
+.league-card.league-premium .league-header {
+    background: linear-gradient(135deg, rgba(221, 21, 21, 0.1) 0%, var(--admin-bg) 100%);
+}
+
+/* Inactive League Card */
+.league-card.league-inactive {
+    opacity: 0.6;
+}
+
+.league-card.league-inactive:hover {
+    opacity: 0.8;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 991px) {
+    .leagues-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: var(--spacing-md);
+    }
+    
+    .league-header {
+        padding: 25px;
+        min-height: 150px;
+    }
+    
+    .league-logo {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 576px) {
+    .leagues-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .league-body {
+        padding: 20px;
+    }
+    
+    .league-name {
+        font-size: 18px;
+    }
+    
+    .league-stats {
+        flex-wrap: wrap;
+    }
+    
+    .league-stat-item {
+        flex: 1;
+        min-width: 45%;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.league-card {
+    animation: fadeInUp 0.4s ease;
+}
+
+.league-card:nth-child(1) { animation-delay: 0s; }
+.league-card:nth-child(2) { animation-delay: 0.1s; }
+.league-card:nth-child(3) { animation-delay: 0.2s; }
+.league-card:nth-child(4) { animation-delay: 0.3s; }
+.league-card:nth-child(5) { animation-delay: 0.4s; }
+.league-card:nth-child(6) { animation-delay: 0.5s; }
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+.league-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(221, 21, 21, 0.03) 100%);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.league-card:hover::before {
+    opacity: 1;
+}
+
+/* Ensure content is above overlay */
+.league-header,
+.league-body,
+.league-footer {
+    position: relative;
+    z-index: 2;
+}

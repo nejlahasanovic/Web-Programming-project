@@ -1,0 +1,559 @@
+/* ========================================
+   ADMIN MARKETING PAGE - 90 MINUT
+   Campaigns, Stats, Progress
+   ======================================== */
+
+/* ========================================
+   CAMPAIGNS GRID
+   ======================================== */
+
+.campaigns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: var(--spacing-lg);
+}
+
+/* ========================================
+   CAMPAIGN CARD
+   ======================================== */
+
+.campaign-card {
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 2px solid transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+.campaign-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Campaign States */
+.campaign-card.campaign-active {
+    border-color: rgba(46, 204, 113, 0.3);
+}
+
+.campaign-card.campaign-active:hover {
+    border-color: var(--stat-green);
+}
+
+.campaign-card.campaign-scheduled {
+    border-color: rgba(243, 156, 18, 0.3);
+}
+
+.campaign-card.campaign-completed {
+    opacity: 0.85;
+    border-color: rgba(149, 165, 166, 0.3);
+}
+
+.campaign-card.campaign-draft {
+    border-color: rgba(52, 152, 219, 0.3);
+    border-style: dashed;
+}
+
+/* Campaign Header */
+.campaign-header {
+    padding: 20px;
+    background: var(--admin-bg);
+    border-bottom: 1px solid var(--admin-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.campaign-type {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.campaign-type i {
+    font-size: 14px;
+}
+
+.type-email {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--stat-blue);
+}
+
+.type-social {
+    background: rgba(155, 89, 182, 0.1);
+    color: #9b59b6;
+}
+
+.type-banner {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--stat-orange);
+}
+
+.type-push {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--stat-red);
+}
+
+/* Campaign Status */
+.campaign-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.campaign-status i {
+    font-size: 10px;
+}
+
+.status-active {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.status-active i {
+    animation: pulse-dot 2s infinite;
+}
+
+.status-scheduled {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--stat-orange);
+}
+
+.status-completed {
+    background: rgba(149, 165, 166, 0.1);
+    color: #95a5a6;
+}
+
+.status-draft {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--stat-blue);
+}
+
+/* Campaign Body */
+.campaign-body {
+    padding: 25px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.campaign-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin: 0;
+    line-height: 1.4;
+}
+
+.campaign-description {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Campaign Stats Row */
+.campaign-stats-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 15px 0;
+    border-top: 1px solid var(--admin-border);
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.campaign-stat {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.campaign-stat i {
+    font-size: 20px;
+    color: var(--admin-primary);
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--admin-text);
+}
+
+.stat-label {
+    font-size: 11px;
+    color: var(--admin-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Campaign Meta */
+.campaign-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.campaign-date,
+.campaign-budget {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--admin-text-muted);
+}
+
+.campaign-date i,
+.campaign-budget i {
+    font-size: 13px;
+    color: var(--admin-primary);
+}
+
+/* Campaign Progress (for draft) */
+.campaign-progress {
+    padding: 15px;
+    background: var(--admin-bg);
+    border-radius: 8px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.progress-header span:first-child {
+    font-size: 12px;
+    color: var(--admin-text-muted);
+    font-weight: 500;
+}
+
+.progress-percentage {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--stat-orange);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--admin-border);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+    transition: width 1s ease;
+}
+
+.progress-steps {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    padding: 4px 8px;
+    border-radius: 6px;
+}
+
+.step i {
+    font-size: 10px;
+}
+
+.step.completed {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.step.pending {
+    background: var(--admin-border);
+    color: var(--admin-text-muted);
+}
+
+/* Campaign Footer */
+.campaign-footer {
+    padding: 15px 20px;
+    background: var(--admin-bg);
+    border-top: 1px solid var(--admin-border);
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-pause {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--stat-orange);
+}
+
+.btn-pause:hover {
+    background: var(--stat-orange);
+    color: #ffffff;
+}
+
+.btn-copy {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--stat-blue);
+}
+
+.btn-copy:hover {
+    background: var(--stat-blue);
+    color: #ffffff;
+}
+
+/* ========================================
+   LIGHT MODE OVERRIDES
+   ======================================== */
+
+body.admin-light-mode .campaign-title,
+body.admin-light-mode .stat-value {
+    color: #333333;
+}
+
+body.admin-light-mode .campaign-description,
+body.admin-light-mode .stat-label,
+body.admin-light-mode .campaign-date,
+body.admin-light-mode .campaign-budget,
+body.admin-light-mode .progress-header span {
+    color: #6c757d;
+}
+
+/* ========================================
+   ADDITIONAL FEATURES
+   ======================================== */
+
+/* Campaign Performance Badge */
+.performance-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+.performance-excellent {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.performance-good {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--stat-blue);
+}
+
+.performance-average {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--stat-orange);
+}
+
+.performance-poor {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--stat-red);
+}
+
+/* Campaign Tags */
+.campaign-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.campaign-tag {
+    padding: 3px 8px;
+    background: var(--admin-bg);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--admin-text-muted);
+}
+
+/* Empty State */
+.campaigns-empty {
+    text-align: center;
+    padding: 80px 20px;
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    border: 2px dashed var(--admin-border);
+}
+
+.campaigns-empty i {
+    font-size: 64px;
+    color: var(--admin-text-muted);
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.campaigns-empty h3 {
+    font-size: 20px;
+    color: var(--admin-text);
+    margin-bottom: 10px;
+}
+
+.campaigns-empty p {
+    font-size: 14px;
+    color: var(--admin-text-muted);
+    margin-bottom: 25px;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 991px) {
+    .campaigns-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: var(--spacing-md);
+    }
+}
+
+@media (max-width: 576px) {
+    .campaigns-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .campaign-stats-row {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .campaign-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .campaign-title {
+        font-size: 16px;
+    }
+    
+    .progress-steps {
+        font-size: 10px;
+    }
+    
+    .campaign-footer {
+        flex-wrap: wrap;
+    }
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+.campaign-card {
+    animation: fadeInUp 0.4s ease;
+}
+
+.campaign-card:nth-child(1) { animation-delay: 0s; }
+.campaign-card:nth-child(2) { animation-delay: 0.1s; }
+.campaign-card:nth-child(3) { animation-delay: 0.2s; }
+.campaign-card:nth-child(4) { animation-delay: 0.3s; }
+.campaign-card:nth-child(5) { animation-delay: 0.4s; }
+.campaign-card:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover Glow Effect */
+.campaign-card.campaign-active::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(46, 204, 113, 0.03) 100%);
+    opacity: 0;
+    transition: var(--transition);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.campaign-card.campaign-active:hover::before {
+    opacity: 1;
+}
+
+/* Ensure content is above overlay */
+.campaign-header,
+.campaign-body,
+.campaign-footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* Loading State */
+.campaign-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--admin-border);
+    border-top-color: var(--admin-primary);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Campaign Type Icon Animation */
+.campaign-type i {
+    transition: var(--transition);
+}
+
+.campaign-card:hover .campaign-type i {
+    transform: scale(1.1);
+}
+
+/* Stats Value Counter */
+.stat-value {
+    transition: color 0.3s ease;
+}
+
+.campaign-card:hover .stat-value {
+    color: var(--admin-primary);
+}

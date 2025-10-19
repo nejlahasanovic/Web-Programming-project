@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analytics - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="/90minut/frontend/assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Analytics Dashboard</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                    <div class="profile-avatar-icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Analytics Content -->
+        <div class="admin-content">
+            
+            <!-- Date Range Selector -->
+            <div class="analytics-header">
+                <div class="date-range-selector">
+                    <button class="date-btn active">Today</button>
+                    <button class="date-btn">This Week</button>
+                    <button class="date-btn">This Month</button>
+                    <button class="date-btn">Last 3 Months</button>
+                    <button class="date-btn">
+                        <i class="fa fa-calendar"></i>
+                        Custom Range
+                    </button>
+                </div>
+                
+                <button class="btn-export">
+                    <i class="fa fa-download"></i>
+                    Export Report
+                </button>
+            </div>
+
+            <!-- Key Metrics -->
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon blue">
+                            <i class="fa fa-eye"></i>
+                        </div>
+                        <span class="metric-trend trend-up">
+                            <i class="fa fa-arrow-up"></i>
+                            +12.5%
+                        </span>
+                    </div>
+                    <div class="metric-body">
+                        <h3 class="metric-value">2.4M</h3>
+                        <p class="metric-label">Total Page Views</p>
+                        <div class="metric-sparkline">
+                            <canvas id="sparkline1" width="100" height="30"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon green">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <span class="metric-trend trend-up">
+                            <i class="fa fa-arrow-up"></i>
+                            +8.3%
+                        </span>
+                    </div>
+                    <div class="metric-body">
+                        <h3 class="metric-value">45.2K</h3>
+                        <p class="metric-label">Unique Visitors</p>
+                        <div class="metric-sparkline">
+                            <canvas id="sparkline2" width="100" height="30"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon orange">
+                            <i class="fa fa-clock-o"></i>
+                        </div>
+                        <span class="metric-trend trend-down">
+                            <i class="fa fa-arrow-down"></i>
+                            -2.1%
+                        </span>
+                    </div>
+                    <div class="metric-body">
+                        <h3 class="metric-value">3m 24s</h3>
+                        <p class="metric-label">Avg. Session Time</p>
+                        <div class="metric-sparkline">
+                            <canvas id="sparkline3" width="100" height="30"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <div class="metric-icon purple">
+                            <i class="fa fa-percent"></i>
+                        </div>
+                        <span class="metric-trend trend-up">
+                            <i class="fa fa-arrow-up"></i>
+                            +5.2%
+                        </span>
+                    </div>
+                    <div class="metric-body">
+                        <h3 class="metric-value">42.5%</h3>
+                        <p class="metric-label">Bounce Rate</p>
+                        <div class="metric-sparkline">
+                            <canvas id="sparkline4" width="100" height="30"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Charts Row -->
+            <div class="charts-row">
+                <!-- Traffic Overview Chart -->
+                <div class="analytics-chart-card large">
+                    <div class="chart-card-header">
+                        <h3>Traffic Overview</h3>
+                        <div class="chart-controls">
+                            <button class="chart-tab active">Visitors</button>
+                            <button class="chart-tab">Page Views</button>
+                            <button class="chart-tab">Sessions</button>
+                        </div>
+                    </div>
+                    <div class="chart-card-body">
+                        <canvas id="trafficChart" height="300"></canvas>
+                    </div>
+                </div>
+
+                <!-- Traffic Sources -->
+                <div class="analytics-chart-card">
+                    <div class="chart-card-header">
+                        <h3>Traffic Sources</h3>
+                    </div>
+                    <div class="chart-card-body">
+                        <canvas id="sourcesChart" height="300"></canvas>
+                    </div>
+                    <div class="chart-legend">
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #3498db;"></span>
+                            <span class="legend-label">Direct</span>
+                            <span class="legend-value">42.3%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #2ecc71;"></span>
+                            <span class="legend-label">Organic Search</span>
+                            <span class="legend-value">31.5%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #f39c12;"></span>
+                            <span class="legend-label">Social Media</span>
+                            <span class="legend-value">16.8%</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-dot" style="background: #e74c3c;"></span>
+                            <span class="legend-label">Referral</span>
+                            <span class="legend-value">9.4%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Devices & Locations Row -->
+            <div class="analytics-grid">
+                <!-- Device Statistics -->
+                <div class="analytics-card">
+                    <div class="analytics-card-header">
+                        <h3>Device Breakdown</h3>
+                        <span class="view-all">View Details</span>
+                    </div>
+                    <div class="device-stats">
+                        <div class="device-item">
+                            <div class="device-info">
+                                <div class="device-icon">
+                                    <i class="fa fa-desktop"></i>
+                                </div>
+                                <div class="device-details">
+                                    <strong>Desktop</strong>
+                                    <span>1.2M visitors</span>
+                                </div>
+                            </div>
+                            <div class="device-percentage">
+                                <span class="percentage-value">52%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 52%; background: #3498db;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="device-item">
+                            <div class="device-info">
+                                <div class="device-icon">
+                                    <i class="fa fa-mobile"></i>
+                                </div>
+                                <div class="device-details">
+                                    <strong>Mobile</strong>
+                                    <span>840K visitors</span>
+                                </div>
+                            </div>
+                            <div class="device-percentage">
+                                <span class="percentage-value">38%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 38%; background: #2ecc71;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="device-item">
+                            <div class="device-info">
+                                <div class="device-icon">
+                                    <i class="fa fa-tablet"></i>
+                                </div>
+                                <div class="device-details">
+                                    <strong>Tablet</strong>
+                                    <span>240K visitors</span>
+                                </div>
+                            </div>
+                            <div class="device-percentage">
+                                <span class="percentage-value">10%</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 10%; background: #f39c12;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Countries -->
+                <div class="analytics-card">
+                    <div class="analytics-card-header">
+                        <h3>Top Countries</h3>
+                        <span class="view-all">View All</span>
+                    </div>
+                    <div class="countries-list">
+                        <div class="country-item">
+                            <div class="country-flag">🇧🇦</div>
+                            <div class="country-name">Bosnia & Herzegovina</div>
+                            <div class="country-stats">
+                                <span class="country-visitors">820K</span>
+                                <span class="country-percentage">45%</span>
+                            </div>
+                        </div>
+
+                        <div class="country-item">
+                            <div class="country-flag">🇷🇸</div>
+                            <div class="country-name">Serbia</div>
+                            <div class="country-stats">
+                                <span class="country-visitors">456K</span>
+                                <span class="country-percentage">25%</span>
+                            </div>
+                        </div>
+
+                        <div class="country-item">
+                            <div class="country-flag">🇭🇷</div>
+                            <div class="country-name">Croatia</div>
+                            <div class="country-stats">
+                                <span class="country-visitors">274K</span>
+                                <span class="country-percentage">15%</span>
+                            </div>
+                        </div>
+
+                        <div class="country-item">
+                            <div class="country-flag">🇲🇪</div>
+                            <div class="country-name">Montenegro</div>
+                            <div class="country-stats">
+                                <span class="country-visitors">146K</span>
+                                <span class="country-percentage">8%</span>
+                            </div>
+                        </div>
+
+                        <div class="country-item">
+                            <div class="country-flag">🌍</div>
+                            <div class="country-name">Other Countries</div>
+                            <div class="country-stats">
+                                <span class="country-visitors">128K</span>
+                                <span class="country-percentage">7%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Pages -->
+                <div class="analytics-card">
+                    <div class="analytics-card-header">
+                        <h3>Top Pages</h3>
+                        <span class="view-all">View All</span>
+                    </div>
+                    <div class="pages-list">
+                        <div class="page-item">
+                            <div class="page-rank">1</div>
+                            <div class="page-info">
+                                <strong>/home</strong>
+                                <span>342,567 views</span>
+                            </div>
+                            <div class="page-change trend-up">
+                                <i class="fa fa-arrow-up"></i>
+                                +12%
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-rank">2</div>
+                            <div class="page-info">
+                                <strong>/matches/live</strong>
+                                <span>287,432 views</span>
+                            </div>
+                            <div class="page-change trend-up">
+                                <i class="fa fa-arrow-up"></i>
+                                +8%
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-rank">3</div>
+                            <div class="page-info">
+                                <strong>/articles/latest</strong>
+                                <span>198,234 views</span>
+                            </div>
+                            <div class="page-change trend-down">
+                                <i class="fa fa-arrow-down"></i>
+                                -3%
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-rank">4</div>
+                            <div class="page-info">
+                                <strong>/schedule</strong>
+                                <span>145,678 views</span>
+                            </div>
+                            <div class="page-change trend-up">
+                                <i class="fa fa-arrow-up"></i>
+                                +15%
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-rank">5</div>
+                            <div class="page-info">
+                                <strong>/results</strong>
+                                <span>132,456 views</span>
+                            </div>
+                            <div class="page-change trend-up">
+                                <i class="fa fa-arrow-up"></i>
+                                +5%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Real-time Activity -->
+                <div class="analytics-card">
+                    <div class="analytics-card-header">
+                        <h3>Real-time Activity</h3>
+                        <span class="live-indicator">
+                            <span class="live-dot"></span>
+                            Live
+                        </span>
+                    </div>
+                    <div class="realtime-stats">
+                        <div class="realtime-main">
+                            <h2 class="realtime-count">1,247</h2>
+                            <p class="realtime-label">Active Users Right Now</p>
+                        </div>
+                        <div class="realtime-breakdown">
+                            <div class="realtime-item">
+                                <span class="realtime-dot" style="background: #3498db;"></span>
+                                <span class="realtime-page">Homepage</span>
+                                <span class="realtime-users">342</span>
+                            </div>
+                            <div class="realtime-item">
+                                <span class="realtime-dot" style="background: #2ecc71;"></span>
+                                <span class="realtime-page">Live Matches</span>
+                                <span class="realtime-users">289</span>
+                            </div>
+                            <div class="realtime-item">
+                                <span class="realtime-dot" style="background: #f39c12;"></span>
+                                <span class="realtime-page">Articles</span>
+                                <span class="realtime-users">178</span>
+                            </div>
+                            <div class="realtime-item">
+                                <span class="realtime-dot" style="background: #e74c3c;"></span>
+                                <span class="realtime-page">Other Pages</span>
+                                <span class="realtime-users">438</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

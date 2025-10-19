@@ -1,0 +1,445 @@
+/* ========================================
+   ADMIN MATCHES PAGE - 90 MINUT
+   Cards, Tabs, Match Status
+   ======================================== */
+
+/* ========================================
+   TABS NAVIGATION
+   ======================================== */
+
+.tabs-container {
+    margin-top: var(--spacing-lg);
+}
+
+.tabs-nav {
+    display: flex;
+    gap: 10px;
+    margin-bottom: var(--spacing-lg);
+    border-bottom: 2px solid var(--admin-border);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    color: var(--admin-text-muted);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: var(--transition);
+    margin-bottom: -2px;
+}
+
+.tab-btn i {
+    font-size: 16px;
+}
+
+.tab-btn:hover {
+    color: var(--admin-text);
+    background: rgba(221, 21, 21, 0.05);
+}
+
+.tab-btn.active {
+    color: var(--admin-primary);
+    border-bottom-color: var(--admin-primary);
+    background: rgba(221, 21, 21, 0.05);
+}
+
+/* Tab Content */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ========================================
+   MATCHES GRID
+   ======================================== */
+
+.matches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: var(--spacing-md);
+}
+
+/* ========================================
+   MATCH CARD
+   ======================================== */
+
+.match-card {
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    border: 2px solid transparent;
+}
+
+.match-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Live Match Highlight */
+.match-card.match-live {
+    border-color: var(--stat-red);
+    box-shadow: 0 4px 20px rgba(231, 76, 60, 0.2);
+}
+
+/* Finished Match */
+.match-card.match-finished {
+    opacity: 0.9;
+}
+
+/* Match Header */
+.match-header {
+    padding: 12px 20px;
+    background: var(--admin-bg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--admin-border);
+}
+
+.match-league {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+.match-league i {
+    font-size: 14px;
+}
+
+/* Match Status Badges */
+.match-status {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.status-scheduled {
+    background: rgba(243, 156, 18, 0.1);
+    color: var(--stat-orange);
+}
+
+.status-live {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--stat-red);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.live-indicator {
+    width: 8px;
+    height: 8px;
+    background: var(--stat-red);
+    border-radius: 50%;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.status-finished {
+    background: rgba(149, 165, 166, 0.1);
+    color: #95a5a6;
+}
+
+/* Match Body */
+.match-body {
+    padding: 30px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 20px;
+    align-items: center;
+}
+
+.match-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    text-align: center;
+}
+
+.team-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--admin-border);
+    background: #ffffff;
+    padding: 5px;
+}
+
+.match-team h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-text);
+    margin: 0;
+}
+
+/* Match Center (Time or Score) */
+.match-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.match-time {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.match-time i {
+    font-size: 20px;
+    color: var(--admin-text-muted);
+}
+
+.match-time span {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    font-weight: 500;
+}
+
+.match-time .time {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--admin-text);
+}
+
+.match-vs {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--admin-text-muted);
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--admin-bg);
+}
+
+/* Match Score (for live/finished) */
+.match-score {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.match-score .score {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--admin-text);
+    min-width: 50px;
+    text-align: center;
+}
+
+.match-score .score-separator {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--admin-text-muted);
+}
+
+/* Match Footer */
+.match-footer {
+    padding: 12px 20px;
+    background: var(--admin-bg);
+    border-top: 1px solid var(--admin-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.match-venue {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.match-venue i {
+    font-size: 14px;
+}
+
+.match-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* ========================================
+   LIGHT MODE OVERRIDES
+   ======================================== */
+
+body.admin-light-mode .match-team h4,
+body.admin-light-mode .match-score .score,
+body.admin-light-mode .match-time .time {
+    color: #333333;
+}
+
+body.admin-light-mode .match-league,
+body.admin-light-mode .match-venue,
+body.admin-light-mode .match-time span,
+body.admin-light-mode .match-vs {
+    color: #6c757d;
+}
+
+body.admin-light-mode .team-logo {
+    background: #ffffff;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 991px) {
+    .matches-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+    .tabs-nav {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .tab-btn {
+        white-space: nowrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .matches-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .match-body {
+        gap: 15px;
+        padding: 20px 15px;
+    }
+    
+    .team-logo {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .match-team h4 {
+        font-size: 14px;
+    }
+    
+    .match-score .score {
+        font-size: 28px;
+        min-width: 40px;
+    }
+    
+    .match-footer {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+}
+
+/* ========================================
+   ADDITIONAL FEATURES
+   ======================================== */
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: var(--admin-text-muted);
+    margin-bottom: 20px;
+}
+
+.empty-state h3 {
+    font-size: 20px;
+    color: var(--admin-text);
+    margin-bottom: 10px;
+}
+
+.empty-state p {
+    font-size: 14px;
+    color: var(--admin-text-muted);
+}
+
+/* Loading Skeleton (optional) */
+.match-skeleton {
+    background: linear-gradient(
+        90deg,
+        var(--admin-bg) 25%,
+        var(--admin-border) 50%,
+        var(--admin-bg) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Filter specific for matches */
+input[type="date"].filter-select {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+input[type="date"].filter-select::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.5);
+}
+
+body.admin-light-mode input[type="date"].filter-select::-webkit-calendar-picker-indicator {
+    filter: invert(0);
+}

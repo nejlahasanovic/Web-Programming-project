@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marketing - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="/90minut/frontend/assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Marketing & Campaigns</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                    <div class="profile-avatar-icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Marketing Content -->
+        <div class="admin-content">
+            
+            <!-- Action Bar -->
+            <div class="content-header">
+                <div class="header-actions">
+                    <button class="btn-primary">
+                        <i class="fa fa-plus"></i>
+                        <span>New Campaign</span>
+                    </button>
+                    
+                    <div class="search-box">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search campaigns...">
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <select class="filter-select">
+                        <option value="all">All Types</option>
+                        <option value="email">Email Campaign</option>
+                        <option value="social">Social Media</option>
+                        <option value="banner">Banner Ads</option>
+                        <option value="push">Push Notifications</option>
+                    </select>
+
+                    <select class="filter-select">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="completed">Completed</option>
+                        <option value="draft">Draft</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Marketing Stats -->
+            <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon blue">
+                        <i class="fa fa-bullhorn"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>24</h4>
+                        <p>Active Campaigns</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon green">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>342K</h4>
+                        <p>Emails Sent</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon orange">
+                        <i class="fa fa-mouse-pointer"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>24.5%</h4>
+                        <p>Click Rate</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon purple">
+                        <i class="fa fa-dollar"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>$12.4K</h4>
+                        <p>Total Spent</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Campaigns Grid -->
+            <div class="campaigns-grid">
+                
+                <!-- Campaign Card 1 - Active Email -->
+                <div class="campaign-card campaign-active">
+                    <div class="campaign-header">
+                        <div class="campaign-type type-email">
+                            <i class="fa fa-envelope"></i>
+                            <span>Email Campaign</span>
+                        </div>
+                        <span class="campaign-status status-active">
+                            <i class="fa fa-circle"></i>
+                            Active
+                        </span>
+                    </div>
+
+                    <div class="campaign-body">
+                        <h3 class="campaign-title">Premier League Finals Newsletter</h3>
+                        <p class="campaign-description">Weekly newsletter featuring Premier League match highlights and exclusive content</p>
+                        
+                        <div class="campaign-stats-row">
+                            <div class="campaign-stat">
+                                <i class="fa fa-paper-plane"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">45,231</span>
+                                    <span class="stat-label">Sent</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-eye"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">32.4%</span>
+                                    <span class="stat-label">Open Rate</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-mouse-pointer"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">12.8%</span>
+                                    <span class="stat-label">Click Rate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="campaign-meta">
+                            <span class="campaign-date">
+                                <i class="fa fa-calendar"></i>
+                                Started: Oct 15, 2025
+                            </span>
+                            <span class="campaign-budget">
+                                <i class="fa fa-dollar"></i>
+                                Budget: $2,500
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Report">
+                            <i class="fa fa-bar-chart"></i>
+                        </button>
+                        <button class="btn-icon btn-pause" title="Pause Campaign">
+                            <i class="fa fa-pause"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 2 - Scheduled Social -->
+                <div class="campaign-card campaign-scheduled">
+                    <div class="campaign-header">
+                        <div class="campaign-type type-social">
+                            <i class="fa fa-share-alt"></i>
+                            <span>Social Media</span>
+                        </div>
+                        <span class="campaign-status status-scheduled">
+                            <i class="fa fa-clock-o"></i>
+                            Scheduled
+                        </span>
+                    </div>
+
+                    <div class="campaign-body">
+                        <h3 class="campaign-title">Champions League Promotion</h3>
+                        <p class="campaign-description">Social media campaign for Champions League final week coverage</p>
+                        
+                        <div class="campaign-stats-row">
+                            <div class="campaign-stat">
+                                <i class="fa fa-calendar"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">Oct 25</span>
+                                    <span class="stat-label">Start Date</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-users"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">125K</span>
+                                    <span class="stat-label">Target Reach</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-bullseye"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">18-35</span>
+                                    <span class="stat-label">Age Group</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="campaign-meta">
+                            <span class="campaign-date">
+                                <i class="fa fa-calendar"></i>
+                                Launch: Oct 25, 2025
+                            </span>
+                            <span class="campaign-budget">
+                                <i class="fa fa-dollar"></i>
+                                Budget: $4,200
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 3 - Active Banner -->
+                <div class="campaign-card campaign-active">
+                    <div class="campaign-header">
+                        <div class="campaign-type type-banner">
+                            <i class="fa fa-picture-o"></i>
+                            <span>Banner Ads</span>
+                        </div>
+                        <span class="campaign-status status-active">
+                            <i class="fa fa-circle"></i>
+                            Active
+                        </span>
+                    </div>
+
+                    <div class="campaign-body">
+                        <h3 class="campaign-title">Homepage Hero Banner</h3>
+                        <p class="campaign-description">Featured banner promoting exclusive match coverage and live scores</p>
+                        
+                        <div class="campaign-stats-row">
+                            <div class="campaign-stat">
+                                <i class="fa fa-eye"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">234K</span>
+                                    <span class="stat-label">Impressions</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-mouse-pointer"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">8.2%</span>
+                                    <span class="stat-label">CTR</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-exchange"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">3.4%</span>
+                                    <span class="stat-label">Conversion</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="campaign-meta">
+                            <span class="campaign-date">
+                                <i class="fa fa-calendar"></i>
+                                Started: Oct 10, 2025
+                            </span>
+                            <span class="campaign-budget">
+                                <i class="fa fa-dollar"></i>
+                                Budget: $1,800
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Report">
+                            <i class="fa fa-bar-chart"></i>
+                        </button>
+                        <button class="btn-icon btn-pause" title="Pause Campaign">
+                            <i class="fa fa-pause"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 4 - Completed -->
+                <div class="campaign-card campaign-completed">
+                    <div class="campaign-header">
+                        <div class="campaign-type type-push">
+                            <i class="fa fa-bell"></i>
+                            <span>Push Notifications</span>
+                        </div>
+                        <span class="campaign-status status-completed">
+                            <i class="fa fa-check-circle"></i>
+                            Completed
+                        </span>
+                    </div>
+
+                    <div class="campaign-body">
+                        <h3 class="campaign-title">Match Day Alerts - Week 8</h3>
+                        <p class="campaign-description">Real-time push notifications for major match events and score updates</p>
+                        
+                        <div class="campaign-stats-row">
+                            <div class="campaign-stat">
+                                <i class="fa fa-paper-plane"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">89K</span>
+                                    <span class="stat-label">Delivered</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-mouse-pointer"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">45.2%</span>
+                                    <span class="stat-label">Open Rate</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-check"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">18.3%</span>
+                                    <span class="stat-label">Action Rate</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="campaign-meta">
+                            <span class="campaign-date">
+                                <i class="fa fa-calendar"></i>
+                                Ended: Oct 12, 2025
+                            </span>
+                            <span class="campaign-budget">
+                                <i class="fa fa-dollar"></i>
+                                Spent: $850
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <button class="btn-icon btn-view" title="View Report">
+                            <i class="fa fa-bar-chart"></i>
+                        </button>
+                        <button class="btn-icon btn-copy" title="Duplicate">
+                            <i class="fa fa-copy"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 5 - Draft -->
+                <div class="campaign-card campaign-draft">
+                    <div class="campaign-header">
+                        <div class="campaign-type type-email">
+                            <i class="fa fa-envelope"></i>
+                            <span>Email Campaign</span>
+                        </div>
+                        <span class="campaign-status status-draft">
+                            <i class="fa fa-edit"></i>
+                            Draft
+                        </span>
+                    </div>
+
+                    <div class="campaign-body">
+                        <h3 class="campaign-title">World Cup Countdown Series</h3>
+                        <p class="campaign-description">Weekly countdown emails featuring World Cup predictions and team analysis</p>
+                        
+                        <div class="campaign-progress">
+                            <div class="progress-header">
+                                <span>Campaign Setup Progress</span>
+                                <span class="progress-percentage">65%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 65%; background: #f39c12;"></div>
+                            </div>
+                            <div class="progress-steps">
+                                <span class="step completed"><i class="fa fa-check"></i> Content</span>
+                                <span class="step completed"><i class="fa fa-check"></i> Design</span>
+                                <span class="step pending"><i class="fa fa-clock-o"></i> Audience</span>
+                                <span class="step pending"><i class="fa fa-clock-o"></i> Schedule</span>
+                            </div>
+                        </div>
+
+                        <div class="campaign-meta">
+                            <span class="campaign-date">
+                                <i class="fa fa-calendar"></i>
+                                Created: Oct 18, 2025
+                            </span>
+                            <span class="campaign-budget">
+                                <i class="fa fa-dollar"></i>
+                                Budget: $3,000
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <button class="btn-icon btn-edit" title="Continue Editing">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="Preview">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Campaign Card 6 - Active Social -->
+                <div class="campaign-card campaign-active">
+                    <div class="campaign-header">
+                        <div class="campaign-type type-social">
+                            <i class="fa fa-share-alt"></i>
+                            <span>Social Media</span>
+                        </div>
+                        <span class="campaign-status status-active">
+                            <i class="fa fa-circle"></i>
+                            Active
+                        </span>
+                    </div>
+
+                    <div class="campaign-body">
+                        <h3 class="campaign-title">Instagram Stories - Match Highlights</h3>
+                        <p class="campaign-description">Daily Instagram stories featuring top goals and match moments</p>
+                        
+                        <div class="campaign-stats-row">
+                            <div class="campaign-stat">
+                                <i class="fa fa-eye"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">156K</span>
+                                    <span class="stat-label">Views</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-heart"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">12.4K</span>
+                                    <span class="stat-label">Engagement</span>
+                                </div>
+                            </div>
+                            <div class="campaign-stat">
+                                <i class="fa fa-share"></i>
+                                <div class="stat-info">
+                                    <span class="stat-value">3.2K</span>
+                                    <span class="stat-label">Shares</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="campaign-meta">
+                            <span class="campaign-date">
+                                <i class="fa fa-calendar"></i>
+                                Started: Oct 12, 2025
+                            </span>
+                            <span class="campaign-budget">
+                                <i class="fa fa-dollar"></i>
+                                Budget: $1,500
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="campaign-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Report">
+                            <i class="fa fa-bar-chart"></i>
+                        </button>
+                        <button class="btn-icon btn-pause" title="Pause Campaign">
+                            <i class="fa fa-pause"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>
