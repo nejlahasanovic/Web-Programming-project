@@ -1,0 +1,368 @@
+/* Profile Page - 90 Minut - Dark Theme */
+
+.profile-container {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #1a1a1a;
+    min-height: 100vh;
+}
+
+.profile-card {
+    background: #2d2d2d;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background: #1a1a1a;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.profile-header h2 {
+    color: white;
+    font-size: 24px;
+    margin: 0;
+    font-weight: 400;
+}
+
+.logout-btn {
+    padding: 10px 25px;
+    background: #e74c3c;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.logout-btn:hover {
+    background: #c0392b;
+}
+
+#profileForm {
+    padding: 40px;
+}
+
+.profile-section {
+    margin-bottom: 30px;
+}
+
+.profile-section label {
+    display: block;
+    color: #b0b0b0;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 12px;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.profile-section input[type="text"],
+.profile-section input[type="email"],
+.profile-section select {
+    width: 100%;
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+.profile-section input:focus,
+.profile-section select:focus {
+    outline: none;
+    background: #1a1a1a;
+    border-color: #4a9eff;
+}
+
+.profile-section input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Username Wrapper */
+.username-wrapper {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+}
+
+.username-prefix {
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-right: none;
+    border-radius: 4px 0 0 4px;
+    color: #6a6a6a;
+    font-size: 14px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.username-wrapper input {
+    border-radius: 0;
+    flex: 1;
+    border-left: none;
+    border-right: none;
+}
+
+.username-link-btn {
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    color: #6a6a6a;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.username-link-btn:hover {
+    color: #4a9eff;
+    background: #242424;
+}
+
+/* Email Wrapper */
+.email-wrapper {
+    display: flex;
+    gap: 0;
+    align-items: stretch;
+}
+
+.email-wrapper input {
+    border-radius: 4px 0 0 4px;
+    flex: 1;
+    border-right: none;
+}
+
+.email-verified-btn {
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-left: none;
+    border-radius: 0 4px 4px 0;
+    color: #4285f4;
+    cursor: default;
+    font-size: 16px;
+}
+
+.profile-info {
+    color: #6a6a6a;
+    font-size: 13px;
+    margin-top: 8px;
+    margin-bottom: 0;
+    line-height: 1.5;
+}
+
+/* Avatar Selector */
+.avatar-selector {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+.avatar-option {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 3px solid transparent;
+    position: relative;
+}
+
+.avatar-option:hover {
+    transform: scale(1.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.avatar-option.selected {
+    border-color: white;
+    transform: scale(1.15);
+}
+
+.avatar-option.selected::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Gender Options */
+.gender-options {
+    display: flex;
+    gap: 24px;
+    margin-top: 10px;
+}
+
+.gender-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.gender-option input[type="radio"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #4a9eff;
+}
+
+/* Status Sections */
+.verification-status,
+.subscription-status {
+    padding: 12px 16px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-radius: 4px;
+}
+
+.status-text {
+    color: white;
+    font-size: 14px;
+}
+
+/* Delete Account Button */
+.delete-account-btn {
+    padding: 10px 20px;
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    border-radius: 4px;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.delete-account-btn:hover {
+    background: #e74c3c;
+    border-color: #e74c3c;
+}
+
+/* Note Box */
+.note-box {
+    background: #1a1a1a;
+    border: 1px solid #3a3a3a;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.note-box h3 {
+    color: white;
+    font-size: 14px;
+    margin: 0 0 10px 0;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.note-box p {
+    color: #b0b0b0;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* Profile Actions */
+.profile-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+}
+
+.save-btn {
+    padding: 12px 40px;
+    background: #5865f2;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+.save-btn:hover {
+    background: #4752c4;
+}
+
+/* Select Dropdown Styling */
+.profile-select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236a6a6a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile-container {
+        padding: 20px 10px;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+        align-items: flex-start;
+    }
+
+    #profileForm {
+        padding: 20px;
+    }
+
+    .username-prefix {
+        font-size: 12px;
+        padding: 12px 10px;
+    }
+
+    .avatar-selector {
+        gap: 6px;
+    }
+
+    .avatar-option {
+        width: 35px;
+        height: 35px;
+    }
+
+    .gender-options {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .save-btn {
+        width: 100%;
+    }
+}

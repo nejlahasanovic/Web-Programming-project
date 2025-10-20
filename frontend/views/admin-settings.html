@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Settings - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="/90minut/frontend/assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Settings</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                    <div class="profile-avatar-icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Settings Content -->
+        <div class="admin-content">
+            
+            <!-- Settings Navigation Tabs -->
+            <div class="settings-tabs">
+                <button class="settings-tab active" data-tab="general">
+                    <i class="fa fa-cog"></i>
+                    General
+                </button>
+                <button class="settings-tab" data-tab="security">
+                    <i class="fa fa-lock"></i>
+                    Security
+                </button>
+                <button class="settings-tab" data-tab="notifications">
+                    <i class="fa fa-bell"></i>
+                    Notifications
+                </button>
+                <button class="settings-tab" data-tab="appearance">
+                    <i class="fa fa-paint-brush"></i>
+                    Appearance
+                </button>
+                <button class="settings-tab" data-tab="integrations">
+                    <i class="fa fa-plug"></i>
+                    Integrations
+                </button>
+                <button class="settings-tab" data-tab="advanced">
+                    <i class="fa fa-code"></i>
+                    Advanced
+                </button>
+            </div>
+
+            <!-- Tab Content: General -->
+            <div class="settings-content active" id="general">
+                <div class="settings-section">
+                    <div class="section-header">
+                        <h2>General Settings</h2>
+                        <p>Manage your site's basic information and preferences</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Site Information -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-info-circle"></i>
+                                Site Information
+                            </h3>
+                            
+                            <div class="form-group">
+                                <label>Site Name</label>
+                                <input type="text" class="form-control" value="90 Minut - Football Portal" placeholder="Enter site name">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Site Tagline</label>
+                                <input type="text" class="form-control" value="Your Ultimate Football News Source" placeholder="Enter tagline">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Site URL</label>
+                                <input type="url" class="form-control" value="https://90minut.com" placeholder="https://example.com">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Admin Email</label>
+                                <input type="email" class="form-control" value="admin@90minut.com" placeholder="admin@example.com">
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+
+                        <!-- Regional Settings -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-globe"></i>
+                                Regional Settings
+                            </h3>
+                            
+                            <div class="form-group">
+                                <label>Language</label>
+                                <select class="form-control">
+                                    <option value="en" selected>English</option>
+                                    <option value="bs">Bosanski</option>
+                                    <option value="hr">Hrvatski</option>
+                                    <option value="sr">Srpski</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Timezone</label>
+                                <select class="form-control">
+                                    <option value="UTC+1" selected>Central European Time (UTC+1)</option>
+                                    <option value="UTC+0">GMT (UTC+0)</option>
+                                    <option value="UTC-5">Eastern Time (UTC-5)</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Date Format</label>
+                                <select class="form-control">
+                                    <option value="DD/MM/YYYY" selected>DD/MM/YYYY</option>
+                                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Time Format</label>
+                                <select class="form-control">
+                                    <option value="24h" selected>24 Hour</option>
+                                    <option value="12h">12 Hour (AM/PM)</option>
+                                </select>
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+
+                        <!-- Content Settings -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-file-text"></i>
+                                Content Settings
+                            </h3>
+                            
+                            <div class="form-group">
+                                <label>Articles Per Page</label>
+                                <input type="number" class="form-control" value="10" min="1" max="50">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Comments</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="enableComments" checked>
+                                    <label for="enableComments">Enable comments on articles</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Comment Moderation</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="commentModeration" checked>
+                                    <label for="commentModeration">Moderate comments before publishing</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Auto-save Drafts</label>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="autoSave" checked>
+                                    <label for="autoSave">Automatically save drafts</label>
+                                </div>
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+
+                        <!-- SEO Settings -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-search"></i>
+                                SEO Settings
+                            </h3>
+                            
+                            <div class="form-group">
+                                <label>Meta Description</label>
+                                <textarea class="form-control" rows="3" placeholder="Enter meta description">Get the latest football news, match results, and live scores from 90 Minut - your ultimate football portal.</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Meta Keywords</label>
+                                <input type="text" class="form-control" value="football, soccer, news, live scores, matches" placeholder="Enter keywords">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Google Analytics ID</label>
+                                <input type="text" class="form-control" value="UA-XXXXXXXXX-X" placeholder="UA-XXXXXXXXX-X">
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Security -->
+            <div class="settings-content" id="security">
+                <div class="settings-section">
+                    <div class="section-header">
+                        <h2>Security Settings</h2>
+                        <p>Protect your account and manage security preferences</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Change Password -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-key"></i>
+                                Change Password
+                            </h3>
+                            
+                            <div class="form-group">
+                                <label>Current Password</label>
+                                <input type="password" class="form-control" placeholder="Enter current password">
+                            </div>
+
+                            <div class="form-group">
+                                <label>New Password</label>
+                                <input type="password" class="form-control" placeholder="Enter new password">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Confirm New Password</label>
+                                <input type="password" class="form-control" placeholder="Confirm new password">
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-check"></i>
+                                Update Password
+                            </button>
+                        </div>
+
+                        <!-- Two-Factor Authentication -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-shield"></i>
+                                Two-Factor Authentication
+                            </h3>
+                            
+                            <div class="security-status">
+                                <div class="status-badge status-disabled">
+                                    <i class="fa fa-times-circle"></i>
+                                    Disabled
+                                </div>
+                                <p>Add an extra layer of security to your account</p>
+                            </div>
+
+                            <button class="btn-primary">
+                                <i class="fa fa-lock"></i>
+                                Enable 2FA
+                            </button>
+                        </div>
+
+                        <!-- Active Sessions -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-desktop"></i>
+                                Active Sessions
+                            </h3>
+                            
+                            <div class="sessions-list">
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <strong>
+                                            <i class="fa fa-desktop"></i>
+                                            Windows - Chrome
+                                        </strong>
+                                        <span>Sarajevo, Bosnia and Herzegovina</span>
+                                        <span class="session-current">Current Session</span>
+                                    </div>
+                                </div>
+
+                                <div class="session-item">
+                                    <div class="session-info">
+                                        <strong>
+                                            <i class="fa fa-mobile"></i>
+                                            iPhone - Safari
+                                        </strong>
+                                        <span>Sarajevo, Bosnia and Herzegovina</span>
+                                        <span>Last active: 2 hours ago</span>
+                                    </div>
+                                    <button class="btn-icon btn-delete">
+                                        <i class="fa fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <button class="btn-danger">
+                                <i class="fa fa-sign-out"></i>
+                                Logout All Sessions
+                            </button>
+                        </div>
+
+                        <!-- Security Options -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-lock"></i>
+                                Security Options
+                            </h3>
+                            
+                            <div class="form-group">
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="loginNotifications" checked>
+                                    <label for="loginNotifications">Email me when someone logs in to my account</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="suspiciousActivity">
+                                    <label for="suspiciousActivity">Alert me about suspicious activity</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="autoLogout" checked>
+                                    <label for="autoLogout">Auto logout after 30 minutes of inactivity</label>
+                                </div>
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Notifications -->
+            <div class="settings-content" id="notifications">
+                <div class="settings-section">
+                    <div class="section-header">
+                        <h2>Notification Settings</h2>
+                        <p>Choose what notifications you want to receive</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Email Notifications -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-envelope"></i>
+                                Email Notifications
+                            </h3>
+                            
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <strong>New Article Published</strong>
+                                    <p>Get notified when a new article is published</p>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="emailArticle" checked>
+                                    <label for="emailArticle"></label>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <strong>New User Registration</strong>
+                                    <p>Get notified when someone registers</p>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="emailUser" checked>
+                                    <label for="emailUser"></label>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <strong>New Comment</strong>
+                                    <p>Get notified about new comments</p>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="emailComment">
+                                    <label for="emailComment"></label>
+                                </div>
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+
+                        <!-- Push Notifications -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-bell"></i>
+                                Push Notifications
+                            </h3>
+                            
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <strong>Match Updates</strong>
+                                    <p>Live match score updates</p>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="pushMatch" checked>
+                                    <label for="pushMatch"></label>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <strong>Breaking News</strong>
+                                    <p>Important football news alerts</p>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="pushNews" checked>
+                                    <label for="pushNews"></label>
+                                </div>
+                            </div>
+
+                            <div class="notification-item">
+                                <div class="notification-info">
+                                    <strong>System Alerts</strong>
+                                    <p>Important system notifications</p>
+                                </div>
+                                <div class="toggle-switch">
+                                    <input type="checkbox" id="pushSystem" checked>
+                                    <label for="pushSystem"></label>
+                                </div>
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Appearance -->
+            <div class="settings-content" id="appearance">
+                <div class="settings-section">
+                    <div class="section-header">
+                        <h2>Appearance Settings</h2>
+                        <p>Customize how your admin panel looks</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Theme Settings -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-paint-brush"></i>
+                                Theme
+                            </h3>
+                            
+                            <div class="theme-options">
+                                <div class="theme-option active">
+                                    <div class="theme-preview dark-theme">
+                                        <div class="preview-header"></div>
+                                        <div class="preview-sidebar"></div>
+                                        <div class="preview-content"></div>
+                                    </div>
+                                    <div class="theme-name">
+                                        <i class="fa fa-check-circle"></i>
+                                        Dark Mode
+                                    </div>
+                                </div>
+
+                                <div class="theme-option">
+                                    <div class="theme-preview light-theme">
+                                        <div class="preview-header"></div>
+                                        <div class="preview-sidebar"></div>
+                                        <div class="preview-content"></div>
+                                    </div>
+                                    <div class="theme-name">
+                                        Light Mode
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Color Scheme -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-tint"></i>
+                                Accent Color
+                            </h3>
+                            
+                            <div class="color-options">
+                                <div class="color-option active" style="background: #dd1515;"></div>
+                                <div class="color-option" style="background: #3498db;"></div>
+                                <div class="color-option" style="background: #2ecc71;"></div>
+                                <div class="color-option" style="background: #f39c12;"></div>
+                                <div class="color-option" style="background: #9b59b6;"></div>
+                                <div class="color-option" style="background: #e74c3c;"></div>
+                            </div>
+
+                            <button class="btn-save">
+                                <i class="fa fa-save"></i>
+                                Apply Color
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Integrations -->
+            <div class="settings-content" id="integrations">
+                <div class="settings-section">
+                    <div class="section-header">
+                        <h2>Integrations</h2>
+                        <p>Connect third-party services and APIs</p>
+                    </div>
+
+                    <div class="integrations-grid">
+                        <!-- Google Analytics -->
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fa fa-line-chart"></i>
+                            </div>
+                            <div class="integration-info">
+                                <h3>Google Analytics</h3>
+                                <p>Track website traffic and user behavior</p>
+                                <span class="integration-status connected">
+                                    <i class="fa fa-check-circle"></i> Connected
+                                </span>
+                            </div>
+                            <button class="btn-secondary">Configure</button>
+                        </div>
+
+                        <!-- Facebook -->
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+                            <div class="integration-info">
+                                <h3>Facebook</h3>
+                                <p>Share content and manage social presence</p>
+                                <span class="integration-status disconnected">
+                                    <i class="fa fa-times-circle"></i> Not Connected
+                                </span>
+                            </div>
+                            <button class="btn-primary">Connect</button>
+                        </div>
+
+                        <!-- Twitter -->
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fa fa-twitter"></i>
+                            </div>
+                            <div class="integration-info">
+                                <h3>Twitter</h3>
+                                <p>Auto-post articles to Twitter</p>
+                                <span class="integration-status disconnected">
+                                    <i class="fa fa-times-circle"></i> Not Connected
+                                </span>
+                            </div>
+                            <button class="btn-primary">Connect</button>
+                        </div>
+
+                        <!-- MailChimp -->
+                        <div class="integration-card">
+                            <div class="integration-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="integration-info">
+                                <h3>MailChimp</h3>
+                                <p>Manage email campaigns and subscribers</p>
+                                <span class="integration-status connected">
+                                    <i class="fa fa-check-circle"></i> Connected
+                                </span>
+                            </div>
+                            <button class="btn-secondary">Configure</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: Advanced -->
+            <div class="settings-content" id="advanced">
+                <div class="settings-section">
+                    <div class="section-header">
+                        <h2>Advanced Settings</h2>
+                        <p>Advanced configuration and system maintenance</p>
+                    </div>
+
+                    <div class="settings-grid">
+                        <!-- Database -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-database"></i>
+                                Database
+                            </h3>
+                            
+                            <div class="advanced-item">
+                                <div class="advanced-info">
+                                    <strong>Database Size</strong>
+                                    <span>2.4 GB</span>
+                                </div>
+                                <button class="btn-secondary btn-sm">Optimize</button>
+                            </div>
+
+                            <div class="advanced-item">
+                                <div class="advanced-info">
+                                    <strong>Last Backup</strong>
+                                    <span>2 hours ago</span>
+                                </div>
+                                <button class="btn-primary btn-sm">Backup Now</button>
+                            </div>
+                        </div>
+
+                        <!-- Cache -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-refresh"></i>
+                                Cache Management
+                            </h3>
+                            
+                            <div class="advanced-item">
+                                <div class="advanced-info">
+                                    <strong>Clear All Cache</strong>
+                                    <span>Improve site performance</span>
+                                </div>
+                                <button class="btn-danger btn-sm">Clear Cache</button>
+                            </div>
+                        </div>
+
+                        <!-- System Info -->
+                        <div class="settings-card">
+                            <h3 class="card-title">
+                                <i class="fa fa-info-circle"></i>
+                                System Information
+                            </h3>
+                            
+                            <div class="system-info">
+                                <div class="info-row">
+                                    <span>Version:</span>
+                                    <strong>1.0.0</strong>
+                                </div>
+                                <div class="info-row">
+                                    <span>PHP Version:</span>
+                                    <strong>8.2.0</strong>
+                                </div>
+                                <div class="info-row">
+                                    <span>MySQL Version:</span>
+                                    <strong>8.0.32</strong>
+                                </div>
+                                <div class="info-row">
+                                    <span>Server:</span>
+                                    <strong>Apache 2.4</strong>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Danger Zone -->
+                        <div class="settings-card danger-zone">
+                            <h3 class="card-title">
+                                <i class="fa fa-exclamation-triangle"></i>
+                                Danger Zone
+                            </h3>
+                            
+                            <div class="danger-item">
+                                <div class="danger-info">
+                                    <strong>Reset All Settings</strong>
+                                    <p>Reset all settings to default values</p>
+                                </div>
+                                <button class="btn-danger">Reset</button>
+                            </div>
+
+                            <div class="danger-item">
+                                <div class="danger-info">
+                                    <strong>Delete All Data</strong>
+                                    <p>Permanently delete all data (cannot be undone)</p>
+                                </div>
+                                <button class="btn-danger">Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matches Management - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Matches Management</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                   <img src="/90minut/frontend/assets/img/avatar.png" alt="Admin" class="profile-avatar">
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Matches Content -->
+        <div class="admin-content">
+            
+            <!-- Action Bar -->
+            <div class="content-header">
+                <div class="header-actions">
+                    <button class="btn-primary">
+                        <i class="fa fa-plus"></i>
+                        <span>Add Match</span>
+                    </button>
+                    
+                    <div class="search-box">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search matches...">
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <select class="filter-select">
+                        <option value="all">All Leagues</option>
+                        <option value="premier-league">Premier League</option>
+                        <option value="la-liga">La Liga</option>
+                        <option value="serie-a">Serie A</option>
+                        <option value="bundesliga">Bundesliga</option>
+                        <option value="champions-league">Champions League</option>
+                    </select>
+
+                    <select class="filter-select">
+                        <option value="all">All Status</option>
+                        <option value="scheduled">Scheduled</option>
+                        <option value="live">Live</option>
+                        <option value="finished">Finished</option>
+                        <option value="postponed">Postponed</option>
+                    </select>
+
+                    <input type="date" class="filter-select" placeholder="Filter by date">
+                </div>
+            </div>
+
+            <!-- Matches Stats -->
+            <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon blue">
+                        <i class="fa fa-calendar"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>248</h4>
+                        <p>Total Matches</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon orange">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>45</h4>
+                        <p>Scheduled</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon red">
+                        <i class="fa fa-circle"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>3</h4>
+                        <p>Live Now</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon green">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>200</h4>
+                        <p>Finished</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tabs-container">
+                <div class="tabs-nav">
+                    <button class="tab-btn active" data-tab="upcoming">
+                        <i class="fa fa-calendar-plus-o"></i>
+                        Upcoming Matches
+                    </button>
+                    <button class="tab-btn" data-tab="live">
+                        <i class="fa fa-circle"></i>
+                        Live Matches
+                    </button>
+                    <button class="tab-btn" data-tab="results">
+                        <i class="fa fa-check-circle"></i>
+                        Match Results
+                    </button>
+                </div>
+
+                <!-- Tab Content: Upcoming Matches -->
+                <div class="tab-content active" id="upcoming">
+                    <div class="matches-grid">
+                        
+                        <!-- Match Card 1 -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <span class="match-league">
+                                    <i class="fa fa-trophy"></i>
+                                    Premier League
+                                </span>
+                                <span class="match-status status-scheduled">Scheduled</span>
+                            </div>
+                            
+                            <div class="match-body">
+                                <div class="match-team">
+                                    <img src="/90minut/frontend/assets/img/club/liverpool-logo.png" alt="Team" class="team-logo">
+                                    <h4>Liverpool</h4>
+                                </div>
+                                
+                                <div class="match-center">
+                                    <div class="match-time">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>Tomorrow</span>
+                                        <span class="time">20:00</span>
+                                    </div>
+                                    <div class="match-vs">VS</div>
+                                </div>
+                                
+                                <div class="match-team">
+                                    <img src="/90minut/frontend/assets/img/club/manunited-logo.png" alt="Team" class="team-logo">
+                                    <h4>Man United</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="match-footer">
+                                <span class="match-venue">
+                                    <i class="fa fa-map-marker"></i>
+                                    Anfield Stadium
+                                </span>
+                                <div class="match-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Match Card 2 -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <span class="match-league">
+                                    <i class="fa fa-trophy"></i>
+                                    La Liga
+                                </span>
+                                <span class="match-status status-scheduled">Scheduled</span>
+                            </div>
+                            
+                            <div class="match-body">
+                                <div class="match-team">
+                                    <img src="/90minut/frontend/assets/img/club/realmadrid-logo.png" alt="Team" class="team-logo">
+                                    <h4>Real Madrid</h4>
+                                </div>
+                                
+                                <div class="match-center">
+                                    <div class="match-time">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>Tomorrow</span>
+                                        <span class="time">22:00</span>
+                                    </div>
+                                    <div class="match-vs">VS</div>
+                                </div>
+                                
+                                <div class="match-team">
+                                    <img src="/90minut/frontend/assets/img/club/barcelona-logo.png" alt="Team" class="team-logo">
+                                    <h4>Barcelona</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="match-footer">
+                                <span class="match-venue">
+                                    <i class="fa fa-map-marker"></i>
+                                    Santiago Bernabéu
+                                </span>
+                                <div class="match-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Match Card 3 -->
+                        <div class="match-card">
+                            <div class="match-header">
+                                <span class="match-league">
+                                    <i class="fa fa-trophy"></i>
+                                    Champions League
+                                </span>
+                                <span class="match-status status-scheduled">Scheduled</span>
+                            </div>
+                            
+                            <div class="match-body">
+                                <div class="match-team">
+                                    <img src="/90minut/frontend/assets/img/club/bayern-munich.png" alt="Team" class="team-logo">
+                                    <h4>Bayern Munich</h4>
+                                </div>
+                                
+                                <div class="match-center">
+                                    <div class="match-time">
+                                        <i class="fa fa-clock-o"></i>
+                                        <span>Oct 25</span>
+                                        <span class="time">21:00</span>
+                                    </div>
+                                    <div class="match-vs">VS</div>
+                                </div>
+                                
+                                <div class="match-team">
+                                    <img src="/90minut/frontend/assets/img/club/psg-logo.png" alt="Team" class="team-logo">
+                                    <h4>PSG</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="match-footer">
+                                <span class="match-venue">
+                                    <i class="fa fa-map-marker"></i>
+                                    Allianz Arena
+                                </span>
+                                <div class="match-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tab Content: Live Matches -->
+                <div class="tab-content" id="live">
+                    <div class="matches-grid">
+                        
+                        <!-- Live Match Card -->
+                        <div class="match-card match-live">
+                            <div class="match-header">
+                                <span class="match-league">
+                                    <i class="fa fa-trophy"></i>
+                                    Premier League
+                                </span>
+                                <span class="match-status status-live">
+                                    <span class="live-indicator"></span>
+                                    LIVE - 67'
+                                </span>
+                            </div>
+                            
+                            <div class="match-body">
+                                <div class="match-team">
+                                    <img src="https://via.placeholder.com/50" alt="Team" class="team-logo">
+                                    <h4>Arsenal</h4>
+                                </div>
+                                
+                                <div class="match-center">
+                                    <div class="match-score">
+                                        <span class="score">2</span>
+                                        <span class="score-separator">-</span>
+                                        <span class="score">1</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="match-team">
+                                    <img src="https://via.placeholder.com/50" alt="Team" class="team-logo">
+                                    <h4>Chelsea</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="match-footer">
+                                <span class="match-venue">
+                                    <i class="fa fa-map-marker"></i>
+                                    Emirates Stadium
+                                </span>
+                                <div class="match-actions">
+                                    <button class="btn-icon btn-edit" title="Update Score">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Details">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Tab Content: Results -->
+                <div class="tab-content" id="results">
+                    <div class="matches-grid">
+                        
+                        <!-- Result Card 1 -->
+                        <div class="match-card match-finished">
+                            <div class="match-header">
+                                <span class="match-league">
+                                    <i class="fa fa-trophy"></i>
+                                    La Liga
+                                </span>
+                                <span class="match-status status-finished">FT</span>
+                            </div>
+                            
+                            <div class="match-body">
+                                <div class="match-team">
+                                    <img src="https://via.placeholder.com/50" alt="Team" class="team-logo">
+                                    <h4>Atletico Madrid</h4>
+                                </div>
+                                
+                                <div class="match-center">
+                                    <div class="match-score">
+                                        <span class="score">3</span>
+                                        <span class="score-separator">-</span>
+                                        <span class="score">1</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="match-team">
+                                    <img src="https://via.placeholder.com/50" alt="Team" class="team-logo">
+                                    <h4>Sevilla</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="match-footer">
+                                <span class="match-venue">
+                                    <i class="fa fa-calendar"></i>
+                                    Yesterday, 20:00
+                                </span>
+                                <div class="match-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Details">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Result Card 2 -->
+                        <div class="match-card match-finished">
+                            <div class="match-header">
+                                <span class="match-league">
+                                    <i class="fa fa-trophy"></i>
+                                    Serie A
+                                </span>
+                                <span class="match-status status-finished">FT</span>
+                            </div>
+                            
+                            <div class="match-body">
+                                <div class="match-team">
+                                    <img src="https://via.placeholder.com/50" alt="Team" class="team-logo">
+                                    <h4>Juventus</h4>
+                                </div>
+                                
+                                <div class="match-center">
+                                    <div class="match-score">
+                                        <span class="score">2</span>
+                                        <span class="score-separator">-</span>
+                                        <span class="score">2</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="match-team">
+                                    <img src="https://via.placeholder.com/50" alt="Team" class="team-logo">
+                                    <h4>AC Milan</h4>
+                                </div>
+                            </div>
+                            
+                            <div class="match-footer">
+                                <span class="match-venue">
+                                    <i class="fa fa-calendar"></i>
+                                    2 days ago
+                                </span>
+                                <div class="match-actions">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Details">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard - 90 Minut</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="/90minut/frontend/assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item active">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard Overview</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-moon-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                    <img src="/90minut/frontend/assets/img/avatar.png" alt="Admin" class="profile-avatar">
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Dashboard Content -->
+        <div class="admin-content">
+            
+            <!-- Stats Cards Row -->
+            <div class="stats-grid">
+                <div class="stat-card card-blue">
+                    <div class="stat-icon">
+                        <i class="fa fa-newspaper-o"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-number">1,245</h3>
+                        <p class="stat-label">Total Articles</p>
+                        <span class="stat-change positive">+12.5% this month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card card-green">
+                    <div class="stat-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-number">8,456</h3>
+                        <p class="stat-label">Active Users</p>
+                        <span class="stat-change positive">+8.3% this month</span>
+                    </div>
+                </div>
+
+                <div class="stat-card card-orange">
+                    <div class="stat-icon">
+                        <i class="fa fa-eye"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-number">45,231</h3>
+                        <p class="stat-label">Today's Visitors</p>
+                        <span class="stat-change positive">+15.2% vs yesterday</span>
+                    </div>
+                </div>
+
+                <div class="stat-card card-red">
+                    <div class="stat-icon">
+                        <i class="fa fa-bar-chart"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-number">2.4M</h3>
+                        <p class="stat-label">Total Page Views</p>
+                        <span class="stat-change negative">-2.1% this week</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Visitor Trends (Last 7 Days)</h3>
+                        <select class="chart-filter">
+                            <option>Last 7 Days</option>
+                            <option>Last 30 Days</option>
+                            <option>Last 3 Months</option>
+                        </select>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="visitorChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <div class="card-header">
+                        <h3>Top Countries</h3>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="countriesChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity & Popular Articles -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3>Recent Activity</h3>
+                        <a href="#admin-analytics" class="view-all">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon blue">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p><strong>New article published</strong></p>
+                                    <p class="activity-meta">Real Madrid wins El Clasico - 5 minutes ago</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon green">
+                                    <i class="fa fa-user-plus"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p><strong>New user registered</strong></p>
+                                    <p class="activity-meta">john.doe@example.com - 12 minutes ago</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon orange">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p><strong>Match schedule updated</strong></p>
+                                    <p class="activity-meta">Premier League fixtures - 1 hour ago</p>
+                                </div>
+                            </div>
+
+                            <div class="activity-item">
+                                <div class="activity-icon red">
+                                    <i class="fa fa-ban"></i>
+                                </div>
+                                <div class="activity-details">
+                                    <p><strong>User banned</strong></p>
+                                    <p class="activity-meta">spam_user@test.com - 2 hours ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="card-header">
+                        <h3>Popular Articles</h3>
+                        <a href="#admin-articles" class="view-all">View All</a>
+                    </div>
+                    <div class="card-body">
+                        <div class="popular-list">
+                            <div class="popular-item">
+                                <span class="rank">1</span>
+                                <div class="popular-details">
+                                    <p class="popular-title">Messi's Hat-trick Leads Argentina to Victory</p>
+                                    <p class="popular-meta">45,231 views • 2 hours ago</p>
+                                </div>
+                            </div>
+
+                            <div class="popular-item">
+                                <span class="rank">2</span>
+                                <div class="popular-details">
+                                    <p class="popular-title">Champions League Draw Results</p>
+                                    <p class="popular-meta">32,145 views • 5 hours ago</p>
+                                </div>
+                            </div>
+
+                            <div class="popular-item">
+                                <span class="rank">3</span>
+                                <div class="popular-details">
+                                    <p class="popular-title">Transfer News: Mbappé to Real Madrid?</p>
+                                    <p class="popular-meta">28,943 views • 1 day ago</p>
+                                </div>
+                            </div>
+
+                            <div class="popular-item">
+                                <span class="rank">4</span>
+                                <div class="popular-details">
+                                    <p class="popular-title">Premier League Top Scorers 2024/25</p>
+                                    <p class="popular-meta">21,567 views • 1 day ago</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="actions-grid">
+                    <button class="action-btn" onclick="window.location.hash='#admin-articles'">
+                        <i class="fa fa-plus"></i>
+                        <span>New Article</span>
+                    </button>
+
+                    <button class="action-btn" onclick="window.location.hash='#admin-matches'">
+                        <i class="fa fa-calendar-plus-o"></i>
+                        <span>Add Match</span>
+                    </button>
+
+                    <button class="action-btn" onclick="window.location.hash='#admin-users'">
+                        <i class="fa fa-user-plus"></i>
+                        <span>Add User</span>
+                    </button>
+
+                    <button class="action-btn" onclick="window.location.hash='#admin-settings'">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>
