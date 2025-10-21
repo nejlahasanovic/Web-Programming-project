@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users Management - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="/90minut/frontend/assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Users Management</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                    <div class="profile-avatar-icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Users Content -->
+        <div class="admin-content">
+            
+            <!-- Action Bar -->
+            <div class="content-header">
+                <div class="header-actions">
+                    <button class="btn-primary">
+                        <i class="fa fa-user-plus"></i>
+                        <span>Add User</span>
+                    </button>
+                    
+                    <div class="search-box">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search users...">
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <select class="filter-select">
+                        <option value="all">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="editor">Editor</option>
+                        <option value="user">User</option>
+                    </select>
+
+                    <select class="filter-select">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="banned">Banned</option>
+                    </select>
+
+                    <select class="filter-select">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="most-active">Most Active</option>
+                        <option value="alphabetical">A-Z</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Users Stats -->
+            <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon blue">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>8,456</h4>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon green">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>7,892</h4>
+                        <p>Active Users</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon orange">
+                        <i class="fa fa-user-plus"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>234</h4>
+                        <p>New This Month</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon red">
+                        <i class="fa fa-ban"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>42</h4>
+                        <p>Banned</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Table -->
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="selectAll">
+                            </th>
+                            <th>User</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                            <th>Joined</th>
+                            <th>Last Active</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        <!-- User Row 1 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=12" alt="User">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>John Doe</strong>
+                                        <span class="user-id">#USER001</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>john.doe@example.com</td>
+                            <td>
+                                <span class="role-badge role-admin">
+                                    <i class="fa fa-star"></i>
+                                    Admin
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">
+                                    <i class="fa fa-circle"></i>
+                                    Active
+                                </span>
+                            </td>
+                            <td>Jan 15, 2024</td>
+                            <td>
+                                <span class="time-badge time-recent">2 min ago</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Profile">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Ban User">
+                                        <i class="fa fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- User Row 2 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=5" alt="User">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Jane Smith</strong>
+                                        <span class="user-id">#USER002</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>jane.smith@example.com</td>
+                            <td>
+                                <span class="role-badge role-editor">
+                                    <i class="fa fa-pencil"></i>
+                                    Editor
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">
+                                    <i class="fa fa-circle"></i>
+                                    Active
+                                </span>
+                            </td>
+                            <td>Feb 20, 2024</td>
+                            <td>
+                                <span class="time-badge">1 hour ago</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Profile">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Ban User">
+                                        <i class="fa fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- User Row 3 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=33" alt="User">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Mike Johnson</strong>
+                                        <span class="user-id">#USER003</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>mike.johnson@example.com</td>
+                            <td>
+                                <span class="role-badge role-user">
+                                    <i class="fa fa-user"></i>
+                                    User
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">
+                                    <i class="fa fa-circle"></i>
+                                    Active
+                                </span>
+                            </td>
+                            <td>Mar 10, 2024</td>
+                            <td>
+                                <span class="time-badge">3 hours ago</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Profile">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Ban User">
+                                        <i class="fa fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- User Row 4 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=47" alt="User">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Sarah Williams</strong>
+                                        <span class="user-id">#USER004</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>sarah.williams@example.com</td>
+                            <td>
+                                <span class="role-badge role-user">
+                                    <i class="fa fa-user"></i>
+                                    User
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-inactive">
+                                    <i class="fa fa-circle"></i>
+                                    Inactive
+                                </span>
+                            </td>
+                            <td>Apr 05, 2024</td>
+                            <td>
+                                <span class="time-badge time-old">2 days ago</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Profile">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Ban User">
+                                        <i class="fa fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- User Row 5 - Banned -->
+                        <tr class="user-banned">
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=68" alt="User">
+                                        <span class="banned-overlay">
+                                            <i class="fa fa-ban"></i>
+                                        </span>
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>Spam User</strong>
+                                        <span class="user-id">#USER005</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>spam@test.com</td>
+                            <td>
+                                <span class="role-badge role-user">
+                                    <i class="fa fa-user"></i>
+                                    User
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-banned">
+                                    <i class="fa fa-ban"></i>
+                                    Banned
+                                </span>
+                            </td>
+                            <td>May 12, 2024</td>
+                            <td>
+                                <span class="time-badge time-old">1 week ago</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-view" title="View Profile">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-success" title="Unban User">
+                                        <i class="fa fa-check"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete Permanently">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- User Row 6 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        <img src="https://i.pravatar.cc/150?img=15" alt="User">
+                                    </div>
+                                    <div class="user-info">
+                                        <strong>David Brown</strong>
+                                        <span class="user-id">#USER006</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>david.brown@example.com</td>
+                            <td>
+                                <span class="role-badge role-user">
+                                    <i class="fa fa-user"></i>
+                                    User
+                                </span>
+                            </td>
+                            <td>
+                                <span class="status-badge status-active">
+                                    <i class="fa fa-circle"></i>
+                                    Active
+                                </span>
+                            </td>
+                            <td>Jun 18, 2024</td>
+                            <td>
+                                <span class="time-badge">5 hours ago</span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View Profile">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Ban User">
+                                        <i class="fa fa-ban"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Showing 1-10 of 8,456 users
+                </div>
+                <div class="pagination-buttons">
+                    <button class="btn-pagination" disabled>
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn-pagination active">1</button>
+                    <button class="btn-pagination">2</button>
+                    <button class="btn-pagination">3</button>
+                    <button class="btn-pagination">...</button>
+                    <button class="btn-pagination">846</button>
+                    <button class="btn-pagination">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

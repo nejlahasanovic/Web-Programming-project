@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Leagues Management - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="/90minut/frontend/assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item active">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Leagues Management</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                    <div class="profile-avatar-icon">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Leagues Content -->
+        <div class="admin-content">
+            
+            <!-- Action Bar -->
+            <div class="content-header">
+                <div class="header-actions">
+                    <button class="btn-primary">
+                        <i class="fa fa-plus"></i>
+                        <span>Add League</span>
+                    </button>
+                    
+                    <div class="search-box">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search leagues...">
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <select class="filter-select">
+                        <option value="all">All Countries</option>
+                        <option value="england">England</option>
+                        <option value="spain">Spain</option>
+                        <option value="italy">Italy</option>
+                        <option value="germany">Germany</option>
+                        <option value="france">France</option>
+                        <option value="international">International</option>
+                    </select>
+
+                    <select class="filter-select">
+                        <option value="all">All Types</option>
+                        <option value="domestic">Domestic</option>
+                        <option value="international">International</option>
+                        <option value="cup">Cup Competition</option>
+                    </select>
+
+                    <select class="filter-select">
+                        <option value="active">Active Leagues</option>
+                        <option value="inactive">Inactive Leagues</option>
+                        <option value="all">All Leagues</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Leagues Stats -->
+            <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon blue">
+                        <i class="fa fa-trophy"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>24</h4>
+                        <p>Total Leagues</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon green">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>18</h4>
+                        <p>Active</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon orange">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>15</h4>
+                        <p>Countries</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon purple">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>420</h4>
+                        <p>Total Teams</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Leagues Grid -->
+            <div class="leagues-grid">
+                
+                <!-- League Card 1 - Premier League -->
+                <div class="league-card">
+                    <div class="league-header">
+                        <img src="/90minut/frontend/assets/img/league/premier.webp" alt="League Logo" class="league-logo">
+                    </div>
+                    
+                    <div class="league-body">
+                        <h3 class="league-name">Premier League</h3>
+                        <div class="league-meta">
+                            <span class="league-country">
+                                <i class="fa fa-map-marker"></i>
+                                England
+                            </span>
+                            <span class="league-type type-domestic">Domestic</span>
+                        </div>
+                        
+                        <div class="league-stats">
+                            <div class="league-stat-item">
+                                <i class="fa fa-users"></i>
+                                <span>20 Teams</span>
+                            </div>
+                            <div class="league-stat-item">
+                                <i class="fa fa-calendar"></i>
+                                <span>38 Matches</span>
+                            </div>
+                        </div>
+                        
+                        <div class="league-info">
+                            <div class="info-item">
+                                <span class="info-label">Season:</span>
+                                <span class="info-value">2024/25</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Articles:</span>
+                                <span class="info-value">342</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="league-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- League Card 2 - La Liga -->
+                <div class="league-card">
+                    <div class="league-header">
+                        <img src="/90minut/frontend/assets/img/league/laliga.png" alt="League Logo" class="league-logo">
+                    </div>
+                    
+                    <div class="league-body">
+                        <h3 class="league-name">La Liga</h3>
+                        <div class="league-meta">
+                            <span class="league-country">
+                                <i class="fa fa-map-marker"></i>
+                                Spain
+                            </span>
+                            <span class="league-type type-domestic">Domestic</span>
+                        </div>
+                        
+                        <div class="league-stats">
+                            <div class="league-stat-item">
+                                <i class="fa fa-users"></i>
+                                <span>20 Teams</span>
+                            </div>
+                            <div class="league-stat-item">
+                                <i class="fa fa-calendar"></i>
+                                <span>38 Matches</span>
+                            </div>
+                        </div>
+                        
+                        <div class="league-info">
+                            <div class="info-item">
+                                <span class="info-label">Season:</span>
+                                <span class="info-value">2024/25</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Articles:</span>
+                                <span class="info-value">289</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="league-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- League Card 3 - Serie A -->
+                <div class="league-card">
+                    <div class="league-header">
+                        <img src="/90minut/frontend/assets/img/league/serieA.png" alt="League Logo" class="league-logo">
+                    </div>
+                    
+                    <div class="league-body">
+                        <h3 class="league-name">Serie A</h3>
+                        <div class="league-meta">
+                            <span class="league-country">
+                                <i class="fa fa-map-marker"></i>
+                                Italy
+                            </span>
+                            <span class="league-type type-domestic">Domestic</span>
+                        </div>
+                        
+                        <div class="league-stats">
+                            <div class="league-stat-item">
+                                <i class="fa fa-users"></i>
+                                <span>20 Teams</span>
+                            </div>
+                            <div class="league-stat-item">
+                                <i class="fa fa-calendar"></i>
+                                <span>38 Matches</span>
+                            </div>
+                        </div>
+                        
+                        <div class="league-info">
+                            <div class="info-item">
+                                <span class="info-label">Season:</span>
+                                <span class="info-value">2024/25</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Articles:</span>
+                                <span class="info-value">201</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="league-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- League Card 4 - Champions League -->
+                <div class="league-card league-featured">
+                    <div class="league-header">
+                        <img src="/90minut/frontend/assets/img/league/uefa.png" alt="League Logo" class="league-logo">
+                        <span class="featured-badge">
+                            <i class="fa fa-star"></i>
+                            Featured
+                        </span>
+                    </div>
+                    
+                    <div class="league-body">
+                        <h3 class="league-name">UEFA Champions League</h3>
+                        <div class="league-meta">
+                            <span class="league-country">
+                                <i class="fa fa-globe"></i>
+                                Europe
+                            </span>
+                            <span class="league-type type-international">International</span>
+                        </div>
+                        
+                        <div class="league-stats">
+                            <div class="league-stat-item">
+                                <i class="fa fa-users"></i>
+                                <span>32 Teams</span>
+                            </div>
+                            <div class="league-stat-item">
+                                <i class="fa fa-calendar"></i>
+                                <span>125 Matches</span>
+                            </div>
+                        </div>
+                        
+                        <div class="league-info">
+                            <div class="info-item">
+                                <span class="info-label">Season:</span>
+                                <span class="info-value">2024/25</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Articles:</span>
+                                <span class="info-value">567</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="league-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- League Card 5 - Bundesliga -->
+                <div class="league-card">
+                    <div class="league-header">
+                        <img src="/90minut/frontend/assets/img/league/bundes.jpg" alt="League Logo" class="league-logo">
+                    </div>
+                    
+                    <div class="league-body">
+                        <h3 class="league-name">Bundesliga</h3>
+                        <div class="league-meta">
+                            <span class="league-country">
+                                <i class="fa fa-map-marker"></i>
+                                Germany
+                            </span>
+                            <span class="league-type type-domestic">Domestic</span>
+                        </div>
+                        
+                        <div class="league-stats">
+                            <div class="league-stat-item">
+                                <i class="fa fa-users"></i>
+                                <span>18 Teams</span>
+                            </div>
+                            <div class="league-stat-item">
+                                <i class="fa fa-calendar"></i>
+                                <span>34 Matches</span>
+                            </div>
+                        </div>
+                        
+                        <div class="league-info">
+                            <div class="info-item">
+                                <span class="info-label">Season:</span>
+                                <span class="info-value">2024/25</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Articles:</span>
+                                <span class="info-value">178</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="league-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- League Card 6 - Ligue 1 -->
+                <div class="league-card">
+                    <div class="league-header">
+                        <img src="/90minut/frontend/assets/img/league/ligue1.png" alt="League Logo" class="league-logo">
+                    </div>
+                    
+                    <div class="league-body">
+                        <h3 class="league-name">Ligue 1</h3>
+                        <div class="league-meta">
+                            <span class="league-country">
+                                <i class="fa fa-map-marker"></i>
+                                France
+                            </span>
+                            <span class="league-type type-domestic">Domestic</span>
+                        </div>
+                        
+                        <div class="league-stats">
+                            <div class="league-stat-item">
+                                <i class="fa fa-users"></i>
+                                <span>18 Teams</span>
+                            </div>
+                            <div class="league-stat-item">
+                                <i class="fa fa-calendar"></i>
+                                <span>34 Matches</span>
+                            </div>
+                        </div>
+                        
+                        <div class="league-info">
+                            <div class="info-item">
+                                <span class="info-label">Season:</span>
+                                <span class="info-value">2024/25</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Articles:</span>
+                                <span class="info-value">134</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Status:</span>
+                                <span class="status-badge status-active">Active</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="league-footer">
+                        <button class="btn-icon btn-edit" title="Edit">
+                            <i class="fa fa-edit"></i>
+                        </button>
+                        <button class="btn-icon btn-view" title="View Details">
+                            <i class="fa fa-eye"></i>
+                        </button>
+                        <button class="btn-icon btn-delete" title="Delete">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

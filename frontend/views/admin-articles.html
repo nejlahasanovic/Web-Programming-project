@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Articles Management - 90 Minut Admin</title>
+</head>
+<body>
+
+<!-- Admin Dashboard Container -->
+<div class="admin-wrapper">
+    
+    <!-- Sidebar -->
+    <aside class="admin-sidebar" id="adminSidebar">
+        <div class="sidebar-header">
+            <img src="assets/img/logo-dark.png" alt="90 Minut" class="sidebar-logo">
+            <h3>Admin Panel</h3>
+        </div>
+
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="#admin-dashboard" data-page="admin-dashboard">
+                        <i class="fa fa-tachometer"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item active">
+                    <a href="#admin-articles" data-page="admin-articles">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Articles</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-matches" data-page="admin-matches">
+                        <i class="fa fa-calendar"></i>
+                        <span>Matches</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-leagues" data-page="admin-leagues">
+                        <i class="fa fa-trophy"></i>
+                        <span>Leagues</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-users" data-page="admin-users">
+                        <i class="fa fa-users"></i>
+                        <span>Users</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-analytics" data-page="admin-analytics">
+                        <i class="fa fa-line-chart"></i>
+                        <span>Analytics</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-marketing" data-page="admin-marketing">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Marketing</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#admin-settings" data-page="admin-settings">
+                        <i class="fa fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="btn-exit" onclick="exitAdminPanel()">
+                <i class="fa fa-sign-out"></i>
+                <span>Exit Admin</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="admin-main">
+        
+        <!-- Top Navbar -->
+        <header class="admin-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" id="sidebarToggle">
+                    <i class="fa fa-bars"></i>
+                </button>
+                <h1 class="page-title">Articles Management</h1>
+            </div>
+
+            <div class="header-right">
+                <!-- Theme Toggle -->
+                <button class="admin-theme-toggle" id="adminThemeToggle">
+                    <i class="fa fa-sun-o"></i>
+                </button>
+
+                <!-- Admin Profile -->
+                <div class="admin-profile">
+                   <img src="/90minut/frontend/assets/img/avatar.png" alt="Admin" class="profile-avatar">
+                    <span class="profile-name">Admin User</span>
+                </div>
+
+                <!-- Logout -->
+                <button class="btn-logout" onclick="adminLogout()">
+                    <i class="fa fa-sign-out"></i>
+                </button>
+            </div>
+        </header>
+
+        <!-- Articles Content -->
+        <div class="admin-content">
+            
+            <!-- Action Bar -->
+            <div class="content-header">
+                <div class="header-actions">
+                    <button class="btn-primary" onclick="openAddArticleModal()">
+                        <i class="fa fa-plus"></i>
+                        <span>New Article</span>
+                    </button>
+                    
+                    <div class="search-box">
+                        <i class="fa fa-search"></i>
+                        <input type="text" placeholder="Search articles..." id="articleSearch">
+                    </div>
+                </div>
+
+                <div class="filter-bar">
+                    <select class="filter-select" id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="news">News</option>
+                        <option value="match-report">Match Report</option>
+                        <option value="transfer">Transfer News</option>
+                        <option value="interview">Interview</option>
+                    </select>
+
+                    <select class="filter-select" id="statusFilter">
+                        <option value="all">All Status</option>
+                        <option value="published">Published</option>
+                        <option value="draft">Draft</option>
+                        <option value="scheduled">Scheduled</option>
+                    </select>
+
+                    <select class="filter-select" id="sortFilter">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="most-views">Most Views</option>
+                        <option value="least-views">Least Views</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Articles Stats -->
+            <div class="mini-stats-grid">
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon blue">
+                        <i class="fa fa-file-text"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>1,245</h4>
+                        <p>Total Articles</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon green">
+                        <i class="fa fa-check-circle"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>1,189</h4>
+                        <p>Published</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon orange">
+                        <i class="fa fa-edit"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>42</h4>
+                        <p>Drafts</p>
+                    </div>
+                </div>
+
+                <div class="mini-stat-card">
+                    <div class="mini-stat-icon purple">
+                        <i class="fa fa-clock-o"></i>
+                    </div>
+                    <div class="mini-stat-info">
+                        <h4>14</h4>
+                        <p>Scheduled</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Articles Table -->
+            <div class="data-table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox" id="selectAll">
+                            </th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Author</th>
+                            <th>Status</th>
+                            <th>Views</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="articlesTableBody">
+                        <!-- Article Row 1 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="article-title-cell">
+                                    <img src="https://via.placeholder.com/60x40" alt="Article" class="article-thumb">
+                                    <div class="article-title-text">
+                                        <strong>Messi's Hat-trick Leads Argentina to Victory</strong>
+                                        <span class="article-excerpt">Argentina defeated Brazil 3-1 in an exciting match...</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-primary">Match Report</span>
+                            </td>
+                            <td>Admin User</td>
+                            <td>
+                                <span class="status-badge status-published">
+                                    <i class="fa fa-check-circle"></i> Published
+                                </span>
+                            </td>
+                            <td>
+                                <strong>45,231</strong>
+                            </td>
+                            <td>2 hours ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Article Row 2 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="article-title-cell">
+                                    <img src="https://via.placeholder.com/60x40" alt="Article" class="article-thumb">
+                                    <div class="article-title-text">
+                                        <strong>Transfer News: Mbappé to Real Madrid?</strong>
+                                        <span class="article-excerpt">Sources close to the player suggest...</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-info">Transfer</span>
+                            </td>
+                            <td>Admin User</td>
+                            <td>
+                                <span class="status-badge status-published">
+                                    <i class="fa fa-check-circle"></i> Published
+                                </span>
+                            </td>
+                            <td>
+                                <strong>28,943</strong>
+                            </td>
+                            <td>1 day ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Article Row 3 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="article-title-cell">
+                                    <img src="https://via.placeholder.com/60x40" alt="Article" class="article-thumb">
+                                    <div class="article-title-text">
+                                        <strong>Champions League Draw Results</strong>
+                                        <span class="article-excerpt">The draw for the knockout stages has been made...</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-success">News</span>
+                            </td>
+                            <td>Admin User</td>
+                            <td>
+                                <span class="status-badge status-draft">
+                                    <i class="fa fa-edit"></i> Draft
+                                </span>
+                            </td>
+                            <td>
+                                <strong>0</strong>
+                            </td>
+                            <td>3 hours ago</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Article Row 4 -->
+                        <tr>
+                            <td>
+                                <input type="checkbox" class="row-checkbox">
+                            </td>
+                            <td>
+                                <div class="article-title-cell">
+                                    <img src="https://via.placeholder.com/60x40" alt="Article" class="article-thumb">
+                                    <div class="article-title-text">
+                                        <strong>Premier League Top Scorers 2024/25</strong>
+                                        <span class="article-excerpt">A look at the current top goal scorers...</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-warning">Stats</span>
+                            </td>
+                            <td>Admin User</td>
+                            <td>
+                                <span class="status-badge status-scheduled">
+                                    <i class="fa fa-clock-o"></i> Scheduled
+                                </span>
+                            </td>
+                            <td>
+                                <strong>0</strong>
+                            </td>
+                            <td>Tomorrow, 10:00</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-edit" title="Edit">
+                                        <i class="fa fa-edit"></i>
+                                    </button>
+                                    <button class="btn-icon btn-view" title="View">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-delete" title="Delete">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container">
+                <div class="pagination-info">
+                    Showing 1-10 of 1,245 articles
+                </div>
+                <div class="pagination-buttons">
+                    <button class="btn-pagination" disabled>
+                        <i class="fa fa-chevron-left"></i>
+                    </button>
+                    <button class="btn-pagination active">1</button>
+                    <button class="btn-pagination">2</button>
+                    <button class="btn-pagination">3</button>
+                    <button class="btn-pagination">...</button>
+                    <button class="btn-pagination">125</button>
+                    <button class="btn-pagination">
+                        <i class="fa fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</div>
+
+</body>
+</html>

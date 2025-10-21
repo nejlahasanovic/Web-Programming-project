@@ -1,0 +1,611 @@
+/* ========================================
+   ADMIN USERS PAGE - 90 MINUT
+   User Table, Avatars, Roles, Status
+   ======================================== */
+
+/* ========================================
+   USER CELL (Avatar + Info)
+   ======================================== */
+
+.user-cell {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    border: 2px solid var(--admin-border);
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Banned Overlay on Avatar */
+.banned-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(231, 76, 60, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 18px;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.user-info strong {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--admin-text);
+}
+
+.user-id {
+    font-size: 12px;
+    color: var(--admin-text-muted);
+    font-weight: 500;
+}
+
+/* ========================================
+   ROLE BADGES
+   ======================================== */
+
+.role-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.role-badge i {
+    font-size: 12px;
+}
+
+.role-admin {
+    background: linear-gradient(135deg, rgba(221, 21, 21, 0.15), rgba(221, 21, 21, 0.1));
+    color: var(--admin-primary);
+    border: 1px solid rgba(221, 21, 21, 0.2);
+}
+
+.role-editor {
+    background: rgba(52, 152, 219, 0.1);
+    color: var(--stat-blue);
+    border: 1px solid rgba(52, 152, 219, 0.2);
+}
+
+.role-user {
+    background: rgba(149, 165, 166, 0.1);
+    color: #7f8c8d;
+    border: 1px solid rgba(149, 165, 166, 0.2);
+}
+
+/* ========================================
+   STATUS BADGES (in table)
+   ======================================== */
+
+.data-table .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.data-table .status-badge i {
+    font-size: 8px;
+}
+
+.status-active {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.status-active i {
+    animation: pulse-dot 2s infinite;
+}
+
+@keyframes pulse-dot {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+.status-inactive {
+    background: rgba(149, 165, 166, 0.1);
+    color: #95a5a6;
+}
+
+.status-banned {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--stat-red);
+}
+
+/* ========================================
+   TIME BADGES
+   ======================================== */
+
+.time-badge {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    background: var(--admin-bg);
+    color: var(--admin-text-muted);
+    display: inline-block;
+}
+
+.time-badge.time-recent {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.time-badge.time-old {
+    background: rgba(231, 76, 60, 0.1);
+    color: var(--stat-red);
+}
+
+/* ========================================
+   BANNED USER ROW
+   ======================================== */
+
+.user-banned {
+    opacity: 0.6;
+    background: rgba(231, 76, 60, 0.02);
+}
+
+.user-banned:hover {
+    opacity: 0.8;
+    background: rgba(231, 76, 60, 0.05);
+}
+
+.user-banned .user-info strong {
+    text-decoration: line-through;
+}
+
+/* ========================================
+   SUCCESS BUTTON (for unban)
+   ======================================== */
+
+.btn-success {
+    background: rgba(46, 204, 113, 0.1);
+    color: var(--stat-green);
+}
+
+.btn-success:hover {
+    background: var(--stat-green);
+    color: #ffffff;
+}
+
+/* ========================================
+   USER DETAILS MODAL (Optional - for future)
+   ======================================== */
+
+.user-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--transition);
+}
+
+.user-details-modal.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.modal-content {
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-lg);
+    transform: scale(0.9);
+    transition: var(--transition);
+}
+
+.user-details-modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid var(--admin-border);
+}
+
+.modal-header h2 {
+    font-size: 22px;
+    color: var(--admin-text);
+    margin: 0;
+}
+
+.modal-close {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: rgba(231, 76, 60, 0.1);
+    border: none;
+    color: var(--stat-red);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    background: var(--stat-red);
+    color: #ffffff;
+}
+
+/* ========================================
+   BULK ACTIONS BAR (Optional)
+   ======================================== */
+
+.bulk-actions-bar {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--admin-primary);
+    padding: 15px 30px;
+    border-radius: 50px;
+    box-shadow: 0 10px 40px rgba(221, 21, 21, 0.4);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.bulk-actions-bar.active {
+    transform: translateX(-50%) translateY(0);
+}
+
+.bulk-actions-bar .selected-count {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.bulk-actions-bar .bulk-btn {
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.bulk-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.bulk-btn i {
+    font-size: 14px;
+}
+
+/* ========================================
+   ADVANCED FILTERS SECTION (Optional)
+   ======================================== */
+
+.advanced-filters {
+    background: var(--admin-card-bg);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.advanced-filters h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--admin-text);
+    margin-bottom: 15px;
+}
+
+.filters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+/* ========================================
+   USER ACTIVITY TIMELINE (Optional)
+   ======================================== */
+
+.activity-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.timeline-item {
+    display: flex;
+    gap: 15px;
+    position: relative;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 17px;
+    top: 35px;
+    bottom: -20px;
+    width: 2px;
+    background: var(--admin-border);
+}
+
+.timeline-item:last-child::before {
+    display: none;
+}
+
+.timeline-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--admin-primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.timeline-content {
+    flex: 1;
+}
+
+.timeline-content h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--admin-text);
+    margin-bottom: 5px;
+}
+
+.timeline-content p {
+    font-size: 13px;
+    color: var(--admin-text-muted);
+    margin: 0;
+}
+
+/* ========================================
+   LIGHT MODE OVERRIDES
+   ======================================== */
+
+body.admin-light-mode .user-info strong,
+body.admin-light-mode .modal-header h2,
+body.admin-light-mode .timeline-content h4 {
+    color: #333333;
+}
+
+body.admin-light-mode .user-id,
+body.admin-light-mode .timeline-content p {
+    color: #6c757d;
+}
+
+body.admin-light-mode .user-avatar {
+    border-color: #e0e0e0;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 991px) {
+    .data-table-container {
+        overflow-x: auto;
+    }
+    
+    .data-table {
+        min-width: 1000px;
+    }
+    
+    .bulk-actions-bar {
+        bottom: 20px;
+        padding: 12px 20px;
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 576px) {
+    .user-avatar {
+        width: 38px;
+        height: 38px;
+    }
+    
+    .user-info strong {
+        font-size: 13px;
+    }
+    
+    .user-id {
+        font-size: 11px;
+    }
+    
+    .role-badge,
+    .status-badge,
+    .time-badge {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+    
+    .modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+}
+
+/* ========================================
+   ADDITIONAL ENHANCEMENTS
+   ======================================== */
+
+/* Hover effect on user row */
+.data-table tbody tr:hover .user-avatar {
+    transform: scale(1.05);
+    border-color: var(--admin-primary);
+}
+
+.user-avatar {
+    transition: var(--transition);
+}
+
+/* Online indicator dot (optional) */
+.user-online-dot {
+    position: absolute;
+    bottom: 2px;
+    right: 2px;
+    width: 10px;
+    height: 10px;
+    background: var(--stat-green);
+    border: 2px solid var(--admin-card-bg);
+    border-radius: 50%;
+    animation: pulse-dot 2s infinite;
+}
+
+/* Verification badge (optional) */
+.verified-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    background: var(--stat-blue);
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+/* User level/rank indicator (optional) */
+.user-level {
+    display: inline-block;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    margin-left: 8px;
+}
+
+/* Stats in user profile modal */
+.user-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.user-stat-box {
+    background: var(--admin-bg);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.user-stat-box h4 {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--admin-text);
+    margin-bottom: 5px;
+}
+
+.user-stat-box p {
+    font-size: 12px;
+    color: var(--admin-text-muted);
+    margin: 0;
+}
+
+/* Loading skeleton for user rows */
+.user-skeleton {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px;
+}
+
+.skeleton-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: linear-gradient(
+        90deg,
+        var(--admin-bg) 25%,
+        var(--admin-border) 50%,
+        var(--admin-bg) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+.skeleton-text {
+    flex: 1;
+    height: 15px;
+    border-radius: 4px;
+    background: linear-gradient(
+        90deg,
+        var(--admin-bg) 25%,
+        var(--admin-border) 50%,
+        var(--admin-bg) 75%
+    );
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
