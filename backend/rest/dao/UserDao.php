@@ -6,6 +6,14 @@ class UserDao extends BaseDao {
    public function __construct() {
        parent::__construct("users");
    }
+   
+   //getbyusername dodana naknadno 
+   public function getByUsername($username) {
+       $stmt = $this->connection->prepare("SELECT * FROM users WHERE username = :username");
+       $stmt->bindParam(':username', $username);
+       $stmt->execute();
+       return $stmt->fetch();
+   }
 
    public function getByEmail($email) {
        $stmt = $this->connection->prepare("SELECT * FROM users WHERE email = :email");
