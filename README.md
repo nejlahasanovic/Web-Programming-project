@@ -1,5 +1,4 @@
-# Web-Programming-project
-# Web-Programming-project
+
 # 90 Minut - Football News Portal
 
 Simple football news webapp.
