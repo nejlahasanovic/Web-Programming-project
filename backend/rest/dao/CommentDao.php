@@ -7,7 +7,7 @@ class CommentDao extends BaseDao {
     }
 
     public function getByArticleId($article_id) {
-        $stmt = $this->connection->prepare("SELECT * FROM comments WHERE article_id = :article_id ORDER BY created_at DESC");
+        $stmt = $this->connection->prepare("SELECT c.*, u.username FROM comments c LEFT JOIN users u ON c.user_id = u.user_id WHERE c.article_id = :article_id ORDER BY c.created_at DESC");
         $stmt->bindParam(':article_id', $article_id);
         $stmt->execute();
         return $stmt->fetchAll();

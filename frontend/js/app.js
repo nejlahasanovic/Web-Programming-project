@@ -1,358 +1,282 @@
-
-(function() {
+(function () {
     'use strict';
 
-    // Configuration
     const config = {
-        defaultPage: 'home',
-        viewsPath: '/90minut/frontend/views/',
-        contentContainer: '#app-content'
+        defaultPage: "home",
+        viewsPath: "/90minut/frontend/views/",
+        container: "#app-content"
     };
 
-    // Page mapping - connects routes to view files
     const routes = {
-    'home': 'home.html',
-    'club': 'club.html',
-    'schedule': 'schedule.html',
-    'results': 'result.html',
-    'players': 'latest_news.html',  // Privremeno koristi club.html dok ne napravimo players
-    'blog': 'blog.html',
-    'contact': 'contact.html',
-    'profile': 'profile.html',
-    'admin-dashboard': 'admin-dashboard.html', 
-    'admin-articles': 'admin-articles.html',
-    'admin-users': 'admin-users.html',
-    'admin-analytics': 'admin-analytics.html',
-    'admin-marketing': 'admin-marketing.html',
-    'admin-matches': 'admin-matches.html',
-    'admin-leagues': 'admin-leagues.html',
-    'admin-settings': 'admin-settings.html'
-};
+        home: "home.html",
+        article: "article-detail.html",
+        club: "club.html",
+        schedule: "schedule.html",
+        results: "result.html",
+        players: "latest_news.html",
+        blog: "blog.html",
+        contact: "contact.html",
+        profile: "profile.html",
 
-    // Initialize the app
-    function init() {
-        console.log('Football Portal SPA Initialized');
-        
-        // Set up navigation click handlers
-        setupNavigation();
-        
-        // Handle browser back/forward buttons
-        window.addEventListener('popstate', handlePopState);
-        
-        // Load initial page
-        const initialPage = getPageFromURL() || config.defaultPage;
-        loadPage(initialPage, false);
+        "admin-dashboard": "admin-dashboard.html",
+        "admin-articles": "admin-articles.html",
+        "admin-users": "admin-users.html",
+        "admin-analytics": "admin-analytics.html",
+        "admin-marketing": "admin-marketing.html",
+        "admin-matches": "admin-matches.html",
+        "admin-leagues": "admin-leagues.html",
+        "admin-settings": "admin-settings.html"
+    };
+
+    function getPageFromHash() {
+        if (!window.location.hash) return config.defaultPage;
+        const hash = window.location.hash.substring(1);
+        return hash.split("?")[0] || config.defaultPage;
     }
 
-    // Setup navigation link handlers
-    function setupNavigation() {
-        document.querySelectorAll('a[data-page]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const page = this.getAttribute('data-page');
-                loadPage(page, true);
-                
-                // Update active nav item
-                updateActiveNav(this);
-            });
-        });
+    function extractBody(html) {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        return doc.body.innerHTML;
     }
 
-    // Update active navigation item
-    function updateActiveNav(activeLink) {
-        // Remove active class from all nav items
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-        });
-        // Add active class to clicked nav item
-        activeLink.classList.add('active');
-    }
-
-    // Load page content
-    function loadPage(page, pushState = true) {
-        const viewFile = routes[page];
-        
-        if (!viewFile) {
-            console.error(`Page "${page}" not found in routes`);
-            loadPage(config.defaultPage, false);
-            return;
-        }
-
-        console.log(`Loading page: ${page}`);
-        
-        // Show loading spinner
-        showLoading();
-        
-
-        // Fetch the view content
-        fetch(config.viewsPath + viewFile)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.text();
-            })
-            .then(html => {
-                // Extract only the body content from the loaded HTML
-                const bodyContent = extractBodyContent(html);
-                
-                // Insert content into container
-                document.querySelector(config.contentContainer).innerHTML = bodyContent;
-                
-                // Update URL without page reload
-                if (pushState) {
-                    const newURL = `#${page}`;
-                    window.history.pushState({ page: page }, '', newURL);
-                }
-                
-                // Re-initialize any scripts/plugins that need to run on new content
-                reinitializePlugins();
-                
-                console.log(`Page "${page}" loaded successfully`);
-            })
-            .catch(error => {
-                console.error('Error loading page:', error);
-                showError(page);
-            });
-            updateActiveNav(page);
-    }
-
-    // Extract body content from HTML string
-    function extractBodyContent(html) {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-        const body = doc.querySelector('body');
-        return body ? body.innerHTML : html;
-    }
-
-    // Show loading spinner
-    function showLoading() {
-        document.querySelector(config.contentContainer).innerHTML = `
-            <div class="text-center py-5">
+    function showLoader() {
+        const container = document.querySelector(config.container);
+        if (!container) return;
+        container.innerHTML = `
+            <div class="d-flex justify-content-center align-items-center" style="min-height: 400px;">
                 <div class="spinner-border text-danger" role="status">
                     <span class="sr-only">Loading...</span>
                 </div>
-                <p class="mt-3">Loading content...</p>
             </div>
         `;
     }
 
-    // Show error message
-    function showError(page) {
-        document.querySelector(config.contentContainer).innerHTML = `
+    function showError(message) {
+        const container = document.querySelector(config.container);
+        if (!container) return;
+        container.innerHTML = `
             <div class="container py-5">
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">Error Loading Page</h4>
-                    <p>Unable to load the "${page}" page. Please try again.</p>
-                    <hr>
-                    <p class="mb-0">
-                        <a href="#home" class="btn btn-danger" data-page="home">Return to Home</a>
-                    </p>
+                <div class="alert alert-danger text-center">
+                    ${message}
                 </div>
             </div>
         `;
-        // Re-setup navigation for the error page button
-        setupNavigation();
     }
 
-    // Get page from URL hash
-    function getPageFromURL() {
-        const hash = window.location.hash.substring(1); // Remove the '#'
-        return hash || null;
-    }
+    function setupNavigation() {
+        document.addEventListener("click", function (e) {
+            const link = e.target.closest("a[data-page]");
+            if (!link) return;
 
-    // Handle browser back/forward buttons
-    function handlePopState(event) {
-        const page = event.state ? event.state.page : getPageFromURL() || config.defaultPage;
-        loadPage(page, false);
-    }
+            e.preventDefault();
+            const page = link.dataset.page;
+            if (!page) return;
 
-   function reinitializePlugins() {
-    // Re-initialize background images (data-setbg)
-    $('.set-bg').each(function () {
-        var bg = $(this).data('setbg');
-        $(this).css('background-image', 'url(' + bg + ')');
-    });
+            const targetHash = "#" + page;
 
-    // Re-initialize Canvas Menu (Hamburger)
-    $(".canvas-open").off('click').on('click', function () {
-        $(".offcanvas-menu-wrapper").addClass("show-offcanvas-menu-wrapper");
-        $(".offcanvas-menu-overlay").addClass("active");
-    });
-
-    $(".canvas-close, .offcanvas-menu-overlay").off('click').on('click', function () {
-        $(".offcanvas-menu-wrapper").removeClass("show-offcanvas-menu-wrapper");
-        $(".offcanvas-menu-overlay").removeClass("active");
-    });
-
-    // Re-initialize Search Model
-    $('.search-switch').off('click').on('click', function () {
-        $('.search-model').fadeIn(400);
-    });
-
-    $('.search-close-switch').off('click').on('click', function () {
-        $('.search-model').fadeOut(400, function () {
-            $('#search-input').val('');
-        });
-    });
-
-    // Re-initialize Mobile Menu (SlickNav)
-    if (typeof $.fn.slicknav !== 'undefined') {
-        // Remove existing slicknav if present
-        $('.mobile-menu').slicknav('destroy');
-        
-        // Reinitialize
-        $(".mobile-menu").slicknav({
-            prependTo: '#mobile-menu-wrap',
-            allowParentLinks: true
-        });
-    }
-        
-    // Re-initialize Owl Carousel if present
-    if (typeof $.fn.owlCarousel !== 'undefined') {
-        // News Slider
-        $(".news-slider").owlCarousel({
-            loop: true,
-            nav: true,
-            items: 1,
-            dots: false,
-            animateOut: 'fadeOut',
-            animateIn: 'fadeIn',
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            smartSpeed: 1200,
-            autoHeight: false,
-            autoplay: true,
-            mouseDrag: false
-        });
-
-        // Video Slider
-        $(".video-slider").owlCarousel({
-            items: 4,
-            dots: false,
-            autoplay: false,
-            margin: 0,
-            loop: true,
-            smartSpeed: 1200,
-            nav: true,
-            navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
-            responsive: {
-                0: { items: 1 },
-                480: { items: 2 },
-                768: { items: 3 },
-                992: { items: 4 }
+            if (window.location.hash === targetHash) {
+                loadPage(page);
+            } else {
+                window.location.hash = targetHash;
             }
         });
-
     }
 
-    // Re-initialize Magnific Popup if present
-    if (typeof $.fn.magnificPopup !== 'undefined') {
-        $('.video-popup').magnificPopup({
-            type: 'iframe'
+    function updateActiveNav(page) {
+        document.querySelectorAll(".main-menu-new li").forEach(li => {
+            li.classList.remove("active");
         });
+
+        const link = document.querySelector(`.main-menu-new a[data-page="${page}"]`);
+        if (link && link.parentElement) {
+            link.parentElement.classList.add("active");
+        }
     }
 
-    // Re-attach any navigation handlers in the newly loaded content
-    setupNavigation();
+    function checkAdminLayout() {
+        const isAdmin = window.location.hash.includes("admin-");
+        const header = document.getElementById("mainHeader");
+        const footer = document.querySelector("footer");
 
-    // Re-initialize admin dashboard if needed
-    const hash = window.location.hash.substring(1);
-    if (hash && hash.startsWith('admin-')) {
-        console.log('📢 Admin page loaded - triggering re-init');
-        setTimeout(function() {
-            if (typeof window.initAdminDashboard === 'function') {
-                window.initAdminDashboard();
-            }
-        }, 400);
-    }
-}
+        if (header) header.style.display = isAdmin ? "none" : "block";
+        if (footer) footer.style.display = isAdmin ? "none" : "block";
 
-    // Start the application when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-    } else {
-        init();
-    }
-
-    // Update active navigation state
-function updateActiveNav(activePage) {
-    // Remove active class from all nav links
-    document.querySelectorAll('.main-menu li').forEach(li => {
-        li.classList.remove('active');
-    });
-    
-    // Add active class to current page link
-    const activeLink = document.querySelector(`.main-menu a[href="#${activePage}"]`);
-    if (activeLink) {
-        activeLink.parentElement.classList.add('active');
-    }
-}
-
-// ========================================
-    // ADMIN CHECK - Hide navbar on admin pages
-    // ========================================
-    function checkAdminPage() {
-        const hash = window.location.hash.substring(1);
-        const mainHeader = document.querySelector('.header-section-new');
-        
-        if (hash && hash.startsWith('admin-')) {
-            // Hide main site navbar
-            if (mainHeader) {
-                mainHeader.style.display = 'none';
-            }
-            console.log('Admin page detected - navbar hidden');
+        if (isAdmin) {
+            document.body.classList.add("admin-active");
         } else {
-            // Show main site navbar
-            if (mainHeader) {
-                mainHeader.style.display = 'block';
+            document.body.classList.remove("admin-active");
+        }
+    }
+
+    function reinitializePlugins() {
+        
+        $(".set-bg").each(function () {
+            $(this).css("background-image", "url(" + $(this).data("setbg") + ")");
+        });
+
+        $(".search-switch").off("click").on("click", () => {
+            $(".search-model").fadeIn(400);
+        });
+
+        $(".search-close-switch").off("click").on("click", () => {
+            $(".search-model").fadeOut(400);
+        });
+
+        $(".canvas-open, .canvas-open-new").off("click").on("click", function () {
+            $(".offcanvas-menu-wrapper").addClass("show-offcanvas-menu-wrapper show-offcanvas-menu");
+            $(".offcanvas-menu-overlay").addClass("active");
+        });
+
+        $(".canvas-close, .offcanvas-menu-overlay").off("click").on("click", function () {
+            $(".offcanvas-menu-wrapper").removeClass("show-offcanvas-menu-wrapper show-offcanvas-menu");
+            $(".offcanvas-menu-overlay").removeClass("active");
+        });
+
+        if ($(".mobile-menu").length && typeof $.fn.slicknav !== "undefined") {
+            if ($(".slicknav_menu").length) {
+                $(".slicknav_menu").remove();
             }
+
+            $(".mobile-menu").slicknav({
+                prependTo: "#mobile-menu-wrap",
+                allowParentLinks: true,
+                closedSymbol: '<i class="fa fa-angle-right"></i>',
+                openedSymbol: '<i class="fa fa-angle-down"></i>'
+            });
+        }
+
+        if ($(".news-slider").length && typeof $.fn.owlCarousel !== "undefined") {
+            $(".news-slider").owlCarousel({
+                loop: true,
+                items: 1,
+                autoplay: true,
+                nav: false,
+                dots: true,
+                animateOut: 'fadeOut',
+                animateIn: 'fadeIn',
+                smartSpeed: 1200
+            });
+        }
+
+        if ($(".video-slider").length && typeof $.fn.owlCarousel !== "undefined") {
+            $(".video-slider").owlCarousel({
+                loop: true,
+                items: 4,
+                margin: 20,
+                autoplay: false,
+                nav: true,
+                dots: false,
+                navText: ['<i class="fa fa-angle-left"></i>', '<i class="fa fa-angle-right"></i>'],
+                responsive: {
+                    0: { items: 1 },
+                    576: { items: 2 },
+                    992: { items: 3 },
+                    1200: { items: 4 }
+                }
+            });
+        }
+
+        if (typeof $.fn.magnificPopup !== "undefined") {
+            $(".video-popup").magnificPopup({
+                type: "iframe"
+            });
         }
     }
-    
-    // Call on hash change
-    window.addEventListener('hashchange', checkAdminPage);
-    
-    // Call on load
-    checkAdminPage();
 
-    // ========================================
-// ADMIN CHECK - Hide navbar and footer on admin pages
-// ========================================
-function checkAdminPage() {
-    const hash = window.location.hash.substring(1);
-    const mainHeader = document.querySelector('.header-section-new');
-    const footer = document.querySelector('.footer-section');
-    
-    if (hash && hash.startsWith('admin-')) {
-        // Hide main site navbar and footer
-        if (mainHeader) {
-            mainHeader.style.display = 'none';
+    function loadPage(page) {
+        const file = routes[page];
+
+        if (!file) {
+            console.warn("Unknown route:", page);
+            showError(`Unknown page: ${page}`);
+            return;
         }
-        if (footer) {
-            footer.style.display = 'none';
-        }
-        
-        // Add admin class to body
-        document.body.classList.add('admin-active');
-        
-        console.log('Admin page detected - navbar and footer hidden');
-    } else {
-        // Show main site navbar and footer
-        if (mainHeader) {
-            mainHeader.style.display = 'block';
-        }
-        if (footer) {
-            footer.style.display = 'block';
-        }
-        
-        // Remove admin class from body
-        document.body.classList.remove('admin-active');
+
+        showLoader();
+
+        fetch(config.viewsPath + file)
+            .then(res => {
+                if (!res.ok) throw new Error("HTTP " + res.status);
+                return res.text();
+            })
+            .then(html => {
+                const container = document.querySelector(config.container);
+                if (!container) return;
+
+                container.innerHTML = extractBody(html);
+
+                updateActiveNav(page);
+                checkAdminLayout();
+                reinitializePlugins();
+
+               
+                if (page.startsWith("admin-") && typeof window.initAdminDashboard === "function") {
+                    setTimeout(() => window.initAdminDashboard(), 50);
+                }
+
+                if (page === "admin-articles" && typeof ArticleService !== "undefined") {
+                    setTimeout(() => ArticleService.init(), 100);
+                }
+
+                if (page === "admin-users" && typeof UserManagementService !== "undefined") {
+                    setTimeout(() => UserManagementService.init(), 100);
+                }
+
+                if (page === "home" && typeof HomeService !== "undefined") {
+                    setTimeout(() => HomeService.init(), 100);
+                }
+
+                if (page === "blog" && typeof NewsService !== "undefined") {
+                    setTimeout(() => NewsService.init(), 100);
+                }
+
+                if (page === "players" && typeof LatestNewsService !== "undefined") {
+                    setTimeout(() => LatestNewsService.init(), 100);
+                }
+
+                if (page.startsWith("article") && typeof ArticleDetailService !== "undefined") {
+                    const params = new URLSearchParams(window.location.hash.split("?")[1]);
+                    const articleId = params.get("id");
+                    if (articleId) {
+                        setTimeout(() => ArticleDetailService.init(articleId), 100);
+                    } else {
+                        console.error("Article ID not found in URL!");
+                    }
+                }
+
+                if (page === "contact" && typeof ContactService !== "undefined") {
+                    setTimeout(() => ContactService.init(), 100);
+                }
+
+                if (page === "profile" && typeof ProfileService !== "undefined") {
+                    setTimeout(() => ProfileService.init(), 100);
+                }
+            })
+            .catch(err => {
+                console.error("Error loading page:", err);
+                showError(`Cannot load page: ${page}`);
+            });
     }
-}
 
-// Call on hash change
-window.addEventListener('hashchange', checkAdminPage);
+    document.addEventListener("DOMContentLoaded", () => {
+        console.log("90 Minut SPA Initialized");
 
-// Call on load
-checkAdminPage();
+        setupNavigation();
+
+        const initialPage = getPageFromHash();
+
+        if (!window.location.hash) {
+            window.location.hash = "#" + initialPage;
+        } else {
+            loadPage(initialPage);
+        }
+
+        checkAdminLayout();
+    });
+
+    window.addEventListener("hashchange", () => {
+        const page = getPageFromHash();
+        loadPage(page);
+    });
+
 })();

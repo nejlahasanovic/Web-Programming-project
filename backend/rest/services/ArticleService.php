@@ -35,6 +35,9 @@ class ArticleService extends BaseService {
     public function getArticlesByDateRange($start_date, $end_date) {
         return $this->dao->getArticlesByDateRange($start_date, $end_date);
     }
+    public function getArticlesWithCommentCount() {
+    return $this->dao->getArticlesWithCommentCount();
+}
     
     public function createArticle($data) {
 

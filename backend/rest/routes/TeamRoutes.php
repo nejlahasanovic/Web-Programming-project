@@ -50,6 +50,7 @@ Flight::route('GET /teams/@id', function($id) {
  *     path="/teams",
  *     tags={"Teams"},
  *     summary="Create a new team",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -69,6 +70,7 @@ Flight::route('GET /teams/@id', function($id) {
  * )
  */
 Flight::route('POST /teams', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::teamService()->createTeam($data));
 });

@@ -49,5 +49,19 @@ class ArticleDao extends BaseDao {
         $stmt->execute();
         return $stmt->fetchAll();
     }
+
+    public function getArticlesWithCommentCount() {
+        $stmt = $this->connection->prepare("
+            SELECT a.*, 
+                   COUNT(c.comment_id) as comment_count
+            FROM articles a
+            LEFT JOIN comments c ON a.article_id = c.article_id
+            GROUP BY a.article_id
+            ORDER BY a.published_at DESC
+        ");
+        $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
 }
 ?>

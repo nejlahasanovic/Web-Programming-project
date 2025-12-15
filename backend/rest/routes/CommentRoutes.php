@@ -44,12 +44,30 @@ Flight::route('GET /comments', function() {
 Flight::route('GET /comments/@id', function($id) {
     Flight::json(Flight::commentService()->getById($id));
 });
-
+/**
+ * @OA\Get(
+ *     path="/comments/article/{article_id}",
+ *     tags={"Comments"},
+ *     summary="Get comments by article ID",
+ *     @OA\Parameter(
+ *         name="article_id",
+ *         in="path",
+ *         required=true,
+ *         description="Article ID",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\Response(response=200, description="Array of comments for the article")
+ * )
+ */
+Flight::route('GET /comments/article/@article_id', function($article_id) {
+    Flight::json(Flight::commentService()->getByArticleId($article_id));
+});
 /**
  * @OA\Post(
  *     path="/comments",
  *     tags={"Comments"},
  *     summary="Create a new comment",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -69,8 +87,13 @@ Flight::route('GET /comments/@id', function($id) {
  * )
  */
 Flight::route('POST /comments', function() {
+    Flight::auth_middleware()->authorizeRoles([Roles::USER, Roles::EDITOR, Roles::ADMIN]);
     $data = Flight::request()->data->getData();
+     $loggedUser = Flight::get('user');
+    $data['user_id'] = $loggedUser->user_id;
+    
     Flight::json(Flight::commentService()->createComment($data));
+    
 });
 
 /**
@@ -78,6 +101,7 @@ Flight::route('POST /comments', function() {
  *     path="/comments/{id}",
  *     tags={"Comments"},
  *     summary="Delete a comment by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -96,7 +120,9 @@ Flight::route('POST /comments', function() {
  * )
  */
 Flight::route('DELETE /comments/@id', function($id) {
-    $data = Flight::request()->data->getData();
-    Flight::json(Flight::commentService()->deleteComment($id, $data));
+     Flight::auth_middleware()->authorizeRoles([Roles::USER, Roles::EDITOR, Roles::ADMIN]);
+     Flight::json(
+        Flight::commentService()->deleteComment($id, Flight::get('user'))
+    );
 });
 ?>

@@ -50,6 +50,7 @@ Flight::route('GET /categories/@id', function($id){
  *     path="/categories",
  *     tags={"Categories"},
  *     summary="Create a new category",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -67,6 +68,8 @@ Flight::route('GET /categories/@id', function($id){
  * )
  */
 Flight::route('POST /categories', function(){
+    
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::categoryService()->createCategory($data));
 });

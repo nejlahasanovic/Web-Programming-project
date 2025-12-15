@@ -148,15 +148,7 @@
         if (activeLink) {
             activeLink.parentElement.classList.add('active');
         }
-        
-        // Update page title
-        const pageTitle = document.querySelector('.page-title');
-        if (pageTitle) {
-            const pageName = hash.replace('admin-', '').replace(/-/g, ' ');
-            pageTitle.textContent = pageName.charAt(0).toUpperCase() + pageName.slice(1);
-        }
-        
-        console.log('Active menu updated:', hash);
+      
     }
 
     // ========================================

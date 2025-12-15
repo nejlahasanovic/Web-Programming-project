@@ -5,52 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>90 Minut</title>
-    
-     
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/90minut/frontend/css/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="/90minut/frontend/css/owl.carousel.min.css">
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="/90minut/frontend/css/style.css">
-    <!-- Login Modal CSS -->
-    <link rel="stylesheet" href="/90minut/frontend/css/login-modal.css">
-    <!-- Magnific Popup CSS -->
-    <link rel="stylesheet" href="/90minut/frontend/css/magnific-popup.css">
-    <!-- Profile CSS -->
-    <link rel="stylesheet" href="/90minut/frontend/css/profile.css">   
 
-    <!-- Admin Dashboard CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/90minut/frontend/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/90minut/frontend/css/style.css">
+    <link rel="stylesheet" href="/90minut/frontend/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/90minut/frontend/css/magnific-popup.css">
+    <link rel="stylesheet" href="/90minut/frontend/css/profile.css">
+    <link rel="stylesheet" href="/90minut/frontend/css/slicknav.min.css">
+
     <link rel="stylesheet" href="/90minut/frontend/css/admin-dashboard.css">
-    <!-- Admin Articles CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-articles.css">
-    <!-- Admin Matches CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-matches.css">
-    <!-- Admin Leagues CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-leagues.css">
-    <!-- Admin Users CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-users.css">
-    <!-- Admin Analytics CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-analytics.css">
-    <!-- Admin Marketing CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-marketing.css">
-    <!-- Admin Settings CSS -->
     <link rel="stylesheet" href="/90minut/frontend/css/admin-settings.css">
 
-    <link rel="stylesheet" href="/90minut/frontend/css/slicknav.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.css">
+
+
 </head>
 <body>
-   <!-- Header Section Begin -->
+
+
 <header class="header-section-new" id="mainHeader">
     <div class="header__nav-new">
         <div class="container">
             <div class="row align-items-center">
-                <!-- Logo -->
+
+            
                 <div class="col-lg-2 col-md-3 col-6">
                     <div class="logo-new">
                         <a href="#home" data-page="home">
@@ -59,91 +47,78 @@
                     </div>
                 </div>
 
-                <!-- Navigation Menu -->
+               
                 <div class="col-lg-8 col-md-6 d-none d-lg-block">
                     <nav class="nav-menu-new">
                         <ul class="main-menu-new">
-                            <li class="active">
-                                <a href="#home" data-page="home">HOME</a>
-                            </li>
-                           <li>
-                                <a href="#club" data-page="club">LEAGUES</a>
-                            </li>
-                           <!--   <li>
-                                <a href="#schedule" data-page="schedule">SCHEDULE</a>
-                            </li>-->
-                            <li>
-                                <a href="#results" data-page="results">RESULTS</a>
-                            </li>
-                            <li>
-                                <a href="#players" data-page="players">LATEST NEWS</a>
-                            </li>
-                            <li>
-                                <a href="#blog" data-page="blog">NEWS</a>
-                            </li>
-                            <li>
-                                <a href="#contact" data-page="contact">CONTACT</a>
-                            </li>
+                            <li class="active"><a href="#home" data-page="home">HOME</a></li>
+                            <li><a href="#club" data-page="club">LEAGUES</a></li>
+                            <li><a href="#results" data-page="results">RESULTS</a></li>
+                            <li><a href="#players" data-page="players">LATEST NEWS</a></li>
+                            <li><a href="#blog" data-page="blog">NEWS</a></li>
+                            <li><a href="#contact" data-page="contact">CONTACT</a></li>
                         </ul>
                     </nav>
                 </div>
 
-                <!-- Right Icons -->
                 <div class="col-lg-2 col-md-3 col-6">
                     <div class="header-icons-new">
-                        <!-- Theme Toggle -->
-                        <button class="theme-toggle" id="themeToggle" title="Promijeni temu">
+
+                        <button class="theme-toggle" id="themeToggle">
                             <i class="fa fa-lightbulb-o"></i>
                         </button>
 
-                        <!-- Search Icon -->
-                        <a href="#" class="search-icon-new search-switch" title="Pretraži">
+                        <a href="#" class="search-icon-new search-switch">
                             <i class="fa fa-search"></i>
                         </a>
 
-                        <!-- Sign In Link - shows when NOT logged in -->
-                        <a href="#" class="signin-link-new" id="openLoginModalNew" title="Prijavi se">
+                        <a href="/90minut/frontend/login.html" class="signin-link-new" id="loginLink">
                             <span>Sign in</span>
                         </a>
 
-                        <!-- Profile Icon - shows when logged in -->
-                        <a href="#profile" class="profile-icon-new" id="profileIconNew" style="display: none;" title="Profil">
+                        <a href="#profile" class="profile-icon-new" id="profileIconNew" style="display:none;">
                             <i class="fa fa-user"></i>
                         </a>
+                        <a href="#admin-dashboard" id="adminDashboardBtn" class="admin-dash-btn" style="display:none;">
+                            <i class="fa fa-tachometer"></i> 
+                        </a>
 
-                        <!-- Mobile Menu Toggle -->
+
                         <span class="canvas-open-new">
                             <i class="fa fa-bars"></i>
                         </span>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
 </header>
-<!-- Header Section End -->
 
-<!-- Mobile Offcanvas Menu -->
 <div class="offcanvas-menu-overlay"></div>
 <div class="offcanvas-menu-wrapper">
-    <div class="canvas-close">
-        <i class="fa fa-close"></i>
-    </div>
-    <div class="search-btn search-switch">
-        <i class="fa fa-search"></i>
-    </div>
+    <div class="canvas-close"><i class="fa fa-close"></i></div>
+
+    <div class="search-btn search-switch"><i class="fa fa-search"></i></div>
+
     <div class="header__top--canvas">
-        <div class="ht-info">
-            <ul>
-                <li><a href="#" id="openLoginModal">Sign in</a></li>
-                <li>
-                    <a href="#profile" data-page="profile" id="profileLink" style="display: none;">
-                        <i class="fa fa-user-circle"></i> PROFILE
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <ul>
+            <li><a href="/90minut/frontend/login.html" id="loginLinkMobile">Sign in</a></li>
+            <li>
+                <a href="#profile" data-page="profile" id="profileLink" style="display:none;">
+                    <i class="fa fa-user-circle"></i> 
+                </a>
+            </li>
+            <li>
+                <a href="#admin-dashboard" data-page="admin-dashboard" id="adminDashboardBtn" style="display:none;">
+                    <i class="fa fa-tachometer"></i> 
+                </a>
+
+
+            </li>
+        </ul>
     </div>
+
     <ul class="main-menu mobile-menu">
         <li><a href="#home" data-page="home">Home</a></li>
         <li><a href="#club" data-page="club">Club</a></li>
@@ -153,247 +128,142 @@
         <li><a href="#blog" data-page="blog">News</a></li>
         <li><a href="#contact" data-page="contact">Contact Us</a></li>
     </ul>
+
     <div id="mobile-menu-wrap"></div>
 </div>
 
-    <!-- Main Content Container - SPA Content Loads Here -->
-    <main id="app-content">
-        <!-- Content will be dynamically loaded here by app.js -->
-        <div class="text-center py-5">
-            <div class="spinner-border text-danger" role="status">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </div>
-    </main>
 
-    <!-- Footer Section Begin -->
-    <footer class="footer-section set-bg" data-setbg="/90minut/frontend/assets/img/footer-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6">
-                    <div class="fs-logo">
-                        <div class="logo">
-                            <a href="#home" data-page="home">
-                                <img src="/90minut/frontend/assets/img/logo-dark.png" alt="">
-                            </a>
-                        </div>
-                        <ul>
-                            <li><i class="fa fa-envelope"></i> Info.colorlib@gmail.com</li>
-                            <li><i class="fa fa-copy"></i> +(12) 345 6789 10</li>
-                            <li><i class="fa fa-thumb-tack"></i> 40 Baria Sreet 133/2 New York City, United State</li>
-                        </ul>
-                        <div class="fs-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-tumblr"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 offset-lg-1">
-                    <div class="fs-widget">
-                        <h4>Top Club</h4>
-                        <ul class="fw-links">
-                            <li><a href="#">Brazil</a></li>
-                            <li><a href="#">Germany</a></li>
-                            <li><a href="#">Italy</a></li>
-                            <li><a href="#">Argentina</a></li>
-                            <li><a href="#">France</a></li>
-                        </ul>
-                        <ul class="fw-links">
-                            <li><a href="#">England</a></li>
-                            <li><a href="#">Netherlands</a></li>
-                            <li><a href="#">Hungary</a></li>
-                            <li><a href="#">Croatia</a></li>
-                            <li><a href="#">Poland</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="fs-widget">
-                        <h4>Recent News</h4>
-                        <div class="fw-item">
-                            <h5><a href="#">England win shows they have the spark to go far at World Cup</a></h5>
-                            <ul>
-                                <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                <li><i class="fa fa-edit"></i> 3 Comment</li>
-                            </ul>
-                        </div>
-                        <div class="fw-item">
-                            <h5><a href="#">Sri Lanka v Australia: Cricket World Cup 2019 – live!</a></h5>
-                            <ul>
-                                <li><i class="fa fa-calendar"></i> May 19, 2019</li>
-                                <li><i class="fa fa-edit"></i> 3 Comment</li>
-                            </ul>
-                        </div>
+<main id="app-content">
+    
+</main>
+
+<footer class="footer-section set-bg" data-setbg="/90minut/frontend/assets/img/footer-bg.jpg">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="fs-logo">
+                    <a href="#home" data-page="home">
+                        <img src="/90minut/frontend/assets/img/logo-dark.png" alt="">
+                    </a>
+                    <ul>
+                        <li><i class="fa fa-envelope"></i> Info.colorlib@gmail.com</li>
+                        <li><i class="fa fa-copy"></i> +(12) 345 6789 10</li>
+                        <li><i class="fa fa-thumb-tack"></i> 40 Baria Sreet 133/2 New York City</li>
+                    </ul>
+                    <div class="fs-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-tumblr"></i></a>
+                        <a href="#"><i class="fa fa-linkedin"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-4 col-md-6 offset-lg-1">
+                <div class="fs-widget">
+                    <h4>Top Club</h4>
+                    <ul class="fw-links">
+                        <li><a href="#">Brazil</a></li>
+                        <li><a href="#">Germany</a></li>
+                        <li><a href="#">Italy</a></li>
+                        <li><a href="#">Argentina</a></li>
+                        <li><a href="#">France</a></li>
+                    </ul>
+                    <ul class="fw-links">
+                        <li><a href="#">England</a></li>
+                        <li><a href="#">Netherlands</a></li>
+                        <li><a href="#">Hungary</a></li>
+                        <li><a href="#">Croatia</a></li>
+                        <li><a href="#">Poland</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="fs-widget">
+                    <h4>Recent News</h4>
+                    <div class="fw-item">
+                        <h5><a href="#">England win shows they have spark</a></h5>
+                        <ul>
+                            <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                            <li><i class="fa fa-edit"></i> 3 Comment</li>
+                        </ul>
+                    </div>
+                    <div class="fw-item">
+                        <h5><a href="#">Sri Lanka v Australia – live!</a></h5>
+                        <ul>
+                            <li><i class="fa fa-calendar"></i> May 19, 2019</li>
+                            <li><i class="fa fa-edit"></i> 3 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
         </div>
+
         <div class="container">
             <div class="copyright-option">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="co-text">
-                            <p>
-                                Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            </p>
-                        </div>
-                        <div class="co-widget">
-                            <ul>
-                                <li><a href="#">Copyright notification</a></li>
-                                <li><a href="#">Terms of Use</a></li>
-                                <li><a href="#">Privacy Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                <p>
+                    Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script>
+                    All rights reserved | Template by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                </p>
             </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-
-    <!-- Search model Begin -->
-    <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="fa fa-close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
         </div>
     </div>
-    <!-- Search model end -->
+</footer>
 
-    <!-- Login Modal Begin -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-container">
-            <button class="login-close" id="closeLoginModal">
-                <i class="fa fa-times"></i>
-            </button>
-
-            <div class="login-header">
-                <h2>Welcome Back</h2>
-                <p>Sign in to continue to Football Portal</p>
-            </div>
-
-            <!-- Tab Switcher -->
-            <div class="login-tabs">
-                <button class="login-tab active" data-tab="login">Login</button>
-                <button class="login-tab" data-tab="signup">Sign Up</button>
-            </div>
-
-            <!-- Login Form -->
-            <form class="login-form active" id="loginForm">
-                <div class="form-group">
-                    <label for="login-email">Email Address</label>
-                    <input type="email" id="login-email" placeholder="Enter your email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="login-password">Password</label>
-                    <input type="password" id="login-password" placeholder="Enter your password" required>
-                </div>
-
-                <div class="form-options">
-                    <label class="remember-me">
-                        <input type="checkbox" id="remember">
-                        <span>Remember me</span>
-                    </label>
-                    <a href="#" class="forgot-password">Forgot Password?</a>
-                </div>
-
-                <button type="submit" class="submit-btn">Login</button>
-
-                <div class="social-login">
-                    <p>Or continue with</p>
-                    <div class="social-buttons">
-                        <button type="button" class="social-btn">
-                            <i class="fa fa-google"></i> Google
-                        </button>
-                        <button type="button" class="social-btn">
-                            <i class="fa fa-facebook"></i> Facebook
-                        </button>
-                    </div>
-                </div>
-            </form>
-
-            <!-- Sign Up Form -->
-            <form class="signup-form" id="signupForm">
-                <div class="form-group">
-                    <label for="signup-firstname">First Name</label>
-                    <input type="text" id="signup-firstname" placeholder="Enter your first name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="signup-lastname">Last Name</label>
-                    <input type="text" id="signup-lastname" placeholder="Enter your last name" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="signup-email">Email Address</label>
-                    <input type="email" id="signup-email" placeholder="Enter your email" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="signup-password">Password</label>
-                    <input type="password" id="signup-password" placeholder="Create a password" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="signup-confirm">Confirm Password</label>
-                    <input type="password" id="signup-confirm" placeholder="Confirm your password" required>
-                </div>
-
-                <div class="terms">
-                    <label>
-                        <input type="checkbox" required>
-                        <span>I agree to the <a href="#">Terms & Conditions</a></span>
-                    </label>
-                </div>
-
-                <button type="submit" class="submit-btn">Create Account</button>
-
-                <div class="social-login">
-                    <p>Or sign up with</p>
-                    <div class="social-buttons">
-                        <button type="button" class="social-btn">
-                            <i class="fa fa-google"></i> Google
-                        </button>
-                        <button type="button" class="social-btn">
-                            <i class="fa fa-facebook"></i> Facebook
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="fa fa-close"></i></div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here...">
+        </form>
     </div>
-    <!-- Login Modal End -->
+</div>
 
-    <!-- jQuery -->
-    <script src="/90minut/frontend/js/jquery-3.3.1.min.js"></script>
-    <!-- Bootstrap JS -->
-    <script src="/90minut/frontend/js/bootstrap.min.js"></script>
-    <!-- Owl Carousel JS -->
-    <script src="/90minut/frontend/js/owl.carousel.min.js"></script>
-    <!-- Magnific Popup JS -->
-    <script src="/90minut/frontend/js/jquery.magnific-popup.min.js"></script>
-    <script src="/90minut/frontend/js/jquery.slicknav.js"></script>
-    
-    <!-- Chart.js Library-->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
-    
-    <!-- Main JS -->
-    <script src="/90minut/frontend/js/main.js"></script>
-    <!-- Login Modal JS -->
-    <script src="/90minut/frontend/js/login-modal.js"></script>
-    <!-- Profile JS -->
-    <script src="/90minut/frontend/js/profile.js"></script>
-    <!-- Admin Dashboard JavaScript -->
-    <script src="/90minut/frontend/js/admin.js"></script>
-    <!-- Admin Settings JS -->
-    <script src="/90minut/frontend/js/admin-settings.js"></script>
-    <!-- SPA Router -->
-    <script src="/90minut/frontend/js/app.js"></script>
+
+<script src="/90minut/frontend/js/jquery-3.3.1.min.js"></script>
+<script src="/90minut/frontend/js/bootstrap.min.js"></script>
+<script src="/90minut/frontend/js/jquery.slicknav.js"></script>
+<script src="/90minut/frontend/js/owl.carousel.min.js"></script>
+<script src="/90minut/frontend/js/jquery.magnific-popup.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
+
+<script src="/90minut/frontend/utils/constants.js"></script>
+<script src="/90minut/frontend/utils/rest-client.js"></script>
+<script src="/90minut/frontend/utils/utils.js"></script>
+
+<script src="/90minut/frontend/services/user-service.js"></script>
+<script src="/90minut/frontend/services/article-service.js"></script>
+
+<script src="/90minut/frontend/services/article-detail-service.js"></script>
+<script src="/90minut/frontend/services/home-services.js"></script>
+<script src="/90minut/frontend/services/user-admin-service.js"></script>
+<script src="/90minut/frontend/services/latest-news-service.js"></script>
+<script src="/90minut/frontend/services/profile-service.js"></script>
+
+<script src="/90minut/frontend/services/contact-service.js"></script>
+<script src="/90minut/frontend/services/news-service.js"></script>
+
+<script src="/90minut/frontend/js/profile-icon.js"></script>
+<script src="/90minut/frontend/js/dashboard-button.js"></script>
+<script src="/90minut/frontend/js/admin.js"></script>
+<script src="/90minut/frontend/js/app.js"></script>
+
 </body>
 </html>

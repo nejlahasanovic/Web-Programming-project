@@ -1,356 +1,125 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Leagues</title>
-</head>
-<body>
-    <!-- Breadcrumb Section Begin -->
-    <section class="breadcrumb-section set-bg" data-setbg="/90minut/frontend/assets/img/breadcrumb-bg.jpg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="bs-text">
-                        <h2>Top Leagues</h2>
-                        <p>Follow the world's best football competitions</p>
-                    </div>
+<section class="breadcrumb-section set-bg" data-setbg="/90minut/frontend/assets/img/breadcrumb-bg.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bs-text">
+                    <h2>Top Leagues</h2>
+                    <p>Follow the world's best football competitions</p>
                 </div>
             </div>
         </div>
-    </section>
-    <!-- Breadcrumb Section End -->
+    </div>
+</section>
 
-    <!-- Leagues Section Begin -->
-    <section class="leagues-section spad">
-        <div class="container">
-            
-            <!-- League Filter Tabs -->
-            <div class="league-filter-tabs">
-                <button class="league-tab active" data-league="premier">
-                    <i class="fa fa-shield"></i>
-                    <span>Premier League</span>
-                </button>
-                <button class="league-tab" data-league="laliga">
-                    <i class="fa fa-trophy"></i>
-                    <span>La Liga</span>
-                </button>
-                <button class="league-tab" data-league="bundesliga">
-                    <i class="fa fa-flag"></i>
-                    <span>Bundesliga</span>
-                </button>
-                <button class="league-tab" data-league="seriea">
-                    <i class="fa fa-star"></i>
-                    <span>Serie A</span>
-                </button>
-                <button class="league-tab" data-league="ligue1">
-                    <i class="fa fa-futbol-o"></i>
-                    <span>Ligue 1</span>
-                </button>
-            </div>
+<section class="leagues-section spad">
+    <div class="container">
 
-            <!-- PREMIER LEAGUE -->
-            <div class="league-content active" id="premier">
-                <div class="league-header">
-                    <div class="league-info">
-                        <img src="/90minut/frontend/assets/img/league/premier.webp" alt="Premier League" class="league-logo">
-                        <div>
-                            <h2>Premier League</h2>
-                            <p class="league-subtitle">England • 2024/25 Season</p>
-                        </div>
-                    </div>
-                </div>
+        <div class="league-filter-tabs">
+            <button class="league-tab active" data-league="premier">
+                <i class="fa fa-shield"></i>
+                <span>Premier League</span>
+            </button>
+            <button class="league-tab" data-league="laliga">
+                <i class="fa fa-trophy"></i>
+                <span>La Liga</span>
+            </button>
+            <button class="league-tab" data-league="bundesliga">
+                <i class="fa fa-flag"></i>
+                <span>Bundesliga</span>
+            </button>
+            <button class="league-tab" data-league="seriea">
+                <i class="fa fa-star"></i>
+                <span>Serie A</span>
+            </button>
+            <button class="league-tab" data-league="ligue1">
+                <i class="fa fa-futbol-o"></i>
+                <span>Ligue 1</span>
+            </button>
+        </div>
 
-                <div class="row">
-                    <!-- Standings Table -->
-                    <div class="col-lg-8">
-                        <div class="standings-card">
-                            <div class="card-header-custom">
-                                <h3><i class="fa fa-list-ol"></i> League Standings</h3>
-                            </div>
-                            <div class="standings-table-wrapper">
-                                <table class="standings-table">
-                                    <thead>
-                                        <tr>
-                                            <th class="pos-col">#</th>
-                                            <th class="team-col">Team</th>
-                                            <th>P</th>
-                                            <th>W</th>
-                                            <th>D</th>
-                                            <th>L</th>
-                                            <th>GD</th>
-                                            <th class="pts-col">Pts</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr class="champions-league">
-                                            <td class="pos-col">1</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-1.jpg" alt="">
-                                                <span>Manchester City</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>7</td>
-                                            <td>1</td>
-                                            <td>1</td>
-                                            <td>+18</td>
-                                            <td class="pts-col"><strong>22</strong></td>
-                                        </tr>
-                                        <tr class="champions-league">
-                                            <td>2</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-2.jpg" alt="">
-                                                <span>Arsenal</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>6</td>
-                                            <td>2</td>
-                                            <td>1</td>
-                                            <td>+14</td>
-                                            <td class="pts-col"><strong>20</strong></td>
-                                        </tr>
-                                        <tr class="champions-league">
-                                            <td>3</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-3.jpg" alt="">
-                                                <span>Liverpool</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>6</td>
-                                            <td>2</td>
-                                            <td>1</td>
-                                            <td>+12</td>
-                                            <td class="pts-col"><strong>20</strong></td>
-                                        </tr>
-                                        <tr class="champions-league">
-                                            <td>4</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-4.jpg" alt="">
-                                                <span>Tottenham</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>5</td>
-                                            <td>2</td>
-                                            <td>2</td>
-                                            <td>+8</td>
-                                            <td class="pts-col"><strong>17</strong></td>
-                                        </tr>
-                                        <tr class="europa-league">
-                                            <td>5</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-5.jpg" alt="">
-                                                <span>Newcastle</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>5</td>
-                                            <td>1</td>
-                                            <td>3</td>
-                                            <td>+5</td>
-                                            <td class="pts-col"><strong>16</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-6.jpg" alt="">
-                                                <span>Chelsea</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>4</td>
-                                            <td>3</td>
-                                            <td>2</td>
-                                            <td>+4</td>
-                                            <td class="pts-col"><strong>15</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>7</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-7.jpg" alt="">
-                                                <span>Man United</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>4</td>
-                                            <td>2</td>
-                                            <td>3</td>
-                                            <td>+2</td>
-                                            <td class="pts-col"><strong>14</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>8</td>
-                                            <td class="team-col">
-                                                <img src="/90minut/frontend/assets/img/flag/flag-8.jpg" alt="">
-                                                <span>Brighton</span>
-                                            </td>
-                                            <td>9</td>
-                                            <td>3</td>
-                                            <td>4</td>
-                                            <td>2</td>
-                                            <td>0</td>
-                                            <td class="pts-col"><strong>13</strong></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="table-legend">
-                                <div class="legend-item">
-                                    <span class="legend-color champions-league-color"></span>
-                                    <span>Champions League</span>
-                                </div>
-                                <div class="legend-item">
-                                    <span class="legend-color europa-league-color"></span>
-                                    <span>Europa League</span>
-                                </div>
-                            </div>
-                        </div>
+        <div class="league-content active" id="league-content">
 
-                        <!-- League News -->
-                        <div class="league-news-section">
-                            <h3 class="section-title-modern">
-                                <i class="fa fa-newspaper-o"></i> Latest News
-                            </h3>
-                            <div class="news-grid">
-                                <div class="news-card-modern">
-                                    <div class="news-image">
-                                        <img src="/90minut/frontend/assets/img/news/ln-1.jpg" alt="">
-                                        <span class="news-badge">Premier League</span>
-                                    </div>
-                                    <div class="news-content">
-                                        <h4>Haaland Scores Hat-Trick in City's Victory</h4>
-                                        <p>Manchester City continued their winning streak...</p>
-                                        <div class="news-meta">
-                                            <span><i class="fa fa-calendar"></i> Oct 19, 2025</span>
-                                            <span><i class="fa fa-eye"></i> 15.2K views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="news-card-modern">
-                                    <div class="news-image">
-                                        <img src="/90minut/frontend/assets/img/news/ln-2.jpg" alt="">
-                                        <span class="news-badge">Transfer</span>
-                                    </div>
-                                    <div class="news-content">
-                                        <h4>Arsenal Eyes January Transfer Target</h4>
-                                        <p>The Gunners are reportedly preparing a bid...</p>
-                                        <div class="news-meta">
-                                            <span><i class="fa fa-calendar"></i> Oct 18, 2025</span>
-                                            <span><i class="fa fa-eye"></i> 12.8K views</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Sidebar -->
-                    <div class="col-lg-4">
-                        <!-- Top Scorers -->
-                        <div class="scorers-card">
-                            <div class="card-header-custom">
-                                <h3><i class="fa fa-futbol-o"></i> Top Scorers</h3>
-                            </div>
-                            <div class="scorers-list">
-                                <div class="scorer-item">
-                                    <div class="scorer-rank">1</div>
-                                    <div class="scorer-info">
-                                        <img src="/90minut/frontend/assets/img/club/p-1.jpg" alt="">
-                                        <div>
-                                            <h5>Erling Haaland</h5>
-                                            <span>Manchester City</span>
-                                        </div>
-                                    </div>
-                                    <div class="scorer-goals">
-                                        <strong>14</strong>
-                                        <span>goals</span>
-                                    </div>
-                                </div>
-                                <div class="scorer-item">
-                                    <div class="scorer-rank">2</div>
-                                    <div class="scorer-info">
-                                        <img src="/90minut/frontend/assets/img/club/p-2.jpg" alt="">
-                                        <div>
-                                            <h5>Mohamed Salah</h5>
-                                            <span>Liverpool</span>
-                                        </div>
-                                    </div>
-                                    <div class="scorer-goals">
-                                        <strong>12</strong>
-                                        <span>goals</span>
-                                    </div>
-                                </div>
-                                <div class="scorer-item">
-                                    <div class="scorer-rank">3</div>
-                                    <div class="scorer-info">
-                                        <img src="/90minut/frontend/assets/img/club/p-3.jpg" alt="">
-                                        <div>
-                                            <h5>Bukayo Saka</h5>
-                                            <span>Arsenal</span>
-                                        </div>
-                                    </div>
-                                    <div class="scorer-goals">
-                                        <strong>10</strong>
-                                        <span>goals</span>
-                                    </div>
-                                </div>
-                                <div class="scorer-item">
-                                    <div class="scorer-rank">4</div>
-                                    <div class="scorer-info">
-                                        <img src="/90minut/frontend/assets/img/club/p-4.jpg" alt="">
-                                        <div>
-                                            <h5>Son Heung-min</h5>
-                                            <span>Tottenham</span>
-                                        </div>
-                                    </div>
-                                    <div class="scorer-goals">
-                                        <strong>9</strong>
-                                        <span>goals</span>
-                                    </div>
-                                </div>
-                                <div class="scorer-item">
-                                    <div class="scorer-rank">5</div>
-                                    <div class="scorer-info">
-                                        <img src="/90minut/frontend/assets/img/club/p-5.jpg" alt="">
-                                        <div>
-                                            <h5>Ollie Watkins</h5>
-                                            <span>Aston Villa</span>
-                                        </div>
-                                    </div>
-                                    <div class="scorer-goals">
-                                        <strong>8</strong>
-                                        <span>goals</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- League Stats -->
-                        <div class="stats-card">
-                            <div class="card-header-custom">
-                                <h3><i class="fa fa-bar-chart"></i> League Stats</h3>
-                            </div>
-                            <div class="stats-list">
-                                <div class="stat-item">
-                                    <span class="stat-label">Total Goals</span>
-                                    <span class="stat-value">287</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Avg Goals/Game</span>
-                                    <span class="stat-value">2.8</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Clean Sheets</span>
-                                    <span class="stat-value">45</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Yellow Cards</span>
-                                    <span class="stat-value">234</span>
-                                </div>
-                                <div class="stat-item">
-                                    <span class="stat-label">Red Cards</span>
-                                    <span class="stat-value">12</span>
-                                </div>
-                            </div>
-                        </div>
+            <div class="league-header">
+                <div class="league-info">
+                    <div>
+                        <h2 id="league-name">Premier League</h2>
+                        <p class="league-subtitle" id="league-subtitle">England • 2024/25 Season</p>
                     </div>
                 </div>
             </div>
 
-</body>
-</html>
+            <div class="row">
+
+                <div class="col-lg-8">
+                    <div class="standings-card">
+
+                        <div class="card-header-custom">
+                            <h3><i class="fa fa-list-ol"></i> League Standings</h3>
+                        </div>
+
+                        <div class="standings-table-wrapper">
+                            <table class="standings-table">
+                                <thead>
+                                    <tr>
+                                        <th class="pos-col">#</th>
+                                        <th class="team-col">Team</th>
+                                        <th>P</th>
+                                        <th>W</th>
+                                        <th>D</th>
+                                        <th>L</th>
+                                        <th>GD</th>
+                                        <th class="pts-col">Pts</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="standings-table-body">
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="table-legend">
+                            <div class="legend-item">
+                                <span class="legend-color champions-league-color"></span>
+                                <span>Champions League</span>
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-color europa-league-color"></span>
+                                <span>Europa League</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+
+                    <div class="scorers-card">
+                        <div class="card-header-custom">
+                            <h3><i class="fa fa-futbol-o"></i> Top Scorers</h3>
+                        </div>
+
+                        <div class="scorers-list" id="top-scorers-list">
+                        
+                        </div>
+                    </div>
+
+                    <div class="stats-card">
+                        <div class="card-header-custom">
+                            <h3><i class="fa fa-bar-chart"></i> League Stats</h3>
+                        </div>
+
+                        <div class="stats-list">
+                            <div class="stat-item"><span class="stat-label">Total Goals</span><span class="stat-value">287</span></div>
+                            <div class="stat-item"><span class="stat-label">Avg Goals/Game</span><span class="stat-value">2.8</span></div>
+                            <div class="stat-item"><span class="stat-label">Clean Sheets</span><span class="stat-value">45</span></div>
+                            <div class="stat-item"><span class="stat-label">Yellow Cards</span><span class="stat-value">234</span></div>
+                            <div class="stat-item"><span class="stat-label">Red Cards</span><span class="stat-value">12</span></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
