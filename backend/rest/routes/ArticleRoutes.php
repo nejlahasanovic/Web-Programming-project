@@ -1,5 +1,18 @@
 <?php
-
+/**
+ * @OA\Get(
+ *     path="/articles/with-comments",
+ *     tags={"Articles"},
+ *     summary="Get all articles with comment count",
+ *     @OA\Response(
+ *         response=200,
+ *         description="List of articles with comment counts"
+ *     )
+ * )
+ */
+Flight::route('GET /articles/with-comments', function(){
+    Flight::json(Flight::articleService()->getArticlesWithCommentCount());
+});
 /**
  * @OA\Get(
  *     path="/articles",
@@ -127,7 +140,6 @@ Flight::route('GET /articles/league/@league_id', function($league_id){
  * @OA\Get(
  *     path="/articles/latest/{limit}",
  *     tags={"Articles"},
- *     summary="Get latest articles",
  *     @OA\Parameter(
  *         name="limit",
  *         in="path",
@@ -180,6 +192,7 @@ Flight::route('GET /articles/search/@keyword', function($keyword){
  *     path="/articles",
  *     tags={"Articles"},
  *     summary="Create a new article",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -201,6 +214,9 @@ Flight::route('GET /articles/search/@keyword', function($keyword){
  * )
  */
 Flight::route('POST /articles', function(){
+
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::EDITOR]);
+
     $data = Flight::request()->data->getData();
     Flight::json(Flight::articleService()->createArticle($data));
 });
@@ -210,6 +226,7 @@ Flight::route('POST /articles', function(){
  *     path="/articles/{id}",
  *     tags={"Articles"},
  *     summary="Update an article by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -236,6 +253,42 @@ Flight::route('POST /articles', function(){
  * )
  */
 Flight::route('PUT /articles/@id', function($id){
+
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::EDITOR]);
+
+    $data = Flight::request()->data->getData();
+    Flight::json(Flight::articleService()->updateArticle($id, $data));
+});
+
+/**
+ * @OA\Patch(
+ *     path="/articles/{id}",
+ *     tags={"Articles"},
+ *     summary="Update an article by ID",
+ *     security={{"ApiKey": {}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         description="Article ID",
+ *         @OA\Schema(type="integer", example=1)
+ *     ),
+ *     @OA\RequestBody(
+ *         required=true,
+ *         @OA\JsonContent(
+ *             @OA\Property(property="title", type="string", example="Updated Title"),
+ *             @OA\Property(property="content", type="string", example="Updated content...")
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Article updated successfully."
+ *     )
+ * )
+ */
+Flight::route('PATCH /articles/@id', function($id){
+    Flight::auth_middleware()->authorizeRoles([Roles::ADMIN, Roles::EDITOR]);
+    
     $data = Flight::request()->data->getData();
     Flight::json(Flight::articleService()->updateArticle($id, $data));
 });
@@ -245,6 +298,7 @@ Flight::route('PUT /articles/@id', function($id){
  *     path="/articles/{id}",
  *     tags={"Articles"},
  *     summary="Delete an article by ID",
+ *     security={{"ApiKey": {}}},
  *     @OA\Parameter(
  *         name="id",
  *         in="path",
@@ -263,6 +317,9 @@ Flight::route('PUT /articles/@id', function($id){
  * )
  */
 Flight::route('DELETE /articles/@id', function($id){
+
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
+
     Flight::json(Flight::articleService()->deleteArticle($id));
 });
 ?>

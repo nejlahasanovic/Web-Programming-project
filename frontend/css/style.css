@@ -3945,3 +3945,815 @@ body:not(.light-mode) {
         gap: 10px;
     }
 }
+html {
+    overflow-y: scroll;    
+}
+
+body {
+    overflow-x: hidden;          
+}
+
+.header-section-new {
+    width: 100%;
+    max-width: 100%;
+}
+#app-content {
+    min-height: 100vh; 
+    transition: min-height 0s;
+}
+.page-fade {
+    opacity: 0;
+    transition: opacity 0.15s ease-in;
+}
+
+.page-fade.show {
+    opacity: 1;
+}
+
+.footer-section .fs-logo img {
+    max-width: 100px;  
+    height: auto;
+}
+/* ========================================
+   NEWS PAGE - KLIX STYLE LAYOUT
+   Fiksne veličine kartica
+   ======================================== */
+
+/* News Grid */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.news-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 400px; /* ✅ FIKSNA VISINA */
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.news-card-image {
+    width: 100%;
+    height: 200px; /* ✅ FIKSNA VISINA SLIKE */
+    overflow: hidden;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.news-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* ✅ CROP slike da budu iste veličine */
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-card-image img {
+    transform: scale(1.08);
+}
+
+.news-card-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #dd1515;
+    color: #fff;
+    padding: 5px 12px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.news-card-content {
+    padding: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.news-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #151618;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    /* ✅ MAX 2 LINIJE */
+    display: -webkit-box;
+   /* -webkit-line-clamp: 2;*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    height: 42px; /* 2 linije x 21px */
+}
+
+.news-card-title a {
+    color: #151618;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-card-title a:hover {
+    color: #dd1515;
+}
+
+.news-card-excerpt {
+    font-size: 13px;
+    color: #636363;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    /* ✅ MAX 3 LINIJE */
+    display: -webkit-box;
+   /* -webkit-line-clamp: vertical;*/
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+    height: 58px; /* 3 linije x 19.5px */
+}
+
+.news-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 12px;
+    color: #ababab;
+    padding-top: 12px;
+    border-top: 1px solid #f2f2f2;
+    margin-top: auto;
+}
+
+.news-card-meta i {
+    color: #dd1515;
+    margin-right: 4px;
+}
+
+/* ========================================
+   PAGINATION
+   ======================================== */
+
+.news-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    padding: 20px 0;
+    border-top: 2px solid #e5e5e5;
+}
+
+.pagination-btn {
+    background: #fff;
+    border: 2px solid #e5e5e5;
+    color: #636363;
+    padding: 12px 28px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination-btn:hover:not(.disabled) {
+    background: #dd1515;
+    border-color: #dd1515;
+    color: #fff;
+}
+
+.pagination-btn.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.pagination-info {
+    font-size: 14px;
+    color: #636363;
+    font-weight: 600;
+}
+
+/* ========================================
+   AD BANNER SIDEBAR
+   ======================================== */
+
+.sidebar-ad-banner {
+    position: sticky;
+    top: 100px;
+}
+
+.ad-banner-sticky {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+}
+
+.ad-label {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.ad-content {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ad-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body:not(.light-mode) .news-card {
+    background: #2d2d2d;
+}
+
+body:not(.light-mode) .news-card-title a {
+    color: #ffffff;
+}
+
+body:not(.light-mode) .news-card-title a:hover {
+    color: #dd1515;
+}
+
+body:not(.light-mode) .news-card-excerpt {
+    color: #b5b8be;
+}
+
+body:not(.light-mode) .news-card-meta {
+    color: #8a8a8a;
+    border-top-color: #3d3d3d;
+}
+
+body:not(.light-mode) .sidebar-ad-banner {
+    background: transparent;
+}
+
+body:not(.light-mode) .ad-banner-sticky {
+    background: #1a1a1a;
+}
+
+body:not(.light-mode) .ad-content {
+    background: #2d2d2d;
+}
+
+body:not(.light-mode) .pagination-btn {
+    background: #2d2d2d;
+    border-color: #3d3d3d;
+    color: #ffffff;
+}
+
+body:not(.light-mode) .pagination-btn:hover:not(.disabled) {
+    background: #dd1515;
+    border-color: #dd1515;
+}
+
+body:not(.light-mode) .pagination-info {
+    color: #b5b8be;
+}
+
+body:not(.light-mode) .news-pagination {
+    border-top-color: #3d3d3d;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+/* Tablet */
+@media (max-width: 991px) {
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+    }
+    
+    .news-card {
+        height: 380px;
+    }
+    
+    .news-card-image {
+        height: 180px;
+    }
+    
+    .sidebar-ad-banner {
+        margin-top: 40px;
+        position: relative;
+        top: 0;
+    }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+    .news-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    
+    .news-card {
+        height: 360px;
+    }
+    
+    .news-card-image {
+        height: 160px;
+    }
+    
+    .news-card-title {
+        font-size: 14px;
+    }
+    
+    .news-card-excerpt {
+        font-size: 12px;
+    }
+    
+    .news-pagination {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .pagination-btn {
+        width: 100%;
+    }
+}
+
+/* Large screens (3 kartice) */
+@media (min-width: 1200px) {
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Extra large screens (možda 4 kartice) */
+@media (min-width: 1400px) {
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+/* ========================================
+   LATEST NEWS PAGE - KLIX ARTICLE STYLE
+   ======================================== */
+
+.latest-article-section {
+    padding: 40px 0 80px;
+    background: #fff;
+}
+
+/* Category Badge */
+.article-category-badge {
+    display: inline-block;
+    background: #00a86b;
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 20px;
+}
+
+/* Main Title */
+.article-main-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #151618;
+    line-height: 1.3;
+    margin-bottom: 25px;
+}
+
+/* Article Meta Info */
+.article-meta-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
+    margin-bottom: 30px;
+}
+
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: #2d2d2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+}
+
+.author-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.author-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #151618;
+}
+
+.publish-time {
+    font-size: 12px;
+    color: #8a8a8a;
+}
+
+.article-stats {
+    display: flex;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.stat-item strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #151618;
+}
+
+.stat-item span {
+    font-size: 11px;
+    color: #8a8a8a;
+}
+
+.article-social {
+    display: flex;
+    gap: 8px;
+}
+
+.social-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.social-btn.facebook {
+    background: #3b5998;
+}
+
+.social-btn.twitter {
+    background: #1da1f2;
+}
+
+.social-btn.email {
+    background: #636363;
+}
+
+.social-btn.whatsapp {
+    background: #25d366;
+}
+
+.social-btn:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+}
+
+/* Main Article Image */
+.article-main-image {
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.article-main-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Article Content */
+.article-content-body {
+    font-size: 17px;
+    line-height: 1.7;
+    color: #2d2d2d;
+}
+
+.article-content-body p {
+    margin-bottom: 20px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: #2d2d2d;
+}
+
+/* Sidebar */
+.article-sidebar {
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-ad-widget {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar-ad-widget .ad-label {
+    font-size: 10px;
+    color: #999;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.ad-banner-content {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.ad-banner-content img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ========================================
+   DARK MODE
+   ======================================== */
+
+body:not(.light-mode) .latest-article-section {
+    background: #1a1a1a;
+}
+
+body:not(.light-mode) .article-main-title {
+    color: #ffffff;
+}
+
+body:not(.light-mode) .author-name {
+    color: #ffffff;
+}
+
+body:not(.light-mode) .stat-item strong {
+    color: #ffffff;
+}
+
+body:not(.light-mode) .article-content-body,
+body:not(.light-mode) .article-content-body p {
+    color: #e0e0e0;
+}
+
+body:not(.light-mode) .article-meta-info {
+    border-top-color: #3d3d3d;
+    border-bottom-color: #3d3d3d;
+}
+
+body:not(.light-mode) .author-avatar {
+    background: #3d3d3d;
+}
+
+body:not(.light-mode) .sidebar-ad-widget {
+    background: #2d2d2d;
+}
+
+body:not(.light-mode) .ad-banner-content {
+    background: #1a1a1a;
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 991px) {
+    .article-main-title {
+        font-size: 28px;
+    }
+    
+    .article-meta-info {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+    
+    .article-sidebar {
+        margin-top: 40px;
+        position: relative;
+        top: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .article-main-title {
+        font-size: 24px;
+    }
+    
+    .article-content-body,
+    .article-content-body p {
+        font-size: 15px;
+    }
+    
+    .article-stats {
+        flex-direction: row;
+        gap: 15px;
+    }
+}
+/* ========================================
+   PROFILE DELETE MODAL
+   Dodaj na kraj style.css
+   ======================================== */
+
+.profile-delete-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    display: none;
+}
+
+.profile-modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.profile-modal-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #2d2d2d;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.profile-modal-box h3 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 15px;
+}
+
+.profile-modal-box p {
+    font-size: 14px;
+    color: #b5b8be;
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+.profile-modal-box input[type="password"] {
+    width: 100%;
+    padding: 12px 18px;
+    border: 2px solid #3d3d3d;
+    border-radius: 8px;
+    background: #1a1a1a;
+    color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.profile-modal-box input[type="password"]:focus {
+    border-color: #dd1515;
+    outline: none;
+}
+
+.profile-modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+}
+
+.profile-cancel-btn,
+.profile-delete-confirm-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.profile-cancel-btn {
+    background: #3d3d3d;
+    color: #ffffff;
+}
+
+.profile-cancel-btn:hover {
+    background: #4d4d4d;
+}
+
+.profile-delete-confirm-btn {
+    background: linear-gradient(135deg, #dd1515 0%, #a01010 100%);
+    color: #ffffff;
+}
+
+.profile-delete-confirm-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(221, 21, 21, 0.3);
+}
+
+/* Light mode */
+body.light-mode .profile-modal-box {
+    background: #ffffff;
+}
+
+body.light-mode .profile-modal-box h3 {
+    color: #2d2d2d;
+}
+
+body.light-mode .profile-modal-box p {
+    color: #636363;
+}
+
+body.light-mode .profile-modal-box input[type="password"] {
+    background: #f5f5f5;
+    border-color: #e0e0e0;
+    color: #2d2d2d;
+}
+#latest-comment-form-section textarea {
+    width: 100%;
+    min-height: 150px;
+}
+
+#latest-comment-form-section .primary-btn {
+    margin-top: 20px;
+}
+/* ===============================
+   Latest News - Comment Form FIX
+   (kopija article-details stila)
+   =============================== */
+
+.latest-article-section .comment-form {
+    margin-top: 60px;
+}
+
+.latest-article-section .comment-form h4 {
+    font-size: 22px;
+    color: #ffffff;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.latest-article-section .comment-form textarea {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #444;
+    padding: 20px;
+    font-size: 14px;
+    color: #ffffff;
+    background: #2d2d2d;
+    resize: none;
+    margin-bottom: 20px;
+}
+
+.latest-article-section .comment-form textarea::placeholder {
+    color: #b7b7b7;
+}
+
+.latest-article-section .comment-form .primary-btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #dd1515;
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.latest-article-section .comment-form .primary-btn:hover {
+    background: #b91111;
+}

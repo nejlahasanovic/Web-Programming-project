@@ -36,6 +36,9 @@ class UserService extends BaseService {
     public function getByUsername($username) {
         $user = $this->dao->getByUsername($username);
         unset($user['password_hash']);
+        if (!$user) {
+        throw new Exception("User with username '$username' not found.");
+        }
         return $user;
     }
 
@@ -120,10 +123,6 @@ class UserService extends BaseService {
             throw new Exception('Invalid email format.');
         }
 
-        if (isset($data['role']) && !in_array($data['role'], self::VALID_ROLES)) {
-            throw new Exception('Invalid role value.');
-        }
-
         return $this->update($id, $data);
     }
 
@@ -138,5 +137,33 @@ class UserService extends BaseService {
 /*  za milestone 4-5 cu implementirati ovu funkciju u skladu sa potrebama 
     public function updatePassword($userId, $oldPassword, $newPassword) {}
 */
+
+public function getSelf() {
+    $currentUser = Flight::get('user');
+
+    $user = $this->dao->getById($currentUser->user_id);
+    if (!$user) {
+        throw new Exception("User not found");
+    }
+
+    unset($user['password_hash']);
+    return $user;
+}
+public function updateSelf($data) {
+    $currentUser = Flight::get('user');
+
+    if (isset($data['username']) && strlen($data['username']) < 7) {
+        throw new Exception("Username must be at least 7 characters");
+    }
+
+    if (isset($data['email']) && !filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        throw new Exception("Invalid email format");
+    }
+
+    unset($data['role']); // user ne smije dirati rolu
+
+    return $this->update($currentUser->user_id, $data);
+}
+
 }
 ?>

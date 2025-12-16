@@ -29,50 +29,41 @@ class CommentService extends BaseService {
     }
     
     public function createComment($data) {
-    
-        if (empty($data['user_id'])) {
-            throw new Exception('You must be logged in to comment.');
-        }
-        
-        $user = $this->userDao->getById($data['user_id']);
-        if (!$user) {
-            throw new Exception('User not found.');
-        }
-        
-        if (empty($data['article_id'])) {
-            throw new Exception('Article ID is required.');
-        }
-        
-        if (empty($data['content'])) {
-            throw new Exception('Content is required.');
-        }
-        
-        if (strlen($data['content']) < 10) {
-            throw new Exception('Comment must be at least 10 characters.');
-        }
-        
-        return $this->create($data);
-    }
 
+    if (empty($data['user_id'])) {
+        throw new Exception('You must be logged in to comment.');
+    }
+    
+    $user = $this->userDao->getById($data['user_id']);
+    if (!$user) {
+        throw new Exception('User not found.');
+    }
+    
+    if (empty($data['article_id'])) {
+        throw new Exception('Article ID is required.');
+    }
+    
+    if (empty($data['content'])) {
+        throw new Exception('Content is required.');
+    }
+    
+    return $this->dao->insert($data);
+    
+}
      public function deleteComment($commentId, $data) {
 
         $comment = $this->dao->getById($commentId);
 
         if (!$comment) {
-            throw new Exception('Comment not found.');
+            Flight::halt(404, "Comment not found");
         }
 
-        $user = $this->userDao->getById($data['user_id']);
-        if (!$user) {
-            throw new Exception('User not found.');
+        if ($loggedUser->role !== Roles::ADMIN && $comment['user_id'] != $loggedUser->id) {
+            Flight::halt(403, "You can only delete your own comment");
         }
 
-        if (!($user['role'] === 'admin' || $comment['user_id'] == $data['user_id'])) {
-            throw new Exception('You can only delete your own comments.');
+        return $this->dao->delete($commentId);
         }
-
-        return $this->delete($commentId); 
-    }
 
 }
 ?>

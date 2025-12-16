@@ -50,6 +50,7 @@ Flight::route('GET /leagues/@id', function($id) {
  *     path="/leagues",
  *     tags={"Leagues"},
  *     summary="Create a new league",
+ *     security={{"ApiKey": {}}},
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
@@ -68,6 +69,7 @@ Flight::route('GET /leagues/@id', function($id) {
  * )
  */
 Flight::route('POST /leagues', function() {
+    Flight::auth_middleware()->authorizeRole(Roles::ADMIN);
     $data = Flight::request()->data->getData();
     Flight::json(Flight::leagueService()->createLeague($data));
 });
