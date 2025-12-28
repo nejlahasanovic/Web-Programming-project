@@ -1,5 +1,25 @@
 <?php
 
+// CORS Configuration - MUST BE FIRST
+$allowedOrigin = isset($_ENV['FRONTEND_URL']) && trim($_ENV['FRONTEND_URL']) != "" 
+    ? $_ENV['FRONTEND_URL'] 
+    : 'http://localhost/Dorm-Student-Organization-System/frontend';
+
+// Set CORS headers for ALL requests
+header("Access-Control-Allow-Origin: " . $allowedOrigin);
+header("Access-Control-Allow-Credentials: true");
+header("Access-Control-Max-Age: 86400");
+header("Access-Control-Allow-Headers: content-type, Content-Type, Authorization, Authentication, Accept, Origin");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+
+// Handle OPTIONS preflight - respond and exit immediately
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header("Content-Length: 0");
+    header("Content-Type: text/plain");
+    http_response_code(204);
+    exit(0);
+}
+
 require __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/config.php';
