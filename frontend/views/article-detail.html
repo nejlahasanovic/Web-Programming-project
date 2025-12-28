@@ -50,10 +50,9 @@
                     <div class="comment-form" id="comment-form-section">
                         <h4>Leave a Comment</h4>
                         <form id="add-comment-form">
-                            <input type="hidden" name="article_id" id="comment-article-id">
-                            
-                            <textarea name="content" placeholder="Your comment" required></textarea>
-                            
+                            <input type="hidden" name="article_id" id="comment-article-id"> 
+                            <textarea name="content" placeholder="Your comment (minimum 10 characters)" required
+                            minlength="10" maxlength="1000" rows="5"></textarea>
                             <button type="submit" class="primary-btn">Post Comment</button>
                         </form>
                     </div>

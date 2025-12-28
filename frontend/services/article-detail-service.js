@@ -3,29 +3,20 @@ let ArticleDetailService = {
   currentArticleId: null,
 
   init: function(articleId) {
-    
     ArticleDetailService.currentArticleId = articleId;
-    
-   
     ArticleDetailService.loadArticle(articleId);
-    
-  
     ArticleDetailService.loadComments(articleId);
-    
-  
     ArticleDetailService.loadRecentPosts();
-    
- 
     ArticleDetailService.setupCommentForm();
   },
 
- 
   loadArticle: function(articleId) {
+    $.blockUI({ message: '<h3>Loading article...</h3>' });
+
     RestClient.get('articles/' + articleId, 
       function(response) {
         const article = response.data || response;
         
-    
         $('#article-title').text(article.title);
         $('#article-breadcrumb-title').text(article.title);
         
@@ -39,7 +30,6 @@ let ArticleDetailService = {
           `);
         }
         
-
         $('#article-content').html(`<p>${article.content}</p>`);
 
         $('#article-tags').html(`
@@ -51,57 +41,60 @@ let ArticleDetailService = {
           var bg = $(this).data('setbg');
           $(this).css('background-image', 'url(' + bg + ')');
         });
+
+        $.unblockUI();
       },
       function(error) {
         console.error("Error loading article:", error);
         $('#article-title').text('Article not found');
         $('#article-content').html('<p class="text-danger">Article could not be loaded.</p>');
+        $.unblockUI();
       }
     );
   },
 
   loadComments: function(articleId) {
-  RestClient.get('comments/article/' + articleId, 
-    function(response) {
-      const comments = Array.isArray(response) ? response : (response.data || []);
-      
-      $('#total-comments').text(comments.length);
-      $('#article-comments-count').text(comments.length + ' Comments');
-      
-      if (comments.length === 0) {
-        $('#comments-list').html('<p>No comments yet. Be the first to comment!</p>');
-        return;
-      }
-      
-      let html = '';
-      comments.forEach(function(comment) {
-        const date = ArticleDetailService.formatDate(comment.created_at);
-        const username = comment.username || 'Anonymous';
+    RestClient.get('comments/article/' + articleId, 
+      function(response) {
+        const comments = Array.isArray(response) ? response : (response.data || []);
         
-        html += `
-          <div class="single-comment-item" style="margin-bottom: 30px; overflow: hidden;">
-            <div class="sc-author" style="float: left; margin-right: 20px;">
-              <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&size=70&background=dd1515&color=fff" 
-                   alt="${username}" 
-                   style="width: 70px; height: 70px; border-radius: 50%;">
+        $('#total-comments').text(comments.length);
+        $('#article-comments-count').text(comments.length + ' Comments');
+        
+        if (comments.length === 0) {
+          $('#comments-list').html('<p>No comments yet. Be the first to comment!</p>');
+          return;
+        }
+        
+        let html = '';
+        comments.forEach(function(comment) {
+          const date = ArticleDetailService.formatDate(comment.created_at);
+          const username = comment.username || 'Anonymous';
+          
+          html += `
+            <div class="single-comment-item" style="margin-bottom: 30px; overflow: hidden;">
+              <div class="sc-author" style="float: left; margin-right: 20px;">
+                <img src="https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&size=70&background=dd1515&color=fff" 
+                     alt="${username}" 
+                     style="width: 70px; height: 70px; border-radius: 50%;">
+              </div>
+              <div class="sc-text" style="overflow: hidden;">
+                <span style="font-size: 12px; color: #dd1515;">${date}</span>
+                <h5 style="color: #ffffff; font-weight: 500; margin-top: 8px; margin-bottom: 14px;">${username}</h5>
+                <p style="font-size: 14px; line-height: 22px; color: #e0e0e0;">${comment.content}</p>
+              </div>
             </div>
-            <div class="sc-text" style="overflow: hidden;">
-              <span style="font-size: 12px; color: #dd1515;">${date}</span>
-              <h5 style="color: #ffffff; font-weight: 500; margin-top: 8px; margin-bottom: 14px;">${username}</h5>
-              <p style="font-size: 14px; line-height: 22px; color: #e0e0e0;">${comment.content}</p>
-            </div>
-          </div>
-        `;
-      });
-      
-      $('#comments-list').html(html);
-    },
-    function(error) {
-      console.error("Error loading comments:", error);
-      $('#comments-list').html('<p>Error loading comments.</p>');
-    }
-  );
-},
+          `;
+        });
+        
+        $('#comments-list').html(html);
+      },
+      function(error) {
+        console.error("Error loading comments:", error);
+        $('#comments-list').html('<p>Error loading comments.</p>');
+      }
+    );
+  },
   
   loadRecentPosts: function() {
     RestClient.get('articles?limit=5&published=1', 
@@ -137,11 +130,9 @@ let ArticleDetailService = {
   },
 
   setupCommentForm: function() {
-   
     const token = localStorage.getItem("user_token");
     
     if (!token) {
-    
       $('#comment-form-section').html(`
         <div class="alert alert-info">
           <p><i class="fa fa-info-circle"></i> You must be <a href="#" onclick="window.location.href='/90minut/frontend/login.html'; return false;">logged in</a> to comment.</p>
@@ -152,46 +143,52 @@ let ArticleDetailService = {
     
     $('#comment-article-id').val(ArticleDetailService.currentArticleId);
     
-    $(document).off('submit', '#add-comment-form').on('submit', '#add-comment-form', function(e) {
-      e.preventDefault();
-      
-      const content = $(this).find('textarea[name="content"]').val();
-      
-      if (!content || content.trim().length < 10) {
-        toastr.error("Comment must be at least 10 characters long.");
-        return;
+    // ADDED: Comment form validation
+    $("#add-comment-form").validate({
+      rules: {
+        content: {
+          required: true,
+          minlength: 10,
+          maxlength: 1000
+        }
+      },
+      messages: {
+        content: {
+          required: "Please enter your comment",
+          minlength: "Comment must be at least 10 characters",
+          maxlength: "Comment cannot exceed 1000 characters"
+        }
+      },
+      submitHandler: function(form) {
+        const content = $(form).find('textarea[name="content"]').val();
+        
+        const data = {
+          article_id: ArticleDetailService.currentArticleId,
+          content: content.trim()
+        };
+        
+        ArticleDetailService.addComment(data);
       }
-      
-      const data = {
-        article_id: ArticleDetailService.currentArticleId,
-        content: content.trim()
-      };
-      
-      ArticleDetailService.addComment(data);
     });
   },
 
   addComment: function(data) {
-  RestClient.post('comments', data, 
-    function(response) {
-      toastr.success("Comment added successfully!");
+    $.blockUI({ message: '<h3>Posting comment...</h3>' });
 
-      $('#add-comment-form')[0].reset();
-
-      ArticleDetailService.loadComments(
-        ArticleDetailService.currentArticleId
-      );
-    },
-    function(error) {
-      console.error("Error adding comment:", error);
-      toastr.error(
-        error.responseText || 
-        "Error adding comment. Please make sure you are logged in."
-      );
-    }
-  );
-},
-
+    RestClient.post('comments', data, 
+      function(response) {
+        $.unblockUI();
+        toastr.success("Comment added successfully!");
+        $('#add-comment-form')[0].reset();
+        ArticleDetailService.loadComments(ArticleDetailService.currentArticleId);
+      },
+      function(error) {
+        console.error("Error adding comment:", error);
+        $.unblockUI();
+        toastr.error(error.responseText || "Error adding comment. Please make sure you are logged in.");
+      }
+    );
+  },
 
   formatDate: function(dateString) {
     if (!dateString) return 'Unknown date';

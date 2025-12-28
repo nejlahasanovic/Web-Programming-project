@@ -208,29 +208,30 @@
 
           <div class="form-group">
             <label>Title</label>
-            <input class="form-control" name="title" required />
+            <input class="form-control" name="title" required minlength="3" maxlength="200" placeholder="Enter article title"/>
           </div>
 
           <div class="form-group">
             <label>Content</label>
-            <textarea class="form-control" name="content" rows="5" required></textarea>
+            <textarea class="form-control" name="content" rows="5" required minlength="20"
+            placeholder="Enter article content (minimum 50 characters)"></textarea>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Category ID</label>
-              <input type="number" class="form-control" name="category_id" required />
+              <input type="number" class="form-control" name="category_id" required min="1" placeholder="1-4" />
             </div>
 
             <div class="form-group col-md-6">
               <label>Author ID</label>
-              <input type="number" class="form-control" name="author_id" required />
+              <input type="number" class="form-control" name="author_id" required min="1" placeholder="Enter author ID"/>
             </div>
           </div>
 
           <div class="form-group">
             <label>League ID</label>
-            <input type="number" class="form-control" name="league_id" required />
+            <input type="number" class="form-control" name="league_id" required min="1" placeholder="Enter league ID" />
           </div>
 
           <div class="form-group">
@@ -267,29 +268,30 @@
 
           <div class="form-group">
             <label>Title</label>
-            <input class="form-control" name="title" required />
+            <input class="form-control" name="title" required minlength="3" maxlength="200" placeholder="Enter article title"/>
           </div>
 
           <div class="form-group">
             <label>Content</label>
-            <textarea class="form-control" name="content" rows="5" required></textarea>
+            <textarea class="form-control" name="content" rows="5" required minlength="20"
+            placeholder="Enter article content (minimum 20 characters)"></textarea>
           </div>
 
           <div class="form-row">
             <div class="form-group col-md-6">
               <label>Category ID</label>
-              <input type="number" class="form-control" name="category_id" required />
+              <input type="number" class="form-control" name="category_id" required min="1" placeholder="1-4" />
             </div>
 
             <div class="form-group col-md-6">
               <label>Author ID</label>
-              <input type="number" class="form-control" name="author_id" required />
+              <input type="number" class="form-control" name="author_id" required min="1" placeholder="Enter author ID"/>
             </div>
           </div>
 
           <div class="form-group">
             <label>League ID</label>
-            <input type="number" class="form-control" name="league_id" required />
+            <input type="number" class="form-control" name="league_id" required min="1" placeholder="Enter league ID" />
           </div>
 
           <div class="form-group">

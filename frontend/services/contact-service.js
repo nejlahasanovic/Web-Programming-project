@@ -1,27 +1,46 @@
-
 let ContactService = {
 
   init: function() {
     
-    $(document)
-      .off('submit', '#contactForm')
-      .on('submit', '#contactForm', function(e) {
-        e.preventDefault();
-
+    $("#contactForm").validate({
+      rules: {
+        name: {
+          required: true,
+          minlength: 3,
+          maxlength: 100
+        },
+        email: {
+          required: true,
+          email: true
+        },
+        message: {
+          required: true,
+          minlength: 10,
+          maxlength: 1000
+        }
+      },
+      messages: {
+        name: {
+          required: "Please enter your name",
+          minlength: "Name must be at least 3 characters",
+          maxlength: "Name cannot exceed 100 characters"
+        },
+        email: {
+          required: "Please enter your email address",
+          email: "Please enter a valid email address"
+        },
+        message: {
+          required: "Please enter your message",
+          minlength: "Message must be at least 10 characters",
+          maxlength: "Message cannot exceed 1000 characters"
+        }
+      },
+      submitHandler: function(form) {
         const name = $('#name').val().trim();
         const email = $('#email').val().trim();
         const message = $('#message').val().trim();
 
-        if (!name || !email || !message) {
-          toastr.error('Please fill in all fields');
-          return;
-        }
-
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          toastr.error('Please enter a valid email address');
-          return;
-        }
+        $.blockUI({ message: '<h3>Preparing email...</h3>' });
 
         const subject = encodeURIComponent('Contact from ' + name);
         const body = encodeURIComponent(
@@ -30,11 +49,16 @@ let ContactService = {
           'Message:\n' + message
         );
 
-        window.location.href =
-          'mailto:info@90minut.ba?subject=' + subject + '&body=' + body;
+        setTimeout(function() {
+          $.unblockUI();
+          
+          window.location.href =
+            'mailto:info@90minut.ba?subject=' + subject + '&body=' + body;
 
-        toastr.success('Opening your email client...');
-        $('#contactForm')[0].reset();
-      });
+          toastr.success('Opening your email client...');
+          $('#contactForm')[0].reset();
+        }, 500);
+      }
+    });
   }
 };

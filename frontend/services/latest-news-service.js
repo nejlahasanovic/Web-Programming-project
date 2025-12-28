@@ -7,15 +7,17 @@ let LatestNewsService = {
   },
 
   loadLatestArticle: function () {
+    $.blockUI({ message: '<h3>Loading latest article...</h3>' });
+
     RestClient.get(
       'articles/with-comments',
       function (response) {
-
         const articles = Array.isArray(response)
           ? response
           : (response.data || []);
 
         if (!articles.length) {
+          $.unblockUI();
           LatestNewsService.showNoArticles();
           return;
         }
@@ -26,15 +28,17 @@ let LatestNewsService = {
         LatestNewsService.renderArticle(article);
         LatestNewsService.loadComments(article.article_id);
         LatestNewsService.setupCommentForm();
+
+        $.unblockUI();
       },
       function () {
+        $.unblockUI();
         toastr.error("Failed to load latest article");
       }
     );
   },
 
   renderArticle: function (article) {
-
     $('#latest-article-title').text(article.title);
 
     $('#latest-article-image').attr(
@@ -65,7 +69,6 @@ let LatestNewsService = {
     RestClient.get(
       'comments/article/' + articleId,
       function (response) {
-
         const comments = Array.isArray(response)
           ? response
           : (response.data || []);
@@ -82,20 +85,17 @@ let LatestNewsService = {
         let html = '';
 
         comments.forEach(function (comment) {
-
-          const username = comment.username ;
+          const username = comment.username;
           const date = LatestNewsService.formatDate(comment.created_at);
 
           html += `
             <div class="single-comment-item" style="margin-bottom:30px; overflow:hidden;">
-              
               <div class="sc-author" style="float:left; margin-right:20px;">
                 <img
                   src="https://ui-avatars.com/api/?name=${encodeURIComponent(username)}&size=70&background=dd1515&color=fff"
                   alt="${username}"
                   style="width:70px;height:70px;border-radius:50%;">
               </div>
-
               <div class="sc-text" style="overflow:hidden;">
                 <span style="font-size:12px;color:#dd1515;">${date}</span>
                 <h5 style="color:#ffffff;font-weight:500;margin-top:8px;margin-bottom:14px;">
@@ -105,7 +105,6 @@ let LatestNewsService = {
                   ${comment.content}
                 </p>
               </div>
-
             </div>
           `;
         });
@@ -119,56 +118,58 @@ let LatestNewsService = {
   },
 
   setupCommentForm: function () {
-
     const token = localStorage.getItem("user_token");
 
     if (!token) {
       $('#latest-comment-form-section').html(`
         <div class="alert alert-info">
-          You must be logged in to comment.
+          <p><i class="fa fa-info-circle"></i> You must be <a href="#" onclick="window.location.href='/90minut/frontend/login.html'; return false;">logged in</a> to comment.</p>
         </div>
       `);
       return;
     }
 
-    $(document)
-      .off('submit', '#latest-add-comment-form')
-      .on('submit', '#latest-add-comment-form', function (e) {
-
-        e.preventDefault();
-
-        const content = $(this)
-          .find('textarea[name="content"]')
-          .val()
-          .trim();
-
-        if (content.length < 5) {
-          toastr.error("Comment must be at least 5 characters long.");
-          return;
+    $("#latest-add-comment-form").validate({
+      rules: {
+        content: {
+          required: true,
+          minlength: 10,
+          maxlength: 1000
         }
-
+      },
+      messages: {
+        content: {
+          required: "Please enter your comment",
+          minlength: "Comment must be at least 10 characters",
+          maxlength: "Comment cannot exceed 1000 characters"
+        }
+      },
+      submitHandler: function(form) {
+        const content = $(form).find('textarea[name="content"]').val().trim();
+        
         LatestNewsService.addComment({
           article_id: LatestNewsService.currentArticleId,
           content: content
         });
-      });
+      }
+    });
   },
 
   addComment: function (data) {
+    $.blockUI({ message: '<h3>Posting comment...</h3>' });
+
     RestClient.post(
       'comments',
       data,
       function () {
-        toastr.success("Comment added!");
+        $.unblockUI();
+        toastr.success("Comment added successfully!");
         $('#latest-add-comment-form')[0].reset();
-        LatestNewsService.loadComments(
-          LatestNewsService.currentArticleId
-        );
+        LatestNewsService.loadComments(LatestNewsService.currentArticleId);
       },
       function (err) {
-        toastr.error(
-          err.responseText || "Error adding comment"
-        );
+        $.unblockUI();
+        toastr.error(err.responseText || "Error adding comment");
       }
     );
   },
