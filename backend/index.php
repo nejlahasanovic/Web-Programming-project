@@ -1,9 +1,7 @@
 <?php
 
 // CORS Configuration - MUST BE FIRST
-$allowedOrigin = isset($_ENV['FRONTEND_URL']) && trim($_ENV['FRONTEND_URL']) != "" 
-    ? $_ENV['FRONTEND_URL'] 
-    : 'http://localhost/90minut/frontend';
+$allowedOrigin = getenv('FRONTEND_URL') ?: 'http://localhost/90minut/frontend';
 
 // Set CORS headers for ALL requests
 header("Access-Control-Allow-Origin: " . $allowedOrigin);
@@ -37,7 +35,6 @@ require_once __DIR__ . '/rest/services/CategoryService.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -52,8 +49,7 @@ Flight::register('auth_service', "AuthService");
 Flight::register('auth_middleware', 'AuthMiddleware');
 
 Flight::before('start', function() {
-    
-$method = Flight::request()->method;
+    $method = Flight::request()->method;
    if (
        (
            strpos(Flight::request()->url, '/auth/login') === 0 ||
@@ -77,7 +73,6 @@ $method = Flight::request()->method;
    }
 });
 
-
 require_once __DIR__ . '/rest/routes/AuthRoutes.php';
 require_once __DIR__ . '/rest/routes/UserRoutes.php';
 require_once __DIR__ . '/rest/routes/ArticleRoutes.php';
@@ -87,3 +82,4 @@ require_once __DIR__ . '/rest/routes/LeagueRoutes.php';
 require_once __DIR__ . '/rest/routes/CategoryRoutes.php';
 
 Flight::start();
+?>
