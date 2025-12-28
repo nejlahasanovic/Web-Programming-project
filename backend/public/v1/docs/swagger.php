@@ -11,7 +11,7 @@ define('PRODSERVER', '-');
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1'){
     define('BASE_URL', 'http://localhost/90minut/backend');
 } else {
-    define('BASE_URL', '-');
+    define('BASE_URL', 'https://seal-app-rt82q.ondigitalocean.app/');
 }
 
 $openapi = \OpenApi\Generator::scan([
