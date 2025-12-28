@@ -38,7 +38,12 @@ class Config
 
     public static function get_env($name, $default)
     {
-        return isset($_ENV[$name]) && trim($_ENV[$name]) != "" ? $_ENV[$name] : $default;
+        $value = getenv($name);
+        
+        // DEBUG OUTPUT
+        error_log("ENV $name = " . ($value !== false ? $value : "NOT SET (using default: $default)"));
+        
+        return $value !== false && trim($value) != "" ? $value : $default;
     }
 }
 
@@ -48,16 +53,27 @@ class Database {
     public static function connect() {
         if (self::$connection === null) {
             try {
+                $host = Config::DB_HOST();
+                $port = Config::DB_PORT();
+                $dbname = Config::DB_NAME();
+                $user = Config::DB_USER();
+                
+                error_log("Connecting to: host=$host port=$port dbname=$dbname user=$user");
+                
                 self::$connection = new PDO(
-                    "mysql:host=" . Config::DB_HOST() . ";port=" . Config::DB_PORT() . ";dbname=" . Config::DB_NAME(),
-                    Config::DB_USER(),
+                    "mysql:host=$host;port=$port;dbname=$dbname",
+                    $user,
                     Config::DB_PASSWORD(),
                     [
                         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                     ]
                 );
+                
+                error_log("Database connection successful!");
+                
             } catch (PDOException $e) {
+                error_log("Database connection failed: " . $e->getMessage());
                 die("Connection failed: " . $e->getMessage());
             }
         }
