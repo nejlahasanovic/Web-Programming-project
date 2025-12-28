@@ -3,7 +3,7 @@
 // CORS Configuration - MUST BE FIRST
 $allowedOrigin = isset($_ENV['FRONTEND_URL']) && trim($_ENV['FRONTEND_URL']) != "" 
     ? $_ENV['FRONTEND_URL'] 
-    : 'http://localhost/Dorm-Student-Organization-System/frontend';
+    : 'http://localhost/90minut/frontend';
 
 // Set CORS headers for ALL requests
 header("Access-Control-Allow-Origin: " . $allowedOrigin);
