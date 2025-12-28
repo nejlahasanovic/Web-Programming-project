@@ -16,17 +16,25 @@
     <form id="register-form">
        <div class="mb-3">
         <label class="form-label">Username</label>
-        <input type="username" name="username" class="form-control" required/>
+        <input type="text" name="username" class="form-control" required minlength="7" maxlength="50" pattern="[a-zA-Z0-9_]+" 
+        title="Username can only contain letters, numbers, and underscores" placeholder="Choose a username"/>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Email</label>
-        <input type="email" name="email" class="form-control" required/>
+        <input type="email" name="email"  class="form-control"  required placeholder="Enter your email"/>
       </div>
 
       <div class="mb-3">
         <label class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" required/>
+        <input  type="password" id="password" name="password" class="form-control" required minlength="8" maxlength="20"
+        placeholder="Create a password (min 6 characters)"/>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" name="confirm_password" class="form-control" required minlength="8" maxlength="20"
+        placeholder="Confirm your password"/>
       </div>
 
       <button type="submit" class="btn btn-success">Create account</button>
@@ -37,6 +45,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/toastr@2.1.4/build/toastr.min.js"></script>
 

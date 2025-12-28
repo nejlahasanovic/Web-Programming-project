@@ -1,8 +1,66 @@
 let ArticleService = {
 
   init: function () {
-
+    
     $("#add-article-form").validate({
+      rules: {
+        title: {
+          required: true,
+          minlength: 3,
+          maxlength: 200
+        },
+        content: {
+          required: true,
+          minlength: 20
+        },
+        category_id: {
+          required: true,
+          number: true,
+          min: 1
+        },
+        author_id: {
+          required: true,
+          number: true,
+          min: 1
+        },
+        league_id: {
+          required: true,
+          number: true,
+          min: 1
+        },
+        image_url: {
+          url: true
+        }
+      },
+      messages: {
+        title: {
+          required: "Please enter article title",
+          minlength: "Title must be at least 3 characters",
+          maxlength: "Title cannot exceed 200 characters"
+        },
+        content: {
+          required: "Please enter article content",
+          minlength: "Content must be at least 20 characters"
+        },
+        category_id: {
+          required: "Please enter category ID",
+          number: "Category ID must be a number",
+          min: "Category ID must be at least 1"
+        },
+        author_id: {
+          required: "Please enter author ID",
+          number: "Author ID must be a number",
+          min: "Author ID must be at least 1"
+        },
+        league_id: {
+          required: "Please enter league ID",
+          number: "League ID must be a number",
+          min: "League ID must be at least 1"
+        },
+        image_url: {
+          url: "Please enter a valid URL (e.g., https://example.com/image.jpg)"
+        }
+      },
       submitHandler: function (form) {
         var article = Object.fromEntries(new FormData(form).entries());
       
@@ -10,20 +68,76 @@ let ArticleService = {
         article.author_id = parseInt(article.author_id, 10);
         article.league_id = parseInt(article.league_id, 10);
   
-        
         ArticleService.addArticle(article);
         form.reset();
       },
     });
 
     $("#edit-article-form").validate({
+      rules: {
+        title: {
+          required: true,
+          minlength: 3,
+          maxlength: 200
+        },
+        content: {
+          required: true,
+          minlength: 20
+        },
+        category_id: {
+          required: true,
+          number: true,
+          min: 1
+        },
+        author_id: {
+          required: true,
+          number: true,
+          min: 1
+        },
+        league_id: {
+          required: true,
+          number: true,
+          min: 1
+        },
+        image_url: {
+          url: true
+        }
+      },
+      messages: {
+        title: {
+          required: "Please enter article title",
+          minlength: "Title must be at least 5 characters",
+          maxlength: "Title cannot exceed 200 characters"
+        },
+        content: {
+          required: "Please enter article content",
+          minlength: "Content must be at least 50 characters"
+        },
+        category_id: {
+          required: "Please enter category ID",
+          number: "Category ID must be a number",
+          min: "Category ID must be at least 1"
+        },
+        author_id: {
+          required: "Please enter author ID",
+          number: "Author ID must be a number",
+          min: "Author ID must be at least 1"
+        },
+        league_id: {
+          required: "Please enter league ID",
+          number: "League ID must be a number",
+          min: "League ID must be at least 1"
+        },
+        image_url: {
+          url: "Please enter a valid URL (e.g., https://example.com/image.jpg)"
+        }
+      },
       submitHandler: function (form) {
         var article = Object.fromEntries(new FormData(form).entries());
         
         article.category_id = parseInt(article.category_id, 10);
         article.author_id = parseInt(article.author_id, 10);
         article.league_id = parseInt(article.league_id, 10);
-        
         
         ArticleService.editArticle(article);
       },
@@ -32,19 +146,17 @@ let ArticleService = {
     ArticleService.getAllArticles();
   },
 
-
   openAddModal: function () {
     $('#addArticleModal').modal('show');
   },
 
- 
   addArticle: function (article) {
-    $.blockUI({ message: '<h3>Processing...</h3>' });
+    $.blockUI({ message: '<h3>Adding article...</h3>' });
     
     RestClient.post('articles', article, 
       function(response) {
-        toastr.success("Article added successfully!");
         $.unblockUI();
+        toastr.success("Article added successfully!");
         ArticleService.getAllArticles();
         ArticleService.closeModal();
       }, 
@@ -59,7 +171,6 @@ let ArticleService = {
   getAllArticles: function () {
     RestClient.get("articles", 
       function(response) {
-       
         const data = Array.isArray(response) ? response : (response.data || []);
         
         ArticleService.updateStats(data);
@@ -124,12 +235,10 @@ let ArticleService = {
               return `League #${data}`;
             }
           },
-         
           {
             title: 'Actions',
             orderable: false,
             render: function (data, type, row) {
-              
               const rowStr = encodeURIComponent(JSON.stringify(row));
               
               return `
@@ -167,17 +276,17 @@ let ArticleService = {
   },
 
   getArticleById: function(id) {
-    $.blockUI({ message: '<h3>Loading...</h3>' });
+    $.blockUI({ message: '<h3>Loading article...</h3>' });
     
     RestClient.get('articles/' + id, 
       function(data) {
-      
         $('#edit-article-form input[name="article_id"]').val(data.article_id);
         $('#edit-article-form input[name="title"]').val(data.title);
         $('#edit-article-form textarea[name="content"]').val(data.content);
         $('#edit-article-form input[name="category_id"]').val(data.category_id);
         $('#edit-article-form input[name="author_id"]').val(data.author_id);
         $('#edit-article-form input[name="league_id"]').val(data.league_id);
+        $('#edit-article-form input[name="image_url"]').val(data.image_url || '');
         $('#edit-article-form input[name="published_at"]').prop('checked', data.published_at == 1);
         
         $.unblockUI();
@@ -190,12 +299,10 @@ let ArticleService = {
   },
 
   openViewMore: function(id) {
-      window.location.hash = '#article?id=' + id;
+    window.location.hash = '#article?id=' + id;
   },
 
- 
   openEditModal: function(id) {
-    $.blockUI({ message: '<h3>Processing...</h3>' });
     $('#editArticleModal').modal('show');
     ArticleService.getArticleById(id);
   },
@@ -207,7 +314,7 @@ let ArticleService = {
   },
 
   editArticle: function(article) {
-    $.blockUI({ message: '<h3>Processing...</h3>' });
+    $.blockUI({ message: '<h3>Updating article...</h3>' });
     
     RestClient.patch('articles/' + article.article_id, article, 
       function(data) {
@@ -236,13 +343,17 @@ let ArticleService = {
   deleteArticle: function() {
     const id = $("#delete_article_id").val();
     
+    $.blockUI({ message: '<h3>Deleting article...</h3>' });
+    
     RestClient.delete('articles/' + id, null, 
       function(response) {
+        $.unblockUI();
         ArticleService.closeModal();
         toastr.success("Article deleted successfully!");
         ArticleService.getAllArticles();
       }, 
       function(jqXHR) {
+        $.unblockUI();
         ArticleService.closeModal();
         toastr.error(jqXHR.responseText || "Error deleting article");
       }

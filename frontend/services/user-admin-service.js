@@ -5,10 +5,42 @@ let UserManagementService = {
    
     $("#add-user-form").validate({
       rules: {
-        username: { required: true, minlength: 3 },
-        email: { required: true, email: true },
-        password_hash: { required: true, minlength: 6 },
-        role: { required: true }
+        username: { 
+          required: true, 
+          minlength: 7, 
+          maxlength: 50
+        },
+        email: { 
+          required: true, 
+          email: true 
+        },
+        password_hash: { 
+          required: true, 
+          minlength: 8,  
+          maxlength: 20
+        },
+        role: { 
+          required: true 
+        }
+      },
+      messages: {
+        username: {
+          required: "Please enter username",
+          minlength: "Username must be at least 7 characters",  
+          maxlength: "Username cannot exceed 50 characters"
+        },
+        email: {
+          required: "Please enter email address",
+          email: "Please enter a valid email"
+        },
+        password_hash: {
+          required: "Please enter password",
+          minlength: "Password must be at least 8 characters (with uppercase, number, special char)",  
+          maxlength: "Password cannot exceed 20 characters"
+        },
+        role: {
+          required: "Please select a role"
+        }
       },
       submitHandler: function (form) {
         var user = Object.fromEntries(new FormData(form).entries());
@@ -17,12 +49,43 @@ let UserManagementService = {
       }
     });
 
+    
     $("#edit-user-form").validate({
       rules: {
-        username: { required: true, minlength: 3 },
-        email: { required: true, email: true },
-        password_hash: { minlength: 6 },
-        role: { required: true }
+        username: { 
+          required: true, 
+          minlength: 7,  
+          maxlength: 50
+        },
+        email: { 
+          required: true, 
+          email: true 
+        },
+        password_hash: { 
+          minlength: 8, 
+          maxlength: 20
+        },
+        role: { 
+          required: true 
+        }
+      },
+      messages: {
+        username: {
+          required: "Please enter username",
+          minlength: "Username must be at least 7 characters",  
+          maxlength: "Username cannot exceed 50 characters"
+        },
+        email: {
+          required: "Please enter email address",
+          email: "Please enter a valid email"
+        },
+        password_hash: {
+          minlength: "Password must be at least 8 characters (leave empty to keep current)",  
+          maxlength: "Password cannot exceed 20 characters"
+        },
+        role: {
+          required: "Please select a role"
+        }
       },
       submitHandler: function (form) {
         var user = Object.fromEntries(new FormData(form).entries());
@@ -52,7 +115,6 @@ let UserManagementService = {
     RestClient.get(
       "users",
       function (data) {
-      
         const users = Array.isArray(data) ? data : (data.data || []);
         UserManagementService.allUsers = users;
         
@@ -69,7 +131,6 @@ let UserManagementService = {
     );
   },
 
-  
   updateStats: function(users) {
     const total = users.length;
     
@@ -168,7 +229,6 @@ let UserManagementService = {
     ], users, 10);
   },
 
-  
   openAddModal: function () {
     $("#add-user-modal").modal("show");
     $("#add-user-form")[0].reset();

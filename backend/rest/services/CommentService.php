@@ -46,6 +46,14 @@ class CommentService extends BaseService {
     if (empty($data['content'])) {
         throw new Exception('Content is required.');
     }
+
+     if (strlen($data['content']) < 10) {
+        throw new Exception('Comment must be at least 10 characters.');
+    }
+    
+    if (strlen($data['content']) > 1000) {
+        throw new Exception('Comment cannot exceed 1000 characters.');
+    }
     
     return $this->dao->insert($data);
     

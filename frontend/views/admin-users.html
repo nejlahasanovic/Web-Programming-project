@@ -209,15 +209,38 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Username *</label>
-                        <input type="text" name="username" class="form-control" required minlength="3" />
+                        <input 
+                            type="text" 
+                            name="username" 
+                            class="form-control" 
+                            required 
+                            minlength="7"
+                            maxlength="50"
+                            placeholder="Enter username (min 7 characters)"
+                        />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email *</label>
-                        <input type="email" name="email" class="form-control" required />
+                        <input 
+                            type="email" 
+                            name="email" 
+                            class="form-control" 
+                            required
+                            placeholder="Enter email address"
+                        />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password *</label>
-                        <input type="password" name="password_hash" class="form-control" required minlength="6" />
+                        <input 
+                            type="password" 
+                            name="password_hash" 
+                            class="form-control" 
+                            required 
+                            minlength="8"
+                            maxlength="20"
+                            placeholder="Enter password (min 8 characters)"
+                        />
+                        <small class="form-text text-muted">Password must include uppercase, number, and special character</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Role *</label>
@@ -253,15 +276,40 @@
                 <div class="modal-body">
                     <div class="mb-3">
                         <label class="form-label">Username *</label>
-                        <input type="text" id="edit-user-username" name="username" class="form-control" required minlength="3" />
+                        <input 
+                            type="text" 
+                            id="edit-user-username" 
+                            name="username" 
+                            class="form-control" 
+                            required 
+                            minlength="7"
+                            maxlength="50"
+                            placeholder="Enter username (min 7 characters)"
+                        />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Email *</label>
-                        <input type="email" id="edit-user-email" name="email" class="form-control" required />
+                        <input 
+                            type="email" 
+                            id="edit-user-email" 
+                            name="email" 
+                            class="form-control" 
+                            required
+                            placeholder="Enter email address"
+                        />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Password (leave empty to keep current)</label>
-                        <input type="password" id="edit-user-password" name="password_hash" class="form-control" minlength="6" placeholder="Leave empty to keep current password" />
+                        <input 
+                            type="password" 
+                            id="edit-user-password" 
+                            name="password_hash" 
+                            class="form-control" 
+                            minlength="8"
+                            maxlength="20"
+                            placeholder="Leave empty to keep current password"
+                        />
+                        <small class="form-text text-muted">If changing, must include uppercase, number, and special character</small>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Role *</label>
@@ -280,7 +328,6 @@
         </div>
     </div>
 </div>
-
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="confirm-delete-user-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
