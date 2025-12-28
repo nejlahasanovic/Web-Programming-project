@@ -3,7 +3,7 @@
 
     const config = {
         defaultPage: "home",
-        viewsPath: "/90minut/frontend/views/",
+        viewsPath: "./views/",
         container: "#app-content"
     };
 
