@@ -1,11 +1,16 @@
 <?php
-
 // CORS Configuration - MUST BE FIRST
-$allowedOrigin = getenv('FRONTEND_URL') ?: 'http://localhost/90minut/frontend';
+$allowedOrigins = [
+    getenv('FRONTEND_URL') ?: 'http://localhost/90minut/frontend',  
+    'https://seal-app-rt82q.ondigitalocean.app'  
+];
 
-// Set CORS headers for ALL requests
-header("Access-Control-Allow-Origin: " . $allowedOrigin);
-header("Access-Control-Allow-Credentials: true");
+$origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+
+if (in_array($origin, $allowedOrigins)) {
+    header("Access-Control-Allow-Origin: $origin");
+    header("Access-Control-Allow-Credentials: true");
+}
 header("Access-Control-Max-Age: 86400");
 header("Access-Control-Allow-Headers: content-type, Content-Type, Authorization, Authentication, Accept, Origin");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
