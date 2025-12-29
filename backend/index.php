@@ -6,14 +6,12 @@ $allowedOrigins = [
     'https://seal-app-rt82q.ondigitalocean.app'  
 ];
 
-// Dohvati origin iz HTTP header-a
 $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
 
 if (in_array($origin, $allowedOrigins)) {
     header("Access-Control-Allow-Origin: $origin");
     header("Access-Control-Allow-Credentials: true");
 }
-
 header("Access-Control-Max-Age: 86400");
 header("Access-Control-Allow-Headers: content-type, Content-Type, Authorization, Authentication, Accept, Origin");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
