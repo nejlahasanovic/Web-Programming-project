@@ -11,7 +11,6 @@ if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0
 } else {
     define('BASE_URL', 'https://seal-app-rt82q.ondigitalocean.app/');
 }
-
 $openapi = \OpenApi\Generator::scan([
     __DIR__ . '/doc_setup.php',
     __DIR__ . '/../../../rest/routes'

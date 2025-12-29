@@ -1,6 +1,5 @@
 <?php
 // CORS Configuration - MUST BE FIRST
-
 $allowedOrigins = [
     getenv('FRONTEND_URL') ?: 'http://localhost/90minut/frontend',  
     'https://seal-app-rt82q.ondigitalocean.app'  
