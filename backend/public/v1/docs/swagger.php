@@ -3,11 +3,13 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
 require __DIR__ . '/../../../vendor/autoload.php';
+define('LOCALSERVER', 'http://localhost/90minut/backend');
+define('PRODSERVER', 'https://seal-app-rt82q.ondigitalocean.app/');
 
 if($_SERVER['SERVER_NAME'] == 'localhost' || $_SERVER['SERVER_NAME'] == '127.0.0.1'){
     define('BASE_URL', 'http://localhost/90minut/backend');
 } else {
-    define('BASE_URL', 'https://seal-app-rt82q.ondigitalocean.app');
+    define('BASE_URL', 'https://seal-app-rt82q.ondigitalocean.app/');
 }
 
 $openapi = \OpenApi\Generator::scan([
