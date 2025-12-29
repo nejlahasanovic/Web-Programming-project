@@ -2,14 +2,8 @@
 
 (function ($) {
 
-    // PRELOADER
- /*  $(window).on("load", function () {
-        $(".loader").fadeOut();
-        $("#preloder").delay(200).fadeOut("slow");
-    });
-*/
-    const LOGO_DARK = "/90minut/frontend/assets/img/logo-dark.png";
-    const LOGO_LIGHT = "/90minut/frontend/assets/img/logo-light.png";
+    const LOGO_DARK = "./assets/img/logo-dark.png";
+    const LOGO_LIGHT = "./assets/img/logo-light.png";
 
     function updateLogo() {
         const newLogo = $("body").hasClass("light-mode") ? LOGO_LIGHT : LOGO_DARK;

@@ -3,7 +3,7 @@ let RestClient = {
  
   get: function (url, callback, error_callback) {
     $.ajax({
-      url: Constants.PROJECT_BASE_URL + url,
+      url: Constants.PROJECT_BASE_URL() + url,
       type: "GET",
       beforeSend: function (xhr) {
         xhr.setRequestHeader(
@@ -22,7 +22,7 @@ let RestClient = {
 
   request: function (url, method, data, callback, error_callback) {
     $.ajax({
-      url: Constants.PROJECT_BASE_URL + url,
+      url: Constants.PROJECT_BASE_URL() + url,
       type: method,
       beforeSend: function (xhr) {
         xhr.setRequestHeader(
