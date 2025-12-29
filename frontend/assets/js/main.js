@@ -1,7 +1,6 @@
 "use strict";
 
 (function ($) {
-
     const LOGO_DARK = "./assets/img/logo-dark.png";
     const LOGO_LIGHT = "./assets/img/logo-light.png";
 
