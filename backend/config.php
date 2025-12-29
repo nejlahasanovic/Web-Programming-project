@@ -29,9 +29,9 @@ class Config {
         return Config::get_env("JWT_SECRET", 'vJ+8fxajix9QnsxoV8ZLDYU9kh3QETPTXbob2XwvucrK+WarO3ljP1aHnmD1KQlz');
     }
 
-    public static function get_env($name, $default) {
-    $val = getenv($name);
-    return $val !== false && trim($val) !== "" ? $val : $default;
+   public static function get_env($name, $default) {
+    $value = getenv($name);
+    return ($value !== false && trim($value) !== "") ? $value : $default;
 }
 
 }

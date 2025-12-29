@@ -87,7 +87,7 @@ var UserService = {
     $.blockUI({ message: '<h3>Logging in...</h3>' });
 
     $.ajax({
-      url: Constants.PROJECT_BASE_URL() + "auth/login",
+      url: Constants.PROJECT_BASE_URL().replace(/\/$/, '') + '/' + url,
       type: "POST",
       data: JSON.stringify(entity),
       contentType: "application/json",
@@ -108,7 +108,7 @@ var UserService = {
     $.blockUI({ message: '<h3>Creating account...</h3>' });
 
     $.ajax({
-      url: Constants.PROJECT_BASE_URL() + "auth/register",
+      url: Constants.PROJECT_BASE_URL().replace(/\/$/, '') + '/' + url,
       type: "POST",
       data: JSON.stringify(entity),
       contentType: "application/json",
