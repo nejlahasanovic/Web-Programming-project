@@ -16,13 +16,6 @@ $openapi = \OpenApi\Generator::scan([
     __DIR__ . '/../../../rest/routes'
 ]);
 header('Content-Type: application/json');
-die(json_encode([
-  'DB_HOST_getenv' => getenv('DB_HOST'),
-  'DB_PORT' => getenv('DB_PORT'),
-  'DB_NAME' => getenv('DB_NAME'),
-  'DATABASE_URL' => getenv('DATABASE_URL')
-]));
-
-//echo $openapi->toJson();
+echo $openapi->toJson();
 
 ?>
